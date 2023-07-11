@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="200a0da0-d2cc-4bc5-8c02-105a42299bc7" name="Default" comment="" />
+    <list default="true" id="200a0da0-d2cc-4bc5-8c02-105a42299bc7" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/transaction/pola-marker/backup/table-pola-marker.php" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/transaction/pola-marker/table-pola-marker.php" afterPath="$PROJECT_DIR$/transaction/pola-marker/table-pola-marker.php" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +22,7 @@
         <entry file="file://$PROJECT_DIR$/transaction/surat-jalan/index.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="690">
-              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#p#0;n#div#0;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#p#0;n#div#1;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -34,24 +38,20 @@
       <file leaf-file-name="table-pola-marker.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/transaction/pola-marker/table-pola-marker.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="90" column="8" lean-forward="true" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
+            <state relative-caret-position="368">
+              <caret line="16" column="19" lean-forward="true" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/transaction/pola-marker/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1104">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <element signature="n#style#0;n#button#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1689047450269" expanded="true" signature="3999:4054" ph="SELECT surat... surat_jalan" />
-                <marker date="1689047450269" expanded="true" signature="4325:4328" ph="..." />
-                <marker date="1689047450269" expanded="true" signature="4801:4971" ph="SELECT surat... surat_jalan" />
-                <marker date="1689047450269" expanded="true" signature="4890:4970" ph="..." />
-                <marker date="1689047450269" expanded="true" signature="5151:5178" ph="..." />
-                <marker date="1689047450269" expanded="true" signature="5369:5694" ph="..." />
-                <marker date="1689047450269" expanded="true" signature="5390:5491" ph="..." />
-                <marker date="1689047450269" expanded="true" signature="5513:5610" ph="..." />
-                <marker date="1689047450269" expanded="true" signature="5632:5694" ph="..." />
-                <marker date="1689047450269" expanded="true" signature="5754:5814" ph="..." />
-                <marker date="1689047450269" expanded="true" signature="5875:5928" ph="..." />
-                <marker date="1689047450269" expanded="true" signature="6177:6188" ph="..." />
-                <marker date="1689047450269" expanded="true" signature="6483:6494" ph="..." />
-                <marker date="1689047450269" expanded="true" signature="6787:6798" ph="..." />
+                <marker date="1689049047488" expanded="true" signature="482:563" ph="SELECT first... users" />
               </folding>
             </state>
           </provider>
@@ -203,6 +203,9 @@
       <dir>D:\xampp\htdocs\sysprod-live</dir>
     </dirStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -306,6 +309,7 @@
     <option name="width" value="1938" />
     <option name="height" value="1048" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -393,18 +397,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\xampp\htdocs\sysprod-live\transaction\pola-marker\backup" />
       <recent name="D:\xampp\htdocs\sysprod-live\transaction\surat-jalan" />
       <recent name="D:\xampp\htdocs\sysprod-live\production\worksheet\detail\table\php" />
       <recent name="D:\xampp\htdocs\sysprod-live\production\worksheet" />
       <recent name="D:\xampp\htdocs\sysprod-live\admin" />
-      <recent name="D:\xampp\htdocs\sysprod-live\transaction\cutting" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\xampp\htdocs\sysprod-live\transaction\pola-marker" />
       <recent name="D:\xampp\htdocs\sysprod-live\production\worksheet\detail\table\php" />
       <recent name="D:\xampp\htdocs\sysprod-live\assets\logo" />
       <recent name="D:\xampp\htdocs\sysprod-live\admin\user-management" />
       <recent name="D:\xampp\htdocs\sysprod-live\php-modules\utilities" />
-      <recent name="D:\xampp\htdocs\sysprod-live\coop\img\products" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -440,12 +444,12 @@
       <workItem from="1686619241049" duration="60000" />
       <workItem from="1688460820389" duration="76871000" />
       <workItem from="1688891240967" duration="4525000" />
-      <workItem from="1688954136651" duration="29148000" />
+      <workItem from="1688954136651" duration="30376000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146780000" />
+    <option name="totallyTimeSpent" value="148008000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="41" width="1938" height="1048" extended-state="6" />
@@ -456,7 +460,7 @@
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -484,21 +488,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/transaction/sewing/table-sewing.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="78" column="110" lean-forward="false" selection-start-line="78" selection-start-column="110" selection-end-line="78" selection-end-column="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/transaction/sewing/set-qty-out.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="32" column="27" lean-forward="false" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/dailies/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
@@ -794,7 +783,7 @@
         <state relative-caret-position="230">
           <caret line="148" column="75" lean-forward="true" selection-start-line="148" selection-start-column="75" selection-end-line="148" selection-end-column="75" />
           <folding>
-            <element signature="e#319#358#0#PHP" expanded="true" />
+            <element signature="e#319#358#0#PHP" expanded="false" />
             <marker date="1688954741892" expanded="true" signature="848:890" ph="SELECT * FRO... worksheet_detail" />
             <marker date="1688954741892" expanded="true" signature="2177:2245" ph="SELECT sampl... article" />
             <marker date="1688954741892" expanded="true" signature="10549:10555" ph=" " />
@@ -861,7 +850,7 @@
         <state relative-caret-position="3440">
           <caret line="177" column="57" lean-forward="false" selection-start-line="177" selection-start-column="57" selection-end-line="177" selection-end-column="57" />
           <folding>
-            <element signature="e#253#273#0#HTML" expanded="true" />
+            <element signature="e#253#273#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -894,7 +883,7 @@
           <caret line="17" column="46" lean-forward="false" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
           <caret line="31" column="55" lean-forward="false" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
           <folding>
-            <element signature="e#236#256#0#HTML" expanded="true" />
+            <element signature="e#236#256#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -904,7 +893,7 @@
         <state relative-caret-position="1575">
           <caret line="70" column="55" lean-forward="false" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="55" />
           <folding>
-            <element signature="e#207#227#0#HTML" expanded="true" />
+            <element signature="e#207#227#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -914,8 +903,8 @@
         <state relative-caret-position="2704">
           <caret line="121" column="56" lean-forward="false" selection-start-line="121" selection-start-column="56" selection-end-line="121" selection-end-column="56" />
           <folding>
-            <element signature="n#style#0;n#table#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#td#0;n#tr#9;n#tbody#0;n#table#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#span#0;n#td#0;n#tr#9;n#tbody#0;n#table#0;n#div#1;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1064,21 +1053,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/transaction/surat-jalan/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#p#0;n#div#0;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#1;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#2;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#6;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1688974086336" expanded="true" signature="1770:1838" ph="SELECT cmt_i... ${$processName}" />
-            <marker date="1688974086336" expanded="true" signature="1843:1906" ph="SELECT cmt_i... cutting" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/php-modules/utilities/util_transaction.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="369">
@@ -1154,27 +1128,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/transaction/pola-marker/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1104">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1689049047488" expanded="true" signature="482:563" ph="SELECT first... users" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transaction/pola-marker/backup/table-pola-marker.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="82" lean-forward="false" selection-start-line="8" selection-start-column="82" selection-end-line="8" selection-end-column="82" />
+          <folding>
+            <marker date="1689049816903" expanded="true" signature="3667:3722" ph="SELECT surat... surat_jalan" />
+            <marker date="1689049816903" expanded="true" signature="5773:5784" ph="..." />
+            <marker date="1689049816903" expanded="true" signature="6079:6090" ph="..." />
+            <marker date="1689049816903" expanded="true" signature="6383:6394" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transaction/surat-jalan/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#p#0;n#div#0;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#1;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#2;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#6;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1688974086336" expanded="true" signature="1770:1838" ph="SELECT cmt_i... ${$processName}" />
+            <marker date="1688974086336" expanded="true" signature="1843:1906" ph="SELECT cmt_i... cutting" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/transaction/pola-marker/table-pola-marker.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="90" column="8" lean-forward="true" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
-          <folding>
-            <element signature="n#style#0;n#button#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1689047450269" expanded="true" signature="3999:4054" ph="SELECT surat... surat_jalan" />
-            <marker date="1689047450269" expanded="true" signature="4325:4328" ph="..." />
-            <marker date="1689047450269" expanded="true" signature="4801:4971" ph="SELECT surat... surat_jalan" />
-            <marker date="1689047450269" expanded="true" signature="4890:4970" ph="..." />
-            <marker date="1689047450269" expanded="true" signature="5151:5178" ph="..." />
-            <marker date="1689047450269" expanded="true" signature="5369:5694" ph="..." />
-            <marker date="1689047450269" expanded="true" signature="5390:5491" ph="..." />
-            <marker date="1689047450269" expanded="true" signature="5513:5610" ph="..." />
-            <marker date="1689047450269" expanded="true" signature="5632:5694" ph="..." />
-            <marker date="1689047450269" expanded="true" signature="5754:5814" ph="..." />
-            <marker date="1689047450269" expanded="true" signature="5875:5928" ph="..." />
-            <marker date="1689047450269" expanded="true" signature="6177:6188" ph="..." />
-            <marker date="1689047450269" expanded="true" signature="6483:6494" ph="..." />
-            <marker date="1689047450269" expanded="true" signature="6787:6798" ph="..." />
-          </folding>
+        <state relative-caret-position="368">
+          <caret line="16" column="19" lean-forward="true" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
