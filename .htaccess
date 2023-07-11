@@ -1,0 +1,16 @@
+Options -Indexes
+
+RewriteEngine On
+
+
+# Redirect users back home for the "/assets" directory and its subdirectories
+RewriteCond %{REQUEST_URI} ^/assets [NC,OR]
+RewriteCond %{REQUEST_URI} ^/error-pages [NC]
+RewriteRule ^ - [R=301,L]
+
+# Custom 404 Error Page
+ErrorDocument 404 /error-pages/404.php
+ErrorDocument 403 /error-pages/403.php
+ErrorDocument 500 /error-pages/500.php
+ErrorDocument 501 /error-pages/501.php
+
