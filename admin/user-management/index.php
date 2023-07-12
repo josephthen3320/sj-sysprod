@@ -111,6 +111,19 @@ if ($username == "nara") {
                     </div>
                 </div>
             </div>
+            <!-- User Activities Button -->
+            <div class="w3-quarter w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button" onclick="openURL('../activities')" style="height: 180px; width: 100%;">
+                    <div class="w3-display-middle">
+                        <div class="w3-container w3-padding">
+                            <i class="fa-solid fa-chart-line fa-4xl" style="color: orchid;"></i><br><br>
+                        </div>
+                    </div>
+                    <div class="w3-container w3-padding-32 w3-display-bottommiddle">
+                        <span class="w3-large"><b>User Activities</b></span>
+                    </div>
+                </div>
+            </div>
 
 
         </div>

@@ -52,10 +52,14 @@ $role = $_SESSION['user_role'];
             $id = $details['id'];
             echo "  <td>";
 
-            if ($role >= -1) {
+            // feature disabled temporarily
+            if ($role <= 1) {
                 echo "<button class='w3-button w3-blue-gray' onclick='openPopupURL35(\"detail?id=" . $id . "\", \"wsdetail\")'><i class='fa-solid fa-magnifying-glass'></i></button>";
             }
-            if ($role <=1) {
+            if ($role >= -1) {
+                echo "<button class='w3-button w3-green' onclick='openPopupURL(\"export.php?id=" . $id . "\", \"wsgenerate\")'><i class='fa-solid fa-file-export'></i></button>";
+            }
+            if ($role >= -1) {
                 echo "<button class='w3-button w3-green' onclick='openPopupURL(\"export.php?id=" . $id . "\", \"wsgenerate\")'><i class='fa-solid fa-file-export'></i></button>";
             }
             if ($role <= 2) {
