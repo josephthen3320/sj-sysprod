@@ -181,8 +181,8 @@ function pushToFinishing($wid, $cmt, $qtyIn) {
     pushToProcessWithCMT('finishing', generateFinishingId(), $wid, $cmt, $qtyIn);
 }
 
-function pushToQCFinal($wid, $qtyIn) {
-    pushToProcess('qc_final', generateQCFinalId(), $wid, $qtyIn);
+function pushToQCFinal($wid, $cmt, $qtyIn) {
+    pushToProcessWithCMT('qc_final', generateQCFinalId(), $wid, $cmt, $qtyIn);
 }
 
 
@@ -235,7 +235,7 @@ function generateWarehouseId() {
 /** Check functions */
 function checkIsProcessDone ($worksheetId, $processName) {
     $conn = getConnTransaction();
-    echo $sql = "SELECT $processName FROM position WHERE worksheet_id = '$worksheetId'";
+    $sql = "SELECT $processName FROM position WHERE worksheet_id = '$worksheetId'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc()[$processName];
 
@@ -244,27 +244,3 @@ function checkIsProcessDone ($worksheetId, $processName) {
     return $row;
 }
 
-function getWorksheetIdByProcessId($processId) {
-    $conn = getConnTransaction();
-    $pn = parseProcessNameFromProcessId($processId);
-
-    $sql = "SELECT worksheet_id FROM $pn WHERE {$pn}_id = '$processId' LIMIT 1";
-    $worksheetId = queryDatabase($conn, $sql)['worksheet_id'];
-
-
-    return $worksheetId;
-}
-
-
-function parseProcessNameFromProcessId($processId) {
-    $prefix = substr($processId, 0, 2);
-
-    switch ($prefix) {
-        case 'PM':
-            return "pola_marker";
-        case 'CT':
-            return "cutting";
-        default:
-            return null;
-    }
-}

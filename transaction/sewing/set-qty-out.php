@@ -6,8 +6,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_transactio
 include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_surat_jalan.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_worksheet.php';
 
-$err = null;
-
 if ($_SERVER['REQUEST_METHOD'] == "GET"); {
     $processName = $_GET['p'];
     $processId = $_GET['i'];
@@ -29,8 +27,7 @@ if (isset($_POST['i'])) {
     $qtyMissing = $_POST['qtyMissing'] > 0 ? $_POST['qtyMissing'] : 0;
 
     if (($qtyFail + $qtyDefect + $qtyMissing + $qty) != $qtyIn) {
-        $err = "Qty tidak seimbang";
-        $err .= "<br><br>";
+        echo "Qty out tidak seimbang dengan Qty in";
     } else {
         setQtyOut($processName, $processId, $qty);
         setQtyOther($processName, $processId, $qtyDefect, $qtyFail, $qtyMissing);
@@ -65,8 +62,6 @@ if (isset($_POST['i'])) {
 
 <div class="w3-container">
     <h3>Sewing: Qty Out</h3>
-
-    <span class="w3-text-red" style="font-weight: bold;"><?= $err ?></span>
 
     <span class="inline-header"><b>Sewing Id: </b></span><?= $processId ?><br>
     <span class="inline-header"><b>Article Id: </b></span><?= $articleId ?><br>

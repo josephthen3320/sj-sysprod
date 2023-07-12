@@ -63,8 +63,6 @@ function getPositionStatus($a, $pn) {
 
 function parseWorksheetPosition($pos) {
     switch ($pos) {
-        case -1:
-            return "KANTOR";
         case 0:
             return "WORKSHEET";
         case 1:

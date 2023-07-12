@@ -1,0 +1,10 @@
+[05-Jul-2023 02:15:59 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/production/worksheet/create/create-sample-worksheet.php:27) in /home/subm6595/public_html/sisprod.suburjayabdg.com/production/worksheet/create/create-sample-worksheet.php on line 32
+[05-Jul-2023 03:03:05 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/production/worksheet/create/insert-worksheet.php:15) in /home/subm6595/public_html/sisprod.suburjayabdg.com/production/worksheet/create/insert-worksheet.php on line 60
+[07-Jul-2023 01:43:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/production/worksheet/create/insert-worksheet.php:15) in /home/subm6595/public_html/sisprod.suburjayabdg.com/production/worksheet/create/insert-worksheet.php on line 60
+[07-Jul-2023 02:44:54 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/production/worksheet/create/insert-worksheet.php:15) in /home/subm6595/public_html/sisprod.suburjayabdg.com/production/worksheet/create/insert-worksheet.php on line 60
+[11-Jul-2023 14:25:34 Asia/Jakarta] PHP Warning:  Undefined array key "is_fob" in /home/subm6595/public_html/sisprod.suburjayabdg.com/production/worksheet/create/insert-worksheet.php on line 45
+[11-Jul-2023 14:25:41 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'WS2023-07-006' for key 'worksheet_id' in /home/subm6595/public_html/sisprod.suburjayabdg.com/production/worksheet/create/insert-worksheet.php:40
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/production/worksheet/create/insert-worksheet.php(40): mysqli->query()
+#1 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/production/worksheet/create/insert-worksheet.php on line 40

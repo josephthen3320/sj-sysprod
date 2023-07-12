@@ -1,0 +1,15 @@
+[05-Jul-2023 07:28:41 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/dailies.php on line 16
+[05-Jul-2023 07:28:53 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/dailies.php on line 16
+[05-Jul-2023 07:29:04 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/dailies.php on line 16
+[05-Jul-2023 07:30:06 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/dailies.php on line 16
+[05-Jul-2023 07:30:07 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/dailies.php on line 16
+[05-Jul-2023 07:30:30 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/dailies.php on line 16
+[05-Jul-2023 07:32:53 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/dailies.php on line 16
+[05-Jul-2023 07:32:58 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/dailies.php on line 16
+[05-Jul-2023 07:33:02 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/dailies.php on line 16
+[05-Jul-2023 07:35:55 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/dailies.php on line 16
+[05-Jul-2023 07:36:29 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/dailies.php on line 16
+[07-Jul-2023 14:01:15 Asia/Jakarta] PHP Warning:  include_once(admin-buttons.php): failed to open stream: No such file or directory in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/mobile-dashboard.php on line 76
+[07-Jul-2023 14:01:15 Asia/Jakarta] PHP Warning:  include_once(): Failed opening 'admin-buttons.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/mobile-dashboard.php on line 76
+[07-Jul-2023 14:02:29 Asia/Jakarta] PHP Warning:  include_once(admin-buttons.php): failed to open stream: No such file or directory in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/mobile-dashboard.php on line 76
+[07-Jul-2023 14:02:29 Asia/Jakarta] PHP Warning:  include_once(): Failed opening 'admin-buttons.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/subm6595/public_html/sisprod.suburjayabdg.com/dashboard/mobile-dashboard.php on line 76

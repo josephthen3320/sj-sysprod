@@ -76,7 +76,7 @@
                     $urlParam .= "&i=" . $ct['sewing_id'];
                     $urlParam .= "&w=" . $ct['worksheet_id'];
                     $urlParam .= "&q=" . $ct['qty_in'];
-                    echo "<button onclick='openPopupURL2(\"set-qty-out.php?{$urlParam}\", \"qtyOut\", 500, 700)' class='w3-button w3-blue-grey'>" . "<i class='fas fa-plus'></i>" . "</button>";
+                    echo "<button onclick='openPopupURL2(\"set-qty-out.php?{$urlParam}\", \"qtyOut\", 500, 300)' class='w3-button w3-blue-grey'>" . "<i class='fas fa-plus'></i>" . "</button>";
                 } else {
                     echo $ct['qty_out'];
                 }

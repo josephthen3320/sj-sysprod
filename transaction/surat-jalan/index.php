@@ -183,17 +183,17 @@ function getCMTId($worksheet_id, $processName) {
         </div>
 
         <!-- FOOTER -->
-        <div class="w3-row w3-small print-show">
+        <div class="w3-padding-32 w3-row w3-small print-show">
             <div class="w3-col l4 m4 s4 w3-center">
-                <p style="margin-bottom: 30px;">Dibuat oleh,</p>
+                <p style="margin-bottom: 50px;">Dibuat oleh,</p>
                 <span><?= $userData['first_name'] . " " . $userData['last_name'] ?></span>
             </div>
             <div class="w3-col l4 m4 s4 w3-center">
-                <p style="margin-bottom: 30px;">Diketahui oleh,</p>
+                <p style="margin-bottom: 50px;">Diketahui oleh,</p>
                 <span>Manager Produksi</span>
             </div>
             <div class="w3-col l4 m4 s4 w3-center">
-                <p style="margin-bottom: 30px;">Diterima oleh,</p>
+                <p style="margin-bottom: 50px;">Diterima oleh,</p>
                 <span>(<span style="display: inline-block; width: 96px;"></span>)</span>
             </div>
         </div>

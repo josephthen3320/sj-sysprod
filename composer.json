@@ -1,7 +1,5 @@
 {
     "require": {
-		"phpoffice/phpspreadsheet": "^1.17",
-        "chillerlan/php-qrcode": "^4.3",
-        "google/apiclient": "^2.15"
+        "chillerlan/php-qrcode": "^4.3"
     }
 }

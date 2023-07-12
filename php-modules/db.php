@@ -2,8 +2,8 @@
 
 function getDbConnection($database) {
     $servername = "localhost";
-    $dbusername = "nara";
-    $dbpassword = "12345678";
+    $dbusername = "subm6595_sj";
+    $dbpassword = "Suburjaya112256";
 
     $conn = new mysqli($servername, $dbusername, $dbpassword, $database);
 
@@ -15,22 +15,22 @@ function getDbConnection($database) {
 }
 
 function getConnTransaction() {
-    return getDbConnection("suburjaya_transaction");
+    return getDbConnection("subm6595_sj_transaction");
 }
 
 function getConnProduction() {
-    return getDbConnection("suburjaya_production");
+    return getDbConnection("subm6595_sj_production");
 }
 
 function getConnWorksheet() {
-    return getDbConnection("suburjaya_worksheet");
+    return getDbConnection("subm6595_sj_worksheet");
 }
 
 function getConnLog() {
-    return getDbConnection("suburjaya_logs");
+    return getDbConnection("subm6595_sj_logs");
 }
 
 function getConnUser() {
-    return getDbConnection("suburjaya");
+    return getDbConnection("subm6595_sj_accounts");
 }
 ?>

@@ -89,7 +89,7 @@ if ($username == "nara") {
 
                     // Fetch all user information from the database
                     $sql = "SELECT *
-                        FROM user_activity_log";
+                        FROM user_activity_log ORDER BY timestamp DESC";
 
                     $result = mysqli_query($log_conn, $sql);
 

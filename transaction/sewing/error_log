@@ -1,0 +1,75 @@
+[10-Jul-2023 14:22:25 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'qty_defect' in 'field list' in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/utilities/util_transaction.php:145
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/utilities/util_transaction.php(145): mysqli->query()
+#1 /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/set-qty-out.php(33): setQtyOther()
+#2 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/utilities/util_transaction.php on line 145
+[10-Jul-2023 14:22:31 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 14:22:31 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 14:22:31 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 14:24:31 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 14:24:31 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 14:24:31 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 14:24:47 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 14:24:47 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 14:24:47 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 14:24:52 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'qty_defect' in 'field list' in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/utilities/util_transaction.php:145
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/utilities/util_transaction.php(145): mysqli->query()
+#1 /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/set-qty-out.php(33): setQtyOther()
+#2 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/utilities/util_transaction.php on line 145
+[10-Jul-2023 14:24:58 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 14:24:58 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 14:24:58 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 14:24:58 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 14:24:58 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 14:24:58 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:02:23 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:02:23 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:02:23 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:02:23 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:02:23 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:02:23 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:05:34 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:05:34 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:05:34 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:05:34 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:05:34 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:05:34 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:05:57 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:05:57 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:05:57 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:05:57 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:05:57 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:05:57 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:06:45 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:06:45 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:06:45 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:06:45 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:06:45 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:06:45 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:18:47 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:18:47 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:18:47 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:18:47 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:18:47 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:18:47 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:19:04 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:19:04 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:19:04 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:19:04 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:19:04 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:19:04 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:19:19 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:19:19 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:19:19 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:19:19 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:19:19 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:19:19 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:23:05 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:23:05 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:23:05 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99
+[10-Jul-2023 15:23:05 Asia/Jakarta] PHP Warning:  Undefined array key "qty_fail" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 87
+[10-Jul-2023 15:23:05 Asia/Jakarta] PHP Warning:  Undefined array key "qty_defect" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 93
+[10-Jul-2023 15:23:05 Asia/Jakarta] PHP Warning:  Undefined array key "qty_missing" in /home/subm6595/public_html/sisprod.suburjayabdg.com/transaction/sewing/table-sewing.php on line 99

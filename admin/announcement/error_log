@@ -1,0 +1,36 @@
+[05-Jul-2023 07:43:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getUserFullnameByID() in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php on line 15
+[05-Jul-2023 07:43:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getUserFullnameByID() in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php on line 15
+[05-Jul-2023 07:43:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getUserFullnameByID() in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php on line 15
+[05-Jul-2023 07:43:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getUserFullnameByID() in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php on line 15
+[05-Jul-2023 07:43:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getUserFullnameByID() in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php on line 15
+[05-Jul-2023 07:43:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getUserFullnameByID() in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php on line 15
+[05-Jul-2023 07:43:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getUserFullnameByID() in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php on line 15
+[05-Jul-2023 07:43:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getUserFullnameByID() in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php on line 15
+[05-Jul-2023 07:43:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getUserFullnameByID() in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/admin/announcement/index.php on line 15

@@ -1,0 +1,108 @@
+[05-Jul-2023 02:06:56 UTC] PHP Warning:  mysqli::__construct(): (HY000/1044): Access denied for user 'subm6595_sj'@'localhost' to database 'subm6595_sj_logs' in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php on line 8
+[05-Jul-2023 02:40:37 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php:16) in /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php on line 68
+[05-Jul-2023 02:40:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php:16) in /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php on line 75
+[05-Jul-2023 02:40:46 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php:16) in /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php on line 75
+[05-Jul-2023 02:41:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php:16) in /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php on line 75
+[05-Jul-2023 06:37:35 UTC] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php on line 8
+[06-Jul-2023 03:46:19 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php:16) in /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php on line 68
+[06-Jul-2023 03:46:23 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php:16) in /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php on line 75
+[06-Jul-2023 03:46:24 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php:16) in /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php on line 75
+[06-Jul-2023 05:58:51 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php:16) in /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php on line 68
+[06-Jul-2023 09:25:18 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php:16) in /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php on line 68
+[07-Jul-2023 02:25:26 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php:16) in /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php on line 68
+[07-Jul-2023 02:25:35 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php:16) in /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php on line 75
+[07-Jul-2023 03:36:53 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php:16) in /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php on line 68
+[10-Jul-2023 08:25:52 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Class "mysqli" not found in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php:8
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php(34): getDbConnection()
+#1 /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php(3): getConnUser()
+#2 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php on line 8
+[10-Jul-2023 08:25:54 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Class "mysqli" not found in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php:8
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php(34): getDbConnection()
+#1 /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php(3): getConnUser()
+#2 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php on line 8
+[10-Jul-2023 08:25:56 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Class "mysqli" not found in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php:8
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php(34): getDbConnection()
+#1 /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php(3): getConnUser()
+#2 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php on line 8
+[10-Jul-2023 08:26:02 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Class "mysqli" not found in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php:8
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php(34): getDbConnection()
+#1 /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php(3): getConnUser()
+#2 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php on line 8
+[10-Jul-2023 08:30:46 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Class "mysqli" not found in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php:8
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php(34): getDbConnection()
+#1 /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php(3): getConnUser()
+#2 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php on line 8
+[10-Jul-2023 08:34:54 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Class "mysqli" not found in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php:8
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php(34): getDbConnection()
+#1 /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php(3): getConnUser()
+#2 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php on line 8
+[10-Jul-2023 08:34:55 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Class "mysqli" not found in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php:8
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php(34): getDbConnection()
+#1 /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php(3): getConnUser()
+#2 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php on line 8
+[10-Jul-2023 08:34:55 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Class "mysqli" not found in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php:8
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php(34): getDbConnection()
+#1 /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php(3): getConnUser()
+#2 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php on line 8
+[10-Jul-2023 08:55:56 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Class "mysqli" not found in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php:8
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php(34): getDbConnection()
+#1 /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php(3): getConnUser()
+#2 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php on line 8
+[10-Jul-2023 09:00:31 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Class "mysqli" not found in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php:8
+Stack trace:
+#0 /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php(34): getDbConnection()
+#1 /home/subm6595/public_html/sisprod.suburjayabdg.com/login.php(3): getConnUser()
+#2 {main}
+  thrown in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/db.php on line 8
+[10-Jul-2023 09:01:23 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 11:22:22 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 12:36:47 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 13:09:03 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 13:09:27 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 13:09:32 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 13:19:09 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 13:41:27 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 13:52:19 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 13:52:32 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 14:00:27 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 14:02:07 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 14:02:43 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 15:00:01 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 16:12:25 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[10-Jul-2023 19:33:08 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 07:34:08 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 08:14:31 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 08:53:56 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 10:56:10 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 10:57:04 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 13:01:49 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 13:30:52 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 14:02:25 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 14:07:46 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 14:11:29 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 14:39:34 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 14:56:45 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 14:57:24 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[11-Jul-2023 15:36:35 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[12-Jul-2023 08:08:40 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[12-Jul-2023 09:10:23 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[12-Jul-2023 09:10:52 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21
+[12-Jul-2023 10:06:26 Asia/Jakarta] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/subm6595/public_html/sisprod.suburjayabdg.com/php-modules/agents/logging.php on line 21

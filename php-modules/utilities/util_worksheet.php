@@ -25,8 +25,8 @@ function fetchWorksheets() {
     $tConn = getConnTransaction();
 
     $sql = "SELECT * FROM worksheet 
-        LEFT JOIN suburjaya_transaction.position AS p ON worksheet.worksheet_id = p.worksheet_id 
         INNER JOIN worksheet_detail ON worksheet.worksheet_id = worksheet_detail.worksheet_id 
+        INNER JOIN subm6595_sj_transaction.position AS p ON worksheet.worksheet_id = p.worksheet_id 
         ORDER BY p.position_id ASC, worksheet.id ASC";
 
     $result = $pConn->query($sql);

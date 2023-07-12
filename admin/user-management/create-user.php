@@ -179,7 +179,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/verify-session.php";
 
           </div>
 
-          <div class="" style="margin-top: 32px">
+          <div class="" style="margin-top: 40px">
               <input class="w3-padding-16" type="submit" value="Create User" style="width: 100%;">
           </div>
       </form>

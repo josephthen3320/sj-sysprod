@@ -62,7 +62,7 @@ if ($username == "nara") {
 <!-- Left bar -->
 <?php include $_SERVER['DOCUMENT_ROOT'] . "/site-modular/sidebar.php" ; ?>
 
-<div class="w3-threequarter w3-white sj-content" style="min-height: 100vh; margin-left: 25%; margin-bottom: 25%; background-color: #fbfbfb">
+<div class="w3-threequarter w3-white sj-content" style="min-height: 100vh; margin-left: 25%; margin-bottom: 64px; background-color: #fbfbfb">
     <?php include $_SERVER['DOCUMENT_ROOT'] . "/site-modular/topbar.php" ; ?>
 
     <div style="margin-top: 16px; min-height: 50vh;">

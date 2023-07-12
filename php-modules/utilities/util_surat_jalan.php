@@ -58,44 +58,6 @@ function createSuratJalan($prefix, $tid, $source, $destination, $article_id, $qt
     return $sjid;
 }
 
-function createSuratJalanMulti($prefix, $source, $destination, $uid, $data) {
-    // $tids && $article_ids && $qtys are array that contain multiple article data
-
-    $conn = getConnTransaction();
-
-    $type = 9;
-    $prefix .= "M";
-
-    $totalQty = 0;
-
-    $sjid = generateSuratJalanIDString($prefix);
-
-    foreach ($data as $i => $d) {
-        //$tids, $article_ids, $qtys,
-        addSuratJalanDetail($sjid, $d[0], $d[1], $d[2]);
-        $totalQty += $d[2];
-    }
-
-    $sql = "INSERT INTO surat_jalan (surat_jalan_id, type, source, destination, created_by, qty) 
-            VALUES ('$sjid', $type, '$source', '$destination', '$uid', $totalQty)";
-
-    $conn->query($sql);
-
-
-
-    $conn->close();
-
-    return $sjid;
-}
-
-function addSuratJalanDetail($sjid, $transactionId, $articleId, $qty) {
-    $conn = getConnTransaction();
-    $sql = "INSERT INTO surat_jalan_detail (surat_jalan_id, transaction_id, article_id, qty) 
-            VALUES ('$sjid', '$transactionId', '$articleId', $qty)";
-    $conn->query($sql);
-    $conn->close();
-}
-
 function createSuratTerima($prefix, $tid, $source, $destination, $article_id, $qty, $uid) {
     $conn = getConnTransaction();
 
@@ -191,16 +153,6 @@ function getSuratJalanDetail($id) {
     return $row;
 }
 
-function getSuratJalanDetailBySJID($sjid) {
-    $conn = getConnTransaction();
-
-    $sql = "SELECT * FROM surat_jalan WHERE surat_jalan_id = '$sjid'";
-    $row = queryDatabase($conn, $sql);
-    $conn->close();
-
-    return $row;
-}
-
 function getProcessName($process_id) {
     $conn = getConnProduction($process_id);
 
@@ -220,12 +172,4 @@ function queryDatabase($conn, $sql) {
     $row = mysqli_fetch_assoc($result);
 
     return $row;
-}
-
-function fetchSuratJalanMultiData($sjid) {
-    $conn = getConnTransaction();
-    $sql = "SELECT * FROM surat_jalan_detail WHERE surat_jalan_id = '$sjid'";
-    $result = $conn->query($sql);
-
-    return $result;
 }
