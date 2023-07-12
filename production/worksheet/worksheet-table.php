@@ -37,6 +37,12 @@ $role = $_SESSION['user_role'];
 
         $worksheets = fetchWorksheets();
 
+		function isFileExists($filename) {
+			$filePath = 'files/' . $filename; // Assuming the files are stored in the "files" directory
+			
+			return file_exists($filePath);
+		}
+
         foreach ($worksheets as $index => $worksheet) {
             $worksheetId = $worksheet['worksheet_id'];
             $details = fetchWorksheetDetails($worksheetId);
@@ -53,14 +59,33 @@ $role = $_SESSION['user_role'];
             echo "  <td>";
 
             // feature disabled temporarily
-            if ($role <= 1) {
+            if ($role <= -1) {
                 echo "<button class='w3-button w3-blue-gray' onclick='openPopupURL35(\"detail?id=" . $id . "\", \"wsdetail\")'><i class='fa-solid fa-magnifying-glass'></i></button>";
             }
-            if ($role >= -1) {
-                echo "<button class='w3-button w3-green' onclick='openPopupURL(\"export.php?id=" . $id . "\", \"wsgenerate\")'><i class='fa-solid fa-file-export'></i></button>";
+			
+			if (in_array($role, [0, 1])) {
+				$btnColour = "orange";
+				if (isFileExists($worksheet['worksheet_id'].".xlsx")) { 
+					$btnColour = "blue";
+				}
+
+				echo "<button class='w3-button w3-{$btnColour}' onclick='openPopupURL(\"import.php?id=" . $id . "\", \"wspopup\")'><i class='fa-solid fa-upload'></i></button>";
+			}
+				
+            if (in_array($role, [0,1,2,5])) {
+				if (isFileExists($worksheet['worksheet_id'].".xlsx")) { 
+					$filePath = "files/" . $worksheet['worksheet_id'] . ".xlsx";
+					echo "<a class='w3-button w3-red' href='{$filePath}' id='wsDownloadLink'><i class='fa-solid fa-download'></i></a>";
+					//echo "<button class='w3-button w3-red' onclick='//todo: download the file uploaded'><i class='fa-solid fa-download'></i></button>";				
+				}
             }
-            if ($role <= 2) {
-                echo "<button class='w3-button w3-red' onclick = 'openPopupURL(\"delete?id=" . $id . "\", \"wsdelete\")' ><i class='fa-solid fa-trash' ></i ></button >";
+				
+            if (in_array($role, [0,1,2,5])) {
+                echo "<button class='w3-button w3-green' onclick='openPopupURL(\"export.php?id=" . $id . "\", \"wspopup\")'><i class='fa-solid fa-file-export'></i></button>";
+            }
+			
+            if (in_array($role, [0,1,2,5])) {
+                echo "<button class='w3-button w3-red' onclick = 'openPopupURL(\"delete?id=" . $id . "\", \"wspopup\")' ><i class='fa-solid fa-trash' ></i ></button >";
                 }
             echo "</td>";
 
