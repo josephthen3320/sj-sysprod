@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="200a0da0-d2cc-4bc5-8c02-105a42299bc7" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/transaction/pola-marker/send-to.php" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/admin/activities/index.php" afterPath="$PROJECT_DIR$/admin/activities/index.php" />
-      <change beforePath="$PROJECT_DIR$/admin/email/index.php" afterPath="$PROJECT_DIR$/admin/email/index.php" />
-      <change beforePath="$PROJECT_DIR$/admin/user-management/user-table.php" afterPath="$PROJECT_DIR$/admin/user-management/user-table.php" />
-      <change beforePath="$PROJECT_DIR$/php-modules/utilities/util_surat_jalan.php" afterPath="$PROJECT_DIR$/php-modules/utilities/util_surat_jalan.php" />
-      <change beforePath="$PROJECT_DIR$/php-modules/utilities/util_transaction.php" afterPath="$PROJECT_DIR$/php-modules/utilities/util_transaction.php" />
-      <change beforePath="$PROJECT_DIR$/php-modules/utilities/util_users.php" afterPath="$PROJECT_DIR$/php-modules/utilities/util_users.php" />
-      <change beforePath="$PROJECT_DIR$/transaction/pola-marker/send-to-cutting.php" afterPath="$PROJECT_DIR$/transaction/pola-marker/backup/send-to-cutting.php" />
-      <change beforePath="$PROJECT_DIR$/transaction/pola-marker/sendDialog.php" afterPath="$PROJECT_DIR$/transaction/pola-marker/sendDialog.php" />
-    </list>
+    <list default="true" id="200a0da0-d2cc-4bc5-8c02-105a42299bc7" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -462,7 +451,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="177799000" />
+    <option name="totallyTimeSpent" value="178415000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="41" width="1938" height="1048" extended-state="6" />
