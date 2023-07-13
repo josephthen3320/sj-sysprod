@@ -1,6 +1,6 @@
 <?php
 session_start();
-$userId = $_SESSION['user_id'];
+$uid = $userId = $_SESSION['user_id'];
 
 $root = $_SERVER['DOCUMENT_ROOT'];
 
@@ -12,10 +12,10 @@ if (!isset($_POST['worksheet_id'])) {
 */
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    echo "<h1> WOW </h1>";
+    echo "<h1> Success! </h1>";
 }
 
-include $root . "/php-modules/db.php";
+include_once $root . "/php-modules/db.php";
 $conn = getConnProduction();
 
 $article_id     = $_POST['article_id'];
@@ -51,9 +51,12 @@ $sql = "INSERT INTO worksheet_detail (worksheet_id, article_id, qty, customer_id
 $conn->query($sql);
 
 
-include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_worksheet_position.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_worksheet_position.php";
 updateWorksheetPosition($worksheet_id, 0);
 $conn->close();
+
+include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/agents/logging.php";
+logGeneric($uid, 421, "WORKSHEET CREATED; worksheet_id={$worksheet_id};");
 
 
 $_SESSION['success_msg'] = "Worksheet created!";

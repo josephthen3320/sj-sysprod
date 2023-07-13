@@ -1,8 +1,10 @@
 <?php
 session_start();
+$uid = $_SESSION['user_id'];
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/verify-session.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/db.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/agents/logging.php";
 $conn = getConnProduction();
 
 $title = "Generate Worksheet";
@@ -171,12 +173,15 @@ if (isset($_GET['id'])) {
 
         // Save the generated worksheet
         $date = date('Ymd');
-        $outputPath = "generated_worksheet/SPK_{$worksheet_id}_{$date}_{$ws_type}.xlsx";
+        $filename = "{$worksheet_id}_{$date}_{$ws_type}.xlsx";
+        $outputPath = "generated_worksheet/SPK_{$filename}.xlsx";
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save($outputPath);
 
         // Free up image temp memory
         unlink($jpgImagePath);
+
+        logGeneric($uid, 429, "WORKSHEET EXPORTED; filename={$filename};");
         // echo 'Worksheet generated successfully. <a href="' . $outputPath . '">Download</a>';
 
 

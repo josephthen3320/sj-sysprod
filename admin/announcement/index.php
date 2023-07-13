@@ -78,8 +78,11 @@ $top_title = "Site Announcements";
 
                                 $sql = "INSERT INTO global_announcements (subject, details, type) VALUES ('$subject', '$description', '$type')";
                                 $connSubmit->query($sql);
-
                                 $connSubmit->close();
+
+                                include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/agents/logging.php';
+                                $details = "ANNOUNCEMENT CREATED; subject=" . $subject . ";";
+                                logGeneric($uid, 25, $details);
                             }
 
                         ?>

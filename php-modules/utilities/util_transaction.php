@@ -1,5 +1,6 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/db.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/agents/logging.php';
 
 // TRANSACTION CODES GENERATOR
 function generateIDString($prefix, $process_name) {
@@ -149,40 +150,64 @@ function setQtyOther($p, $pid, $qtyDefect, $qtyFail, $qtyMissing) {
 
 /** Push functions */
 function pushToPolaMarker($wid) {
-    pushToProcess("pola_marker", generatePolaMarkerId(), $wid);
+    $recordId = generatePolaMarkerId();
+    pushToProcess("pola_marker", $recordId, $wid);
+    logGeneric(-1, 501, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
 }
 
 function pushToCutting($wid, $cmt) {
     //pushToProcess('cutting', generateCuttingId(), $wid);
-    pushToProcessCuttingTest('cutting', generateCuttingId(), $wid, $cmt);
+    $recordId = generateCuttingId();
+    pushToProcessCuttingTest('cutting', $recordId, $wid, $cmt);
+    logGeneric(-1, 511, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
 }
 
 function pushToEmbro($wid, $cmt, $qtyIn) {
-    pushToProcessWithCMT('embro', generateEmbroId(), $wid, $cmt, $qtyIn);
+    $recordId = generateEmbroId();
+    pushToProcessWithCMT('embro', $recordId, $wid, $cmt, $qtyIn);
+    logGeneric(-1, 521, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
 }
 
 function pushToPrintSablon($wid, $cmt, $qtyIn) {
-    pushToProcessWithCMT('print_sablon', generatePrintSablonId(), $wid, $cmt, $qtyIn);
+    $recordId = generatePrintSablonId();
+    pushToProcessWithCMT('print_sablon', $recordId, $wid, $cmt, $qtyIn);
+    logGeneric(-1, 531, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
 }
 
 function pushToQCEmbro($wid, $qtyIn) {
-    pushToProcess('qc_embro', generateQCEmbroId(), $wid, $qtyIn);
+    $recordId = generateQCEmbroId();
+    pushToProcess('qc_embro', $recordId, $wid, $qtyIn);
+    logGeneric(-1, 541, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
 }
 
 function pushToSewing($wid, $cmt, $qtyIn) {
-    pushToProcessWithCMT('sewing', generateSewingId(), $wid, $cmt, $qtyIn);
+    $recordId = generateSewingId();
+    pushToProcessWithCMT('sewing', $recordId, $wid, $cmt, $qtyIn);
+    logGeneric(-1, 551, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
 }
 
 function pushToWashing($wid, $cmt, $qtyIn) {
-    pushToProcessWithCMT('washing', generateWashingId(), $wid, $cmt, $qtyIn);
+    $recordId = generateWashingId();
+    pushToProcessWithCMT('washing', $recordId, $wid, $cmt, $qtyIn);
+    logGeneric(-1, 561, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
 }
 
 function pushToFinishing($wid, $cmt, $qtyIn) {
-    pushToProcessWithCMT('finishing', generateFinishingId(), $wid, $cmt, $qtyIn);
+    $recordId = generateFinishingId();
+    pushToProcessWithCMT('finishing', $recordId, $wid, $cmt, $qtyIn);
+    logGeneric(-1, 571, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
 }
 
 function pushToQCFinal($wid, $qtyIn) {
-    pushToProcess('qc_final', generateQCFinalId(), $wid, $qtyIn);
+    $recordId = generateQCFinalId();
+    pushToProcess('qc_final', $recordId, $wid, $qtyIn);
+    logGeneric(-1, 581, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
+}
+
+function pushToPerbaikan($wid, $qtyIn) {
+    $recordId = generateServiceId();
+    pushToProcess('perbaikan', $recordId, $wid, $qtyIn);
+    logGeneric(-1, 591, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
 }
 
 

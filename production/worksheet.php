@@ -91,7 +91,8 @@ $top_title .= "Dashboard";
             <button class="w3-bar-item w3-button" onclick="changeIframeSrc('worksheet/worksheet-table.php')"><span class="w3-hide-small">View All &nbsp; </span><i class="fa-solid fa-magnifying-glass fa-sm"></i> </button>
             <?php
             if ($_SESSION['user_role'] == 0) {
-                echo "<button class='w3-bar-item w3-button' onclick='openPopup(\"worksheet/create/create-sample-worksheet.php\")'><span class=\"w3-hide-small\">Populate Sample &nbsp; </span><i class='fas fa-seedling fa-sm'></i></button>";
+                echo "<button class='w3-bar-item w3-button' onclick='openPopupURL2(\"worksheet/create/create-sample-worksheet.php\")'><span class=\"w3-hide-small\">Populate Sample &nbsp; </span><i class='fas fa-seedling fa-sm'></i></button>";
+                echo "<button class='w3-bar-item w3-button' onclick='openPopupURL2(\"worksheet/clear-files.php\")'><span class=\"w3-hide-small\">Clear Files &nbsp; </span><i class='fas fa-broom fa-sm'></i></button>";
 
             }
             ?>

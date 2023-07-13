@@ -55,16 +55,43 @@ $top_title = "Site Announcements";
 <div class="w3-threequarter sj-content w3-white" style="min-height: 100vh; margin-left: 25%; background-color: #fbfbfb">
     <?php include $_SERVER['DOCUMENT_ROOT'] . "/site-modular/topbar.php" ; ?>
 
-    <div style="margin-top: 16px; min-height: 50vh;">
+    <div style="margin-top: 16px; min-height: 75vh;">
         <div id="modal-1" class="w3-bar w3-white w3-border-bottom" style="display: flex; background-color: #0B293C; height: 72px; align-items: center;">
-            <span class="w3-bar-item w3-large" style="color: #0B293C;"><b>Activities Table</b></span>
+            <span class="w3-bar-item w3-large" style="color: #0B293C;"><b>Activities Log</b></span>
         </div>
 
-        <div class="w3-padding-top-24">
-            <iframe src="activity-table.php" width="100%" height="750px" frameborder="none"></iframe>
+        <div class="w3-row">
+            <div class="w3-col l8 m8 w3-margin-top">
+                <iframe src="activity-log-table.php" width="100%" height="700px" frameborder="none"></iframe>
+            </div>
+
+            <div class="w3-row w3-col l4 m4 w3-margin-top">
+                <div class="w3-col l12 m12">
+                    <iframe src="insert-activity.php" width="100%" height="300px" frameborder="none"></iframe>
+                </div>
+                <div class="w3-col l12 m12">
+                    <iframe src="activity-id-table.php" width="100%" height="400px" frameborder="none"></iframe>
+                </div>
+            </div>
         </div>
+
 
     </div>
+
+    <script>
+        function refreshIframes() {
+            var iframe1 = document.getElementById("iframe1");
+            iframe1.src = iframe1.src;
+
+            var iframe2 = document.getElementById("iframe2");
+            iframe2.src = iframe2.src;
+        }
+
+        document.getElementById("submit").onclick = function() {
+            refreshIframes();
+        };
+    </script>
+
 
 
 </div>

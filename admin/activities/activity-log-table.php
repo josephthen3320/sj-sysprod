@@ -11,6 +11,7 @@
 <script src="/assets/js/utils.js"></script>
 <body>
 <div class="w3-container classification-content" id="worksheet-modal" style="">
+
     <table class="w3-table w3-table-all">
         <tr class="">
             <th class="w3-center">Activity ID</th>

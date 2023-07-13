@@ -1,8 +1,11 @@
 <!-- insert_article.php -->
 <?php
 session_start();
+$uid = $_SESSION['user_id'];
+
 // Include the database connection file
 require_once 'db.php';
+require_once 'agents/logging.php';
 $conn = getConnProduction();
 
 // Retrieve form data
@@ -127,6 +130,10 @@ if (move_uploaded_file($file_tmp, $target_filepath)) {
     if (mysqli_query($conn, $insertQuery)) {
         echo "Data inserted successfully!";
         $_SESSION['msg'] = "<div class='w3-bar w3-green'><span class='w3-bar-item'>Insert Success!</span></div>";
+
+        // Logging
+        $details = "ARTICLE CREATED; article_id={$article_id};";
+        logGeneric($uid, 411, $details);
 
     } else {
         $_SESSION['msg'] = "<div class='w3-bar w3-red'><span class='w3-bar-item'>Error: " . mysqli_error($conn) . "</span></div>";
