@@ -18,6 +18,21 @@ function getUserDataByID($uid) {
     }
 }
 
+function getUserDataByUsername($username) {
+    $conn = getConnUser();
+
+    $sql = "SELECT * FROM user_accounts INNER JOIN users ON user_accounts.username = users.username WHERE user_accounts.username = '$username'";
+    $result = $conn->query($sql);
+
+    $conn->close();
+
+    if ($result && $result->num_rows > 0) {
+        return $result->fetch_assoc();
+    } else {
+        return null;
+    }
+}
+
 function getUserFullnameByID($uid) {
     $userdata = getUserDataByID($uid);
 

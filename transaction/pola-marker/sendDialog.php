@@ -31,15 +31,16 @@ $a = $_GET['a'];
         <h1>Send to cutting</h1>
         <span style="display: inline-block; width: 120px; font-weight: bold">Worksheet ID: </span><?= $w ?>
         <br>
-        <span style="display: inline-block; width: 120px; font-weight: bold">Cutting ID: </span><?= $pi ?>
+        <span style="display: inline-block; width: 120px; font-weight: bold">Pola Marker ID: </span><?= $pi ?>
         <br>
         <span style="display: inline-block; width: 120px; font-weight: bold">Article ID: </span><?= $a ?>
 
-        <form class="w3-margin-top" action="send-to-cutting.php" method="post">
+        <form class="w3-margin-top" action="send-to.php" method="post">
 
-            <input hidden value="<?= $i ?>" id="i" name="i">
+            <input hidden value="<?= $i ?>" id="tid" name="tid">
             <input hidden value="<?= $w ?>" id="w" name="w">
-            <input hidden value="<?= $a ?>" id="a" name="a">
+            <input hidden value="<?= $a ?>" id="aid" name="aid">
+            <input hidden value="<?= $pi ?>" id="trid" name="trid">
 
             <label>Select location for cutting:</label>
             <select class="w3-select w3-border" required id="cmt" name="cmt">

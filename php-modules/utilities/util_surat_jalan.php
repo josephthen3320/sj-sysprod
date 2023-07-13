@@ -50,7 +50,7 @@ function createSuratJalan($prefix, $tid, $source, $destination, $article_id, $qt
 
     $sjid = generateSuratJalanIDString($prefix);
 
-    echo $sql = "INSERT INTO surat_jalan (surat_jalan_id, transaction_id, type, source, destination, article_id, qty, created_by) 
+    $sql = "INSERT INTO surat_jalan (surat_jalan_id, transaction_id, type, source, destination, article_id, qty, created_by) 
             VALUES ('$sjid', '$tid', 1, '$source', '$destination', '$article_id', '$qty', '$uid')";
     $conn->query($sql);
     $conn->close();

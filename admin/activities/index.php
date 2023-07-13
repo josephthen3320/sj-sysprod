@@ -16,7 +16,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_users.php"
 
 $name = getUserFullnameByID($uid);
 
-$top_title = "Site Announcements";
+$top_title = "Activities Log";
 
 ?>
 

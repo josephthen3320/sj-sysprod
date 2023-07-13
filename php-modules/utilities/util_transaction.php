@@ -107,7 +107,8 @@ function setQtyOut($p, $pid, $qtyOut) {
 function fetchAllTransactionByProcess($tname) {
     $conn = getConnTransaction();
 
-    $sql = "SELECT * FROM {$tname} AS t INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id ORDER BY p.{$tname} ASC, t.{$tname}_id DESC";
+    $sql = "SELECT t.*, p.position_id, p.{$tname} FROM {$tname} AS t INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id ORDER BY p.{$tname} ASC, t.{$tname}_id DESC";
+    //$sql = "SELECT * FROM {$tname} AS t INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id ORDER BY p.{$tname} ASC, t.{$tname}_id DESC";
     $result = $conn->query($sql);
     $conn->close();
     return $result;
@@ -125,7 +126,7 @@ function fetchCuttingCipadungTransaction() {
 function updateEndDate ($tn, $tid) {                // table {transaction_name}
     $conn = getConnTransaction();
 
-    $sql = "UPDATE " . $tn . " SET date_out = '" . date('Y-m-d H:i:s') . "' WHERE id = '" . $tid . "'";
+    echo $sql = "UPDATE " . $tn . " SET date_out = '" . date('Y-m-d H:i:s') . "' WHERE id = '" . $tid . "'";
     $conn->query($sql);
     $conn->close();
 }

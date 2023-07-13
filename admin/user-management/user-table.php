@@ -10,11 +10,14 @@ $user_role = "Kucing Admin";
 include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/verify-session.php";
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/db.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_users.php";
 
 // MySQL query to fetch information from "users" table for the logged-in user
 $username = $_SESSION["username"];
+
 $sql = "SELECT first_name, last_name, employee_id FROM users WHERE username = '$username'";
 $result = $conn->query($sql);
+
 
 if ($result->num_rows > 0) {
     // User found, fetch the name and employee_id
@@ -78,6 +81,7 @@ if ($username == "nara") {
                     <th>ID</th>
                     <th>Full Name</th>
                     <th>Username</th>
+                    <th>Email</th>
                     <th>Create Date</th>
                     <th>Actions</th>
                 </tr>
@@ -101,6 +105,8 @@ if ($username == "nara") {
                     while ($row = mysqli_fetch_assoc($result)) {
                         $user_cur = $row['username'];
 
+                        $userdata = getUserDataByUsername($user_cur);
+
                         $status_icons = "";
 
                         $status_icons .= ($row['is_locked']) ? "&nbsp;&nbsp;<i class='fa-solid fa-lock fa-2xs'></i>" : "";
@@ -113,19 +119,20 @@ if ($username == "nara") {
 
 
                         echo "<tr class='w3-hover-blue-grey' style='cursor: pointer;'>";
-                        echo "<td>#{$row['id']}</td>";
+                        echo "<td>#{$userdata['id']}</td>";
                         echo "<td>                        
                                 <img class=\"w3-circle\" src=\"/img/profile-placeholder.png\" width=\"40px\"> &nbsp;&nbsp;
-                                {$row['first_name']} {$row['last_name']}</td>";
-                        echo "<td>{$row['username']}{$status_icons}</td>";
-                        echo "<td>{$row['date_created']}</td>";
+                                {$userdata['first_name']} {$userdata['last_name']}</td>";
+                        echo "<td>{$userdata['username']}{$status_icons}</td>";
+                        echo "<td>{$userdata['email']}</td>";
+                        echo "<td>{$userdata['date_created']}</td>";
                         echo "<td>
-                                <span class='w3-button w3-round-large w3-blue-grey' onclick='resetPopup(\"{$row['username']}\")'><i class='fa-solid fa-shield-keyhole'></i>&nbsp;&nbsp;Reset</span>&nbsp;";
+                                <span class='w3-button w3-round-large w3-blue-grey' onclick='resetPopup(\"{$userdata['username']}\")'><i class='fa-solid fa-shield-keyhole'></i>&nbsp;&nbsp;Reset</span>&nbsp;";
 
-                        if (!$row['is_locked']){
-                            echo "<span class='w3-button w3-round-large w3-blue-grey' onclick='lockAccount(\"{$row['username']}\")'><i class='fa-solid fa-lock'></i>&nbsp;&nbsp;Disable</span>";
+                        if (!$userdata['is_locked']){
+                            echo "<span class='w3-button w3-round-large w3-blue-grey' onclick='lockAccount(\"{$userdata['username']}\")'><i class='fa-solid fa-lock'></i>&nbsp;&nbsp;Disable</span>";
                         } else {
-                            echo "<span class='w3-button w3-round-large w3-blue-grey' onclick='unlockAccount(\"{$row['username']}\")'><i class='fa-solid fa-lock-open'></i>&nbsp;&nbsp;Enable</span>";
+                            echo "<span class='w3-button w3-round-large w3-blue-grey' onclick='unlockAccount(\"{$userdata['username']}\")'><i class='fa-solid fa-lock-open'></i>&nbsp;&nbsp;Enable</span>";
                         }
 
 
