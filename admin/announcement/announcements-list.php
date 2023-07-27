@@ -56,6 +56,10 @@ while ($a = $result->fetch_assoc()) {
             $icon = "fa-up";
             $colour = "green";
             break;
+        case 6:                     // megaphone
+            $icon = "fa-megaphone";
+            $colour = "green";
+            break;
 
     }
 

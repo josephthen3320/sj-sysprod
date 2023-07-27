@@ -63,9 +63,23 @@ $sha256Hash = hash('sha256', $randomString); // Generate the SHA-256 hash
 
 function getCMTId($worksheet_id, $processName) {
     $conn = getConnTransaction();
+
+    /* todo: check overall logic */
+    $processName = str_replace(" ", "_", $processName);
+
+    if (substr($processName, 0, 2) === 'qc') {
+        return 'SJ';
+    }
+
     $sql = ($processName != "kantor") ? "SELECT cmt_id FROM $processName WHERE worksheet_id = '$worksheet_id'" : "SELECT cmt_id FROM cutting WHERE worksheet_id = '$worksheet_id'";
     $result = $conn->query($sql);
-    $row = $result->fetch_assoc()['cmt_id'];
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc()['cmt_id'];
+    } else {
+        $row = null;
+    }
+
     return $row;
 }
 
@@ -81,6 +95,7 @@ function getCMTId($worksheet_id, $processName) {
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/w3.css">
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <style>
@@ -109,12 +124,12 @@ function getCMTId($worksheet_id, $processName) {
     <div class="w3-container w3-padding-16 w3-display-container" style="padding-left: 64px; padding-right: 64px">
         <div class="w3-padding w3-right-align print-show">
             <span class="w3-monospace"><b>CV. SUBUR JAYA</b></span><br>
-            <span class="w3-monospace w3-small">Jl. Moch. Ramdhan 56, Bandung</span>
+            <span class="w3-monospace w3-small">Jl. Moch. Ramdhan 56, Bandung | 0895-4042-55456</span>
         </div>
 
         <div class="w3-padding w3-right-align print-hide w3-hide-large">
             <span class="w3-monospace"><b>CV. SUBUR JAYA</b></span><br>
-            <span class="w3-monospace w3-small">Jl. Moch. Ramdhan 56, Bandung</span>
+            <span class="w3-monospace w3-small">Jl. Moch. Ramdhan 56, Bandung | 0895-4042-55456</span>
         </div>
 
         <!-- HEADER -->
@@ -170,8 +185,46 @@ function getCMTId($worksheet_id, $processName) {
                         <td><?= $sjData['qty'] ?></td>
                         <td><?= $articleData['model_name'] ?></td>
                         <td><?= $brand ?></td>
-                        <td></td>
+                        <td contenteditable id="<?= $sjid ?>"><?= $sjData['description'] ?></td>
                     </tr>
+
+                    <script>
+                        // Assuming you're using the jQuery library for AJAX functionality
+                        $(document).ready(function() {
+                            // Create a delay variable
+                            var delay = null;
+
+                            // Add event listener to the editable element
+                            $('#<?= $sjid ?>').on('input', function() {
+                                // Clear the previous timeout
+                                clearTimeout(delay);
+
+                                // Set a new timeout to delay the AJAX request
+                                delay = setTimeout(function() {
+                                    var description = $(this).text(); // Get the updated description
+                                    var sjid = $(this).attr('id'); // Get the ID
+
+                                    // Send an AJAX request to update the description
+                                    $.ajax({
+                                        url: 'update_description.php', // Path to your PHP script for updating the description
+                                        method: 'POST',
+                                        data: {
+                                            sjid: sjid,
+                                            description: description
+                                        },
+                                        success: function(response) {
+                                            // Handle the response if needed
+                                            console.log('Description updated successfully');
+                                        },
+                                        error: function(xhr, status, error) {
+                                            // Handle any errors
+                                            console.error(error);
+                                        }
+                                    });
+                                }.bind(this), 1000); // Adjust the delay time as needed
+                            });
+                        });
+                    </script>
 
                     <tr class=" w3-border-bottom w3-border-black">
                         <th class="w3-right-align">Jumlah: </th>
@@ -183,14 +236,14 @@ function getCMTId($worksheet_id, $processName) {
         </div>
 
         <!-- FOOTER -->
-        <div class="w3-row w3-small print-show">
+        <div class="w3-row w3-small">
             <div class="w3-col l4 m4 s4 w3-center">
                 <p style="margin-bottom: 30px;">Dibuat oleh,</p>
                 <span><?= $userData['first_name'] . " " . $userData['last_name'] ?></span>
             </div>
             <div class="w3-col l4 m4 s4 w3-center">
                 <p style="margin-bottom: 30px;">Diketahui oleh,</p>
-                <span>Manager Produksi</span>
+                <span>(<span style="display: inline-block; width: 96px;"></span>)</span>
             </div>
             <div class="w3-col l4 m4 s4 w3-center">
                 <p style="margin-bottom: 30px;">Diterima oleh,</p>

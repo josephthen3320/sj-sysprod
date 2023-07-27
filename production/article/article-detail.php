@@ -45,10 +45,10 @@
         }
     </style>
 
-    <div class="w3-padding-16">
+    <div class="w3-padding-16" style="margin-bottom: 64px;">
         <span><b>Brand:</b> <?= getBrandNameById($a['brand_id']) ?></span><br>
-        <span><b>CMT:</b> <?= getCMTNameById($a['embro_cmt_id']) ?></span><br>
-        <span><b>CMT:</b> <?= getCMTNameById($a['print_cmt_id']) ?></span><br>
+        <span><b>Embro:</b> <?= getCMTNameById($a['embro_cmt_id']) ?></span><br>
+        <span><b>Print/Sablon:</b> <?= getCMTNameById($a['print_cmt_id']) ?></span><br>
         <span><b>Rib:</b> <?= $a['is_rib'] ? "YES" : "NO" ?></span><br>
         <span><b>Sample Code:</b> <?= $a['sample_code'] ?></span><br>
         <span><b>Wash:</b> <?= implode(", ", fetchWashNamesByArticleId($a['article_id'])) ?></span>

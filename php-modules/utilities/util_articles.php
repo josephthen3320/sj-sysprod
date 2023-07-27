@@ -4,7 +4,7 @@ function fetchAllArticles() {
     require_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/db.php";
     $conn = getConnProduction();
 
-    $sql = "SELECT * FROM article";
+    $sql = "SELECT * FROM article ORDER BY id ASC";
     $result = $conn->query($sql);
 
     $articles = [];

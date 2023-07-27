@@ -42,9 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             pushToQCFinal($wid, $qty);
             updateWorksheetPosition($wid, 9); // Set to qc final
 
+            // Get all qty_missing from Sewing, Finishing, Washing
+            $totalQtyMissing = getTotalQtyMissing($wid);
+            setQtyMissing('qc_final', $transaction_id, $totalQtyMissing);
+
             // Surat Jalan
             $sjid = createSuratJalan('QF', $transaction_id, 8, 9, $aid, $qty, $uid);
-            addSuratJalanRecord($stid, 'finishing', $transaction_id);
+            addSuratJalanRecord($sjid, 'finishing', $transaction_id);
 
             echo "Pushing complete";
             break;

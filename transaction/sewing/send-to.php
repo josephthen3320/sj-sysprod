@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $wid = $_POST['w'];
     $tid = $_POST['tid'];
-    $cmt = $_POST['cmt'];
+    $cmt = $_POST['cmt'] ?? '';
     $qty = $_POST['qty'];
     $aid = $_POST['aid'];
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         case 'qc final':
             echo "Pushing to QC Final";
 
-            pushToQCFinal($wid, $cmt, $qty);
+            pushToQCFinal($wid, $qty);
             updateWorksheetPosition($wid, 9); // Set to qc final
 
             // Surat Jalan
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             echo "Pushing to Finishing";
 
             pushToFinishing($wid, $cmt, $qty);
-            updateWorksheetPosition($wid, 8); // Set to embro
+            updateWorksheetPosition($wid, 8); // Set to finishing
 
             // Surat Jalan
             $sjid = createSuratJalan('FI', $transaction_id, 6, 8, $aid, $qty, $uid);
@@ -66,6 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     updateEndDate($curProcessName, $tid);
     toggleProcessCompleted($curProcessName, $wid);
 
-    echo $closeWindowScript = "<script type='text/javascript'>window.close();</script>";
+    //echo $closeWindowScript = "<script type='text/javascript'>window.close();</script>";
 
 }

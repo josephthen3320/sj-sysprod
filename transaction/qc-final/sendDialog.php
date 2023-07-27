@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send to QC Final</title>
+    <title>Send to</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/w3.css">
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css" type="text/css">
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         <h1>Send to QC Final</h1>
         <span style="display: inline-block; width: 120px; font-weight: bold">Worksheet ID: </span><?= $w ?>
         <br>
-        <span style="display: inline-block; width: 120px; font-weight: bold">Cutting ID: </span><?= $pi ?>
+        <span style="display: inline-block; width: 120px; font-weight: bold">QC Final ID: </span><?= $pi ?>
         <br>
         <span style="display: inline-block; width: 120px; font-weight: bold">Article ID: </span><?= $a ?>
         <br><br>

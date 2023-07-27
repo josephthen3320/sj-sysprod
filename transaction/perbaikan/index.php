@@ -3,9 +3,6 @@ session_start();
 
 $page_title = "Perbaikan | Transaction";
 
-// TODO: Change this to actual user role
-$user_role = "Kucing Admin";
-
 // Check if the user is not logged in, redirect to login page
 include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/verify-session.php";
 
@@ -90,9 +87,9 @@ $top_title .= "Dashboard";
         <?php include $_SERVER['DOCUMENT_ROOT'] . "/transaction/nav-transaction.php" ?>
 
 
-        <div class="w3-cell-row w3-padding-16">
+        <div class="w3-cell-row w3-padding">
             <div id="loading">Loading...</div>
-            <iframe id="pmFrame" src="table-pola-marker.php" width="100%" frameborder="0" style="min-height: 75vh;"></iframe>
+            <iframe id="pmFrame" src="table-perbaikan.php" width="100%" frameborder="0" style="min-height: 75vh;"></iframe>
         </div>
 
         <script>

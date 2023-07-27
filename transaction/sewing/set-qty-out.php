@@ -19,16 +19,27 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"); {
     $articleId = $worksheet['article_id'];
 }
 
+$qtyTotalOut = getQtyOutTotal($processId)->fetch_assoc()['qty_total_out'];
+$qtyLeft = $qtyIn - $qtyTotalOut;
+
 if (isset($_POST['i'])) {
-    //$processName = $_POST['p'];
-    //$processId = $_POST['i'];
-    $qty = $_POST['qtyOut'];
+    $qtyOut = $_POST['qtyOut'];
 
-    $qtyFail    = $_POST['qtyFail'] > 0 ? $_POST['qtyFail'] : 0;
-    $qtyDefect  = $_POST['qtyDefect'] > 0 ? $_POST['qtyDefect'] : 0;
+    // $qtyFail    = $_POST['qtyFail'] > 0 ? $_POST['qtyFail'] : 0;
+    // $qtyDefect  = $_POST['qtyDefect'] > 0 ? $_POST['qtyDefect'] : 0;
     $qtyMissing = $_POST['qtyMissing'] > 0 ? $_POST['qtyMissing'] : 0;
+    $description = $_POST['description'] ?? '';
 
-    if (($qtyFail + $qtyDefect + $qtyMissing + $qty) != $qtyIn) {
+    if (($qtyOut + $qtyMissing) > $qtyLeft) {
+        echo "Jumlah input lebih dari sisa di CMT!";
+        exit();
+    }
+
+    insertSewingOutRecord($processId, $qtyOut, $qtyMissing, $description, $uid);
+    updateSewingMasterRecord($processId);
+
+    /*
+    if (($qtyFail + $qty) != $qtyIn) {
         $err = "Qty tidak seimbang";
         $err .= "<br><br>";
     } else {
@@ -37,9 +48,15 @@ if (isset($_POST['i'])) {
 
         echo $closeWindowScript = "<script type='text/javascript'>window.close();</script>";
     }
+    */
 
 
 }
+
+
+$qtyTotalOut = getQtyOutTotal($processId)->fetch_assoc()['qty_total_out'];
+$qtyLeft = $qtyIn - $qtyTotalOut;
+
 ?>
 
 <html>
@@ -72,7 +89,8 @@ if (isset($_POST['i'])) {
     <span class="inline-header"><b>Article Id: </b></span><?= $articleId ?><br>
     <span class="inline-header"><b>Worksheet Id: </b></span><?= $worksheetId ?><br><Br>
 
-    <span class="inline-header"><b>Qty Masuk: </b></span><?= $qtyIn ?> | (<span id="qtyLeft" style="font-weight: bold"><?= $qtyIn ?></span>)
+    <span class="inline-header"><b>Qty Masuk: </b></span><?= $qtyIn ?> |
+    <span class="inline-header"><b>Qty Tersisa: </b></span><?= $qtyIn - $qtyTotalOut ?>
 
     <form action="" method="POST" class="w3-margin-top">
         <input hidden name="p" value="<?= $processName ?>">
@@ -80,8 +98,15 @@ if (isset($_POST['i'])) {
 
         <h6>Hasil Sewing: </h6>
         <label for="qtyOut">Qty: </label>
-        <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyOut" id="qtyOut" autofocus>
+        <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" <?= ($qtyLeft == 0) ? 'disabled' : ''; ?> type="number" min="0" name="qtyOut" id="qtyOut" autofocus required>
 
+        <label for="description">Keterangan: </label>
+        <input  class="w3-input w3-border w3-margin-bottom" <?= ($qtyLeft == 0) ? 'disabled' : ''; ?> type="text" name="description" id="description" required>
+
+        <label for="qtyMissing">Qty Hilang: </label>
+        <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" <?= ($qtyLeft == 0) ? 'disabled' : ''; ?> type="number" min="0" name="qtyMissing" id="qtyMissing">
+
+        <!--
         <h6>Cacat/Gagal/Hilang</h6>
         <label for="qtyDefect">Cacat: </label>
         <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyDefect" id="qtyDefect">
@@ -89,13 +114,19 @@ if (isset($_POST['i'])) {
         <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyFail" id="qtyFail">
         <label for="qtyMissing">Hilang: </label>
         <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyMissing" id="qtyMissing">
+        -->
 
-        <button class="w3-button w3-block w3-blue-grey" type="submit">Submit</button>
+        <?php 
+        $submitBtn = "<button class='w3-button w3-block w3-blue-grey' type='submit'>Submit</button>";
+
+        echo ($qtyLeft == 0) ? '' : $submitBtn;
+        
+        ?>
     </form>
 </div>
 
 
-<script>
+<!--script>
     // Get the input elements
     var qtyIn = <?= $qtyIn ?>;
     var qtyOutInput = document.getElementById('qtyOut');
@@ -128,6 +159,6 @@ if (isset($_POST['i'])) {
             qtyLeftSpan.classList.add('w3-text-red');
         }
     }
-</script>
+</script-->
 
 </body>

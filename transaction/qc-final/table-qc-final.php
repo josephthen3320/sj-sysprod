@@ -1,3 +1,7 @@
+<?php
+session_start();
+$role = $_SESSION['user_role'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,46 +15,62 @@
 <script src="/assets/js/utils.js"></script>
 <body>
 
-<table class="w3-table w3-table-all">
+<table class="w3-table w3-table-all w3-small">
     <thead>
     <tr>
-        <th>No</th>
-        <th>QC Final No.</th>
-        <th>Worksheet No.</th>
-        <th>Qty in</th>
-        <th>Qty out</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th colspan="2">Actions</th>
+        <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">No</th>
+        <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">QC Final No.</th>
+        <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">Worksheet No.</th>
+        <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">Article ID</th>
+        <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">Model</th>
+        <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">Qty in</th>
+        <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">Qty out</th>
+        <th class="w3-center w3-cell-middle" style="vertical-align: middle;" colspan="3">Qty Lain-Lain</th>
+        <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">Start Date</th>
+        <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">End Date</th>
+        <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2" colspan="2">Actions</th>
+    </tr>
+    <tr>
+        <th class="w3-center w3-white">Hilang</th>
+        <th class="w3-center w3-white">Cacat</th>
+        <th class="w3-center w3-white">Gagal</th>
     </tr>
     </thead>
     <tbody>
         <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_worksheet_position.php";
+            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_worksheet.php";
             include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_transaction.php";
-        include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_articles.php";
-        include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_surat_jalan.php";
+            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_articles.php";
+            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_surat_jalan.php";
 
             $ct_data = fetchAllTransactionByProcess('qc_final');
             $i = 0;
 
             if ($ct_data->num_rows == 0) {
                 echo "<tr>";
-                echo "<td colspan='8'>No data found!</td>";
+                echo "<td class='w3-center' colspan='13'>No data found!</td>";
                 echo "</tr>";
             }
 
             while ($ct = $ct_data->fetch_assoc()) {
 
+                $worksheet = fetchWorksheet($ct['worksheet_id'])->fetch_assoc();
+                $article_id = $worksheet['article_id'];
+                $article = getArticleById($article_id);
+
                 ++$i;
                 echo "<tr>";
-                echo "<td>{$i}</td>";
-                echo "<td>{$ct['qc_final_id']}</td>";
-                echo "<td>{$ct['worksheet_id']}</td>";
+                echo "<td class='w3-center'>{$i}</td>";
+                echo "<td class='w3-center'>{$ct['qc_final_id']}</td>";
+                echo "<td class='w3-center'>{$ct['worksheet_id']}</td>";
+
+                echo "<td class='w3-center w3-left-align'>{$article_id}</td>";
+                echo "<td class='w3-center w3-left-align'>{$article['model_name']}</td>";
 
 
-                echo "<td>{$ct['qty_in']}</td>";
-                echo "<td>";
+                echo "<td class='w3-center'>{$ct['qty_in']}</td>";
+                echo "<td class='w3-center'>";
 
                 if ($ct['qty_out'] <= 0) {
                     $urlParam = "p=qc_final";
@@ -63,20 +83,31 @@
 
                 echo "</td>";
 
-                echo "<td>{$ct['date_in']}</td>";
-                echo "<td>{$ct['date_out']}</td>";
+                $qtyMissing = $qtyFail = $qtyDefect = "-";
+                if ($ct['qty_missing'] > 0) {
+                    $qtyMissing = $ct['qty_missing'];
+                    $qtyFail = $ct['qty_fail'];
+                    $qtyDefect = $ct['qty_defect'];
+                }
 
-                echo "<td>";
+                echo "<td class='w3-center'>{$qtyMissing}</td>";
+                echo "<td class='w3-center'>{$qtyDefect}</td>";
+                echo "<td class='w3-center'>{$qtyFail}</td>";
+
+                echo "<td class='w3-center'>{$ct['date_in']}</td>";
+                echo "<td class='w3-center'>{$ct['date_out']}</td>";
+
+                echo "<td class='w3-center'>";
                     // Surat Terima
-                    $urlSuratTerima = "/transaction/surat-jalan/?i={$ct['st_id']}&t={$ct['qc_final_id']}&w={$ct['worksheet_id']}";
+                    $urlSuratTerima = "/transaction/surat-jalan/?i={$ct['sj_id']}&t={$ct['qc_final_id']}&w={$ct['worksheet_id']}";
                     if (checkSuratJalanExistsByTransactionId($ct['qc_final_id'])) {
                         echo "<button class='w3-button w3-green' onclick='openPopupURL2(\"$urlSuratTerima\", \"suratJalan\", 800, 500)'><i class='fas fa-print'></i></button>";
                     }
                 echo "</td>";
 
-                echo "<td>";
-                if (getWorksheetPosition($ct['worksheet_id']) == 7) {
-                    if ($ct['qty_out'] > 0) {
+                echo "<td class='w3-center'>";
+                if (getWorksheetPosition($ct['worksheet_id']) == 9) {
+                    if ($ct['qty_out'] > 0 && in_array($role, [0,1,2,3])) {
                         echo "<button class='w3-button w3-red' onclick='openPopupURL2(\"sendDialog.php?w={$ct['worksheet_id']}&i={$ct['id']}&pi={$ct['qc_final_id']}&q={$ct['qty_out']}\", \"sendto\", 500, 400)'><i class=\"fa-solid fa-arrow-right-from-arc\"></i></button>";
                     }
 

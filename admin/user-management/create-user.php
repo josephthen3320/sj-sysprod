@@ -123,7 +123,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/verify-session.php";
 		}
 	}
 
-	$conn->close();
 	?>
 
   <div class="w3-bar w3-row w3-top w3-text-white" style="background-color: #0B293C; height: 64px;">
@@ -134,7 +133,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/verify-session.php";
   </div>
 
   <div class="w3-container w3-light-grey" style="width: 75%; margin-top: 64px; margin-left: 12.5%;">
-      <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+      <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
           <div class="">
               <h5>Account Detail</h5>
               <input class="w3-input w3-border" type="text" name="username" placeholder="Username" required autocomplete="off">
@@ -160,19 +159,19 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/verify-session.php";
 
               <select class="w3-select" name="role" required>
                   <option disabled hidden selected>Assign role</option>
-                  <optgroup label="Produksi"></optgroup>
-                  <option value="3">Admin Produksi</option>
-                  <option value="4">Admin Cipadung</option>
-                  <option value="7">Admin Kembar</option>
-                  <option value="2">Manager Produksi</option>
-                  <optgroup label="Merchandiser"></optgroup>
-                  <option value="5">MD Produksi</option>
-                  <option value="6">MD Sales</option>
-                  <optgroup label="Other"></optgroup>
-                  <option value="10">Owner</option>
-                  <option value="12">Regular</option>
-                  <optgroup label="ITS"></optgroup>
-                  <option value="1">System Admin</option>
+                  <?php
+                    $sql = "SELECT * FROM roles";
+                    $result = $conn->query($sql);
+
+                    while ($row = $result->fetch_assoc()){
+                        if ($row['id'] < 1) {
+                            continue;
+                        }
+                        echo "<option value='{$row['id']}'>{$row['role_name']}</option>";
+
+                    }
+                  ?>
+
               </select>
 
 

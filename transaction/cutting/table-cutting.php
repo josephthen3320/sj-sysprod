@@ -1,5 +1,6 @@
 <?php
 session_start();
+$role = $_SESSION['user_role'];
 ?>
 
 <!DOCTYPE html>
@@ -15,13 +16,14 @@ session_start();
 <script src="/assets/js/utils.js"></script>
 <body>
 
-<table class="w3-table w3-table-all w3-hide-small">
+<table class="w3-table w3-table-all w3-hide-small w3-small">
     <thead>
     <tr>
         <th>No</th>
         <th>Cutting No.</th>
         <th>Worksheet No.</th>
         <th>Article ID</th>
+        <th>Model</th>
         <th>Location</th>
         <th>Start Date</th>
         <th>End Date</th>
@@ -60,12 +62,14 @@ session_start();
 
                 $worksheet = fetchWorksheet($ct['worksheet_id'])->fetch_assoc();
                 $article_id = $worksheet['article_id'];
+                $article = getArticleById($article_id);
 
                 echo "<tr>";
                 echo "<td>{$i}</td>";
                 echo "<td>{$ct['cutting_id']}</td>";
                 echo "<td>{$ct['worksheet_id']}</td>";
                 echo "<td>{$article_id}</td>";
+                echo "<td>{$article['model_name']}</td>";
 
                 echo "<td>". getCMTNameById($ct['cmt_id']) . "</td>";
 
@@ -73,7 +77,7 @@ session_start();
                 echo "<td>{$ct['date_out']}</td>";
 
                 echo "<td class='w3-center'>";
-                if ($ct['qty_out'] <= 0) {
+                if ($ct['qty_out'] <= 0 && in_array($role, [0,1,2,3,4,7])) {
                     $urlParam = "p=cutting";
                     $urlParam .= "&i=" . $ct['cutting_id'];
                     $urlParam .= "&w=" . $ct['worksheet_id'];
@@ -107,7 +111,7 @@ session_start();
                 echo "<td>";
 
                 if (getPositionStatus($ct['worksheet_id'], 'cutting') == 0) {
-                    if($ct['qty_out'] > 0  && $_SESSION['user_role'] != 4) {
+                    if($ct['qty_out'] > 0  && in_array($role, [0,1,2,3,7])) {
                         echo "<button class='w3-button w3-red' onclick='openPopupURL2(\"sendDialog.php?w={$ct['worksheet_id']}&i={$ct['id']}&pi={$ct['cutting_id']}&q={$ct['qty_out']}\", \"sendtocutting\", 500, 400)'><i class=\"fa-solid fa-arrow-right-from-arc\"></i></button>";
                     }
 

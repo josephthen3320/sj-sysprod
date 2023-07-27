@@ -44,6 +44,7 @@ $top_title .= "Dashboard";
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/w3.css">
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css" type="text/css">
+    <script src="/assets/js/utils.js"></script>
 
     <style>
         body {
@@ -70,6 +71,17 @@ $top_title .= "Dashboard";
             font-size: 24px;
             font-weight: bold;
         }
+
+        .w3-fifth {
+            float:left;
+            width: 50%;
+        }
+
+        @media (min-width:601px){
+            .w3-fifth {
+                width: 20%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -88,60 +100,198 @@ $top_title .= "Dashboard";
 
         <?php include $_SERVER['DOCUMENT_ROOT'] . "/transaction/nav-transaction.php" ?>
 
-        <div class="w3-cell-row w3-padding-16">
-            <!--div id="loading">Loading...</div>
-            <iframe id="worksheetFrame" src="/" width="100%" frameborder="0" style="min-height: 75vh;"></iframe-->
-
-
-
-
+        <div class="w3-cell-row w3-container w3-padding-16">
+            <div class="w3-col" style="margin-bottom: 32px;">
+                <i class="fas fa-fw fa-arrow-up"></i> &nbsp; Silahkan pilih proses transaksi
+            </div>
         </div>
-
-        <script>
-            var iframe = document.getElementById('worksheetFrame');
-            var loading = document.getElementById('loading');
-
-            function changeIframeSrc(src) {
-                showLoadingAnimation();
-                iframe.src = src;
-
-                // Store the selected URL in localStorage
-                localStorage.setItem('selectedURL', src);
-            }
-
-            iframe.addEventListener('load', hideLoadingAnimation);
-
-            function showLoadingAnimation() {
-                loading.style.display = 'block';
-            }
-
-            function hideLoadingAnimation() {
-                loading.style.display = 'none';
-            }
-        </script>
 
         <div class="w3-container w3-cell-row w3-padding-16">
+            <?php
+
+                function getCountByPosition($positionId) {
+                    $conn = getConnTransaction();
+
+                    $sql = "SELECT COUNT(*) as count FROM position WHERE position_id = '$positionId'";
+                    $result = $conn->query($sql);
+                    return $result->fetch_assoc()['count'];
+                }
+
+                function getCountTransaction() {
+
+                    $n = 0;
+
+                    for ($i = 1; $i < 11; ++$i) {
+                        $n += getCountByPosition($i);
+                    }
+
+                    return $n;
+                }
+
+            ?>
+
+
+            <!-- Total Worksheet -->
+            <div class="w3-third w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-file-lines fa-4xl" style="color: green;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountByPosition(0) ?></span><br><span class="w3-text-grey">New Worksheet</span><br><br></b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Produksi -->
+            <div class="w3-third w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-right-left fa-4xl" style="color: red;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountTransaction() ?></span><br><span class="w3-text-grey">In Progress</span><br><br></b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Selesai -->
+            <div class="w3-third w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-warehouse-full fa-4xl" style="color: darkblue;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountByPosition(11) ?></span><br><span class="w3-text-grey">Gudang</span><br><br></b>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
+
+        <div id="" class="w3-bar w3-white w3-border-bottom " style="display: flex; background-color: #0B293C; height: 72px; align-items: center;">
+            <span class="w3-bar-item w3-large" style="color: #0B293C;"><b>Process Summary</b></span>
+        </div>
+        <!-- TRANSAKSI -->
+        <div class="w3-container w3-cell-row w3-padding-16">
+
+            <!-- Pola Marker -->
+            <div class="w3-fifth w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                     onclick="openURL('pola-marker')" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-draw-square fa-4xl" style="color: lightseagreen;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountByPosition(1) ?></span><br><span class="w3-text-grey">Pola Marker</span><br><br></b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cutting -->
+            <div class="w3-fifth w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                     onclick="openURL('cutting')" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-scissors fa-4xl" style="color: orangered;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountByPosition(2) ?></span><br><span class="w3-text-grey">Cutting</span><br><br></b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Embro -->
+            <div class="w3-fifth w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                     onclick="openURL('embro')" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-scarf fa-4xl" style="color: purple;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountByPosition(3) ?></span><br><span class="w3-text-grey">Embro</span><br><br></b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Print/Sablon -->
+            <div class="w3-fifth w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                     onclick="openURL('print-sablon')" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-pen-paintbrush fa-4xl" style="color: dodgerblue;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountByPosition(4) ?></span><br><span class="w3-text-grey">Print/Sablon</span><br><br></b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QC Embro -->
+            <div class="w3-fifth w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                     onclick="openURL('qc-embro')" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-clipboard-list-check fa-4xl" style="color: teal;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountByPosition(5) ?></span><br><span class="w3-text-grey">QC Embro</span><br><br></b>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Sewing -->
+            <div class="w3-fifth w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                     onclick="openURL('sewing')" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-reel fa-4xl" style="color: deeppink;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountByPosition(6) ?></span><br><span class="w3-text-grey">Sewing</span><br><br></b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finishing -->
+            <div class="w3-fifth w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                     onclick="openURL('finishing')" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-list fa-4xl" style="color: darkgreen;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountByPosition(8) ?></span><br><span class="w3-text-grey">Finishing</span><br><br></b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Washing -->
+            <div class="w3-fifth w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                     onclick="openURL('washing')" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-washing-machine fa-4xl" style="color: royalblue;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountByPosition(7) ?></span><br><span class="w3-text-grey">Washing</span><br><br></b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QC Final -->
+            <div class="w3-fifth w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                     onclick="openURL('qc-final')" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-clipboard-check fa-4xl" style="color: lightseagreen;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountByPosition(9) ?></span><br><span class="w3-text-grey">QC Final</span><br><br></b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Perbaikan -->
+            <div class="w3-fifth w3-center w3-padding">
+                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                     onclick="openURL('perbaikan')" style="height: 180px; width: 100%;">
+                    <div class="w3-display-bottommiddle">
+                        <i class="fa-solid fa-fw fa-screwdriver-wrench fa-4xl" style="color: sienna;"></i><br><br>
+                        <b><span class="w3-xlarge"><?= getCountByPosition(10) ?></span><br><span class="w3-text-grey">Perbaikan</span><br><br></b>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
 
+<?php include $_SERVER['DOCUMENT_ROOT'] . "/site-modular/bottombar.php" ?>
+
+</body>
+</html>
+
 <script>
-    function openPopup(url, name) {
-        var windowFeatures = "width=400,height=700,top=100,left=200,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,status=no";
-
-        window.open(url, name, windowFeatures);
-    }
-
-    function openURL(url) {
-        window.location.href = url;
-    }
-
-    function openTabURL(url, target) {
-        window.open(url, target);
-    }
-
     function dropdown(id) {
         var x = document.getElementById(id);
         if (x.className.indexOf("w3-show") == -1) {
@@ -150,11 +300,4 @@ $top_title .= "Dashboard";
             x.className = x.className.replace(" w3-show", "");
         }
     }
-
-
 </script>
-
-<?php include $_SERVER['DOCUMENT_ROOT'] . "/site-modular/bottombar.php" ?>
-
-</body>
-</html>

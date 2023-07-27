@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    $role = $_SESSION['user_role'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,12 +15,14 @@
 <script src="/assets/js/utils.js"></script>
 <body>
 
-<table class="w3-table w3-table-all">
+<table class="w3-table w3-table-all w3-small">
     <thead>
     <tr>
         <th>No</th>
         <th>Print/Sablon No.</th>
         <th>Worksheet No.</th>
+        <th>Article ID</th>
+        <th>Model</th>
         <th>Qty In</th>
         <th>Qty Out</th>
         <th>Start Date</th>
@@ -28,27 +34,35 @@
     <tbody>
         <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_worksheet_position.php";
+            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_worksheet.php";
             include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_transaction.php";
-        include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_classification.php";
-        include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_surat_jalan.php";
+            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_classification.php";
+            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_surat_jalan.php";
 
             $ct_data = fetchAllTransactionByProcess('print_sablon');
             $i = 0;
 
             if ($ct_data->num_rows == 0) {
                 echo "<tr>";
-                echo "<td colspan='8'>No data found!</td>";
+                echo "<td class='w3-center' colspan='11'>No data found!</td>";
                 echo "</tr>";
             }
 
 
             while ($ct = $ct_data->fetch_assoc()) {
 
+                $worksheet = fetchWorksheet($ct['worksheet_id'])->fetch_assoc();
+                $article_id = $worksheet['article_id'];
+                $article = getArticleById($article_id);
+
                 ++$i;
                 echo "<tr>";
                 echo "<td>{$i}</td>";
                 echo "<td>{$ct['print_sablon_id']}</td>";
                 echo "<td>{$ct['worksheet_id']}</td>";
+
+                echo "<td>{$article_id}</td>";
+                echo "<td>{$article['model_name']}</td>";
 
                 echo "<td>{$ct['qty_in']}</td>";
                 echo "<td>";
@@ -76,7 +90,7 @@
 
                 echo "<td>";
                 if (getWorksheetPosition($ct['worksheet_id']) == 4) {
-                    if ($ct['qty_out'] > 0) {
+                    if ($ct['qty_out'] > 0 && in_array($role, [0,1,2,3,7])) {
                         echo "<button class='w3-button w3-red' onclick='openPopupURL2(\"sendDialog.php?w={$ct['worksheet_id']}&i={$ct['id']}&pi={$ct['print_sablon_id']}&q={$ct['qty_in']}\", \"sendto\", 500, 400)'><i class=\"fa-solid fa-arrow-right-from-arc\"></i></button>";
                     }
 

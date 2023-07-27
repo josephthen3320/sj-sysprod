@@ -89,7 +89,7 @@ $conn->close();
     <link rel="stylesheet" href="/assets/css/w3.css">
     <link rel="stylesheet" href="assets/fontawesome/css/all.css" type="text/css">
 
-    <script src="/js/utils.js"></script>
+    <script src="/assets/js/utils.js"></script>
 
     <style>
         body {
@@ -177,9 +177,29 @@ $conn->close();
                 </form>
             </div>
 
+            <div class="w3-margin-bottom">
+                <span onclick="openModal()" class="w3-small w3-hover-text-blue-grey" style="text-decoration: none; cursor: pointer;">Forgot Password?</span>
+            </div>
+
+
             <div class="w3-bar w3-container">
                 <p class="w3-tiny"><?php echo $sso_text; ?></p>
             </div>
+        </div>
+    </div>
+
+    <!-- todo: Finish this -->
+    <div class="w3-display-container" id="forgotPasswordModal" style="display: none; width: 100vw; height: 100vh; position: absolute; left:0; top:0; background-color: rgba(0, 0, 0, .5);">
+        <div class="w3-display-middle w3-card-4 w3-container w3-display-container" style="padding: 32px 64px; background-color: rgba(251, 251, 251, 1)">
+            <button onclick="closeModal()" class="w3-button w3-red w3-display-topright"><i class="fas fa-x"></i></button>
+            <h4>Forgot Password?</h4>
+            <span class="w3-small">A request for password change will be submitted to ITS.</span><br>
+            <span class="w3-small">Please submit your username.</span>
+
+            <form class="w3-margin-top" action="#" method="post">
+                <input class="w3-input w3-border" placeholder="Username" name="username" required>
+                <span class="w3-button w3-margin-top w3-margin-bottom w3-blue-grey w3-bar">Submit</span>
+            </form>
         </div>
     </div>
 
@@ -190,3 +210,14 @@ $conn->close();
 
 </body>
 </html>
+
+<script>
+    function closeModal() {
+        var modal = document.getElementById('forgotPasswordModal');
+        modal.style.display = 'none';
+    }
+    function openModal() {
+        var modal = document.getElementById('forgotPasswordModal');
+        modal.style.display = 'block';
+    }
+</script>

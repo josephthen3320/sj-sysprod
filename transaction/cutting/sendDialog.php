@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                         <label>Select process:</label>
                         <select class=\"w3-select w3-border w3-margin-bottom\" required id=\"process\" name=\"process\">
-                            <option selected hidden disabled>Please select</option>
+                            <option disabled>Please select</option>
                             <option value=\"EB\">Embro</option>
                             <option value=\"EP\">Print/Sablon</option>
                             <option value=\"SI\">Sewing (CMT)</option>
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 echo "  <label>Select location: </label>
                         <select class=\"w3-select w3-border\" required id=\"cmt\" name=\"cmt\">
-                            <option disabled hidden selected>Please select</option>
+                            <option disabled>Please select</option>
                         ";
 
                 while ($cmt = $cmts->fetch_assoc()) {

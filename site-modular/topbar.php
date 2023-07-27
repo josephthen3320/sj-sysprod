@@ -23,7 +23,7 @@
 </script>
 
 <!-- Mobile -->
-<div class="w3-bar w3-top w3-text-white w3-hide-medium w3-hide-large" style="background-color: #0B293C; height: 64px;">
+<div class="w3-bar w3-top w3-text-white w3-hide-large" style="background-color: #0B293C; height: 64px;">
     <div class="w3-row" style="height: inherit;">
         <button class="w3-col s2 w3-button jt-orange" onclick="sidenavOpen()" style="height: inherit;"><i class="fas fa-bars"></i></button>
 
@@ -39,8 +39,8 @@
     </button>
 </div>
 
-<div class="w3-sidebar w3-bar-block w3-hide-medium w3-hide-large" style="display:none; width: 100%; top: 0; padding-bottom: 64px;" id="sidenavbar">
-    <div class="w3-bar w3-top w3-text-white w3-hide-medium w3-hide-large" style="background-color: #0B293C; height: 64px;">
+<div class="w3-sidebar w3-bar-block w3-hide-large" style="display:none; width: 100%; top: 0; padding-bottom: 64px;" id="sidenavbar">
+    <div class="w3-bar w3-top w3-text-white" style="background-color: #0B293C; height: 64px;">
         <div class="w3-row" style="height: inherit;">
             <button class="w3-col s2 w3-button w3-red" onclick="sidenavClose()" style="height: inherit;"><i class="fas fa-x"></i></button>
 
@@ -91,7 +91,7 @@
 
 
 <!-- Widescreen -->
-<div class="w3-bar w3-text-white w3-hide-small" style="display: flex; background-color: #0B293C; width: 75%; height: 64px; align-items: center; position: fixed; top:0; z-index: 9999; /* Set a high z-index value */">
+<div class="w3-bar w3-text-white w3-hide-small w3-hide-medium" style="display: flex; background-color: #0B293C; width: 75%; height: 64px; align-items: center; position: fixed; top:0; z-index: 9999; /* Set a high z-index value */">
     <button class="w3-button w3-bar-item jt-orange" onclick="goBack()" name="back_button" style="height: inherit; align-items: center;">
         <i class="fa-solid fa-arrow-left"></i>
     </button>

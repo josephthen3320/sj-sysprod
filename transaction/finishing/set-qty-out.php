@@ -19,17 +19,19 @@ if (isset($_POST['i'])) {
     $processName = $_POST['p'];
     $processId = $_POST['i'];
     $qty = $_POST['qtyOut'];
+    $qtyMissing = isset($_POST['qtyMissing']) ? $_POST['qtyMissing'] : 0 ;
 /*
     if (($qtyFail + $qtyDefect + $qtyMissing + $qty) != ) {
 
     }
 */
     setQtyOut($processName, $processId, $qty);
+    setQtyMissing($processName, $processId, $qtyMissing);
 
-    /*
-    $stid = createSuratTerima("EBO", $processId, 3, -1, $articleId, $qty, $uid);
+/*
+    $sjid = createSuratTerima("FI", $processId, 3, -1, $articleId, $qty, $uid);
     addSuratTerimaRecord($stid, "finishing", $processId);
-    */
+*/
 
     echo $closeWindowScript = "<script type='text/javascript'>window.close();</script>";
 
@@ -71,6 +73,9 @@ if (isset($_POST['i'])) {
         <h6>Hasil Finishing: </h6>
         <label for="qtyOut">Qty: </label>
         <input class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyOut" id="qtyOut" autofocus>
+
+        <label for="qtyMissing">Qty Hilang: </label>
+        <input class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyMissing" id="qtyMissing" >
 
         <button class="w3-button w3-block w3-blue-grey" type="submit">Submit</button>
     </form>

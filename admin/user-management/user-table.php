@@ -81,6 +81,7 @@ if ($username == "nara") {
                     <th>ID</th>
                     <th>Full Name</th>
                     <th>Username</th>
+                    <th>Role</th>
                     <th>Email</th>
                     <th>Create Date</th>
                     <th>Actions</th>
@@ -107,6 +108,9 @@ if ($username == "nara") {
 
                         $userdata = getUserDataByUsername($user_cur);
 
+                        $role = $userdata['role'];
+                        $role = getRoleByRoleId($role);
+
                         $status_icons = "";
 
                         $status_icons .= ($row['is_locked']) ? "&nbsp;&nbsp;<i class='fa-solid fa-lock fa-2xs'></i>" : "";
@@ -124,6 +128,7 @@ if ($username == "nara") {
                                 <img class=\"w3-circle\" src=\"/img/profile-placeholder.png\" width=\"40px\"> &nbsp;&nbsp;
                                 {$userdata['first_name']} {$userdata['last_name']}</td>";
                         echo "<td>{$userdata['username']}{$status_icons}</td>";
+                        echo "<td>{$role}</td>";
                         echo "<td>{$userdata['email']}</td>";
                         echo "<td>{$userdata['date_created']}</td>";
                         echo "<td>

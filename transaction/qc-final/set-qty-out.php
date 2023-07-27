@@ -20,7 +20,12 @@ if (isset($_POST['i'])) {
     $processId = $_POST['i'];
     $qty = $_POST['qtyOut'];
 
+    $qtyMissing = getTotalQtyMissing($worksheetId);
+    $qtyDefect = $_POST['qtyDefect'];
+    $qtyFail = $_POST['qtyFail'];
+
     setQtyOut($processName, $processId, $qty);
+    echo setQtyOther($processName, $processId, $qtyMissing, $qtyDefect, $qtyFail);
 
     /*
     $stid = createSuratTerima("EBO", $processId, 3, -1, $articleId, $qty, $uid);
@@ -36,7 +41,7 @@ if (isset($_POST['i'])) {
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
-    <title>Embro: Qty Out</title>
+    <title>QC Final: Qty Out</title>
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="/assets/css/w3.css">
@@ -54,7 +59,7 @@ if (isset($_POST['i'])) {
 <body>
 
 <div class="w3-container">
-    <h3>Embro: Qty Out</h3>
+    <h3>QC Final: Qty Out</h3>
 
     <span class="inline-header"><b>Embro Id: </b></span><?= $processId ?><br>
     <span class="inline-header"><b>Article Id: </b></span><?= $articleId ?><br>
@@ -67,6 +72,13 @@ if (isset($_POST['i'])) {
 
         <label for="qtyOut">Qty: </label>
         <input class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyOut" id="qtyOut" autofocus>
+
+        <label for="qtyDefect">Qty Cacat: </label>
+        <input class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyDefect" id="qtyDefect">
+
+        <label for="qtyFail">Qty Gagal: </label>
+        <input class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyFail" id="qtyFail">
+
         <button class="w3-button w3-block w3-blue-grey" type="submit">Submit</button>
     </form>
 </div>

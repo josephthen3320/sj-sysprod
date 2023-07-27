@@ -5,6 +5,7 @@ $uid = $_SESSION['user_id'];
 include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/verify-session.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/db.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/agents/logging.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_articles.php";
 $conn = getConnProduction();
 
 $title = "Generate Worksheet";
@@ -36,6 +37,7 @@ if (isset($_GET['id'])) {
         $worksheet_id       = $wd['worksheet_id'];
         $ws = fetchWorksheet($worksheet_id);
 
+
         $worksheet_date     = $ws['worksheet_date'];
         $delivery_date      = DateTime::createFromFormat('Y-m-d', $ws['delivery_date'])->format('M Y');
         $po_date            = $ws['po_date'];
@@ -47,16 +49,22 @@ if (isset($_GET['id'])) {
         $cloth_width        = $wd['cloth_width'];
         $is_fob             = isset($wd['is_fob']) == 1 ? "YES" : "NO";
 
-        $art_name           = $wd['art_name'];
-        $art_brand          = $wd['art_brand'];
-        $art_cmt_embro      = $wd['art_cmt_embro'];
-        $art_cmt_print      = $wd['art_cmt_print'];
-        $art_rib            = $wd['art_rib'];
-        $art_sample_code    = $wd['art_sample_code'];
+        $article = fetchArticle($article_id);
+
+        $art_name           = $article['model_name'];
+        $art_brand          = getBrandNameById($article['brand_id']);
+        $art_cmt_embro      = getCMTNameById($article['embro_cmt_id']);
+        $art_cmt_print      = getCMTNameById($article['print_cmt_id']);
+        $art_rib            = $article['is_rib'];
+        $art_sample_code    = $article['sample_code'];
 
 
-        $category_name = fetchCategoryName(fetchArticle($article_id)['category_id']);
-        $subcategory_name = fetchSubCategoryName(fetchArticle($article_id)['subcategory_id']);
+
+        $category_id = $article['category_id'];
+        $subcategory_id = $article['subcategory_id'];
+
+        $category_name = fetchCategoryName($category_id);
+        $subcategory_name = fetchSubCategoryName($subcategory_id);
 
         $sql = "SELECT sample_img_path FROM article WHERE article_id = '$article_id' ";
         $result = mysqli_query($conn, $sql);
@@ -129,12 +137,12 @@ if (isset($_GET['id'])) {
 
 
         $sheet->setCellValue('C10', $delivery_date);                        // Delivery date
-        $sheet->setCellValue('C11', $wd['art_brand']);                      // Merk
+        $sheet->setCellValue('C11', $art_brand);                      // Merk
         $sheet->setCellValue('F10', $wd['cloth_width']);                    // Merk
-        $sheet->setCellValue('F11', $wd['art_rib']);                        // Rib
+        $sheet->setCellValue('F11', $art_rib == 0 ? "NO" : "YES");                        // Rib
 
-        $sheet->setCellValue('I7', $wd['art_cmt_embro']);                   // Embro
-        $sheet->setCellValue('I8', $wd['art_cmt_print']);                   // Print
+        $sheet->setCellValue('I7', $art_cmt_embro);                   // Embro
+        $sheet->setCellValue('I8', $art_cmt_print);                   // Print
 
 
         $w_names = fetchWashNames($article_id);
@@ -173,7 +181,7 @@ if (isset($_GET['id'])) {
 
         // Save the generated worksheet
         $date = date('Ymd');
-        $filename = "{$worksheet_id}_{$date}_{$ws_type}.xlsx";
+        $filename = "{$article_id}_{$worksheet_id}_{$date}_{$ws_type}";
         $outputPath = "generated_worksheet/SPK_{$filename}.xlsx";
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save($outputPath);
@@ -325,11 +333,8 @@ function fetchCategoryName($cat_id) {
     include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/db.php";
     $conn = getConnProduction();
 
-    $sql = "SELECT category_name FROM main_category WHERE category_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $cat_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $sql = "SELECT category_name FROM main_category WHERE category_id = '$cat_id'";
+    $result = $conn->query($sql);
 
     if ($result->num_rows > 0 ){
         $c_name = $result->fetch_assoc();
@@ -344,11 +349,8 @@ function fetchSubCategoryName($subcat_id) {
     include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/db.php";
     $conn = getConnProduction();
 
-    $sql = "SELECT subcategory_name FROM subcategory WHERE subcategory_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $subcat_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $sql = "SELECT subcategory_name FROM subcategory WHERE subcategory_id = '$subcat_id'";
+    $result = $conn->query($sql);
 
     if ($result->num_rows > 0 ){
         $c_name = $result->fetch_assoc();

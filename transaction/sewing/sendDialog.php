@@ -18,14 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $w  = $_POST['w'];
     $i  = $_POST['i'];
     $pi = $_POST['pi'];
-    $qty = $_POST['qty'];
+   echo $qty = $_POST['qty'];
 
     if ($_POST['process'] === "WI") {
         $processName = 'Washing';
     } elseif ($_POST['process'] === "FI") {
         $processName = 'Finishing';
     } elseif ($_POST['process'] === "QF") {
-        $processName = 'QC Final';
+        echo $processName = 'QC Final';
     } else {
         $processName = '<span class="w3-text-red">Unknown</span>';
     }
@@ -108,25 +108,28 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 echo "<input hidden value='{$aid}' name='aid'>";        // article id
 
-                echo "  <label>Select location: </label>
-                        <select class=\"w3-select w3-border\" required id=\"cmt\" name=\"cmt\">
-                            <option disabled hidden selected>Please select</option>
-                        ";
 
-                while ($cmt = $cmts->fetch_assoc()) {
-                    if ($selectedProcess === 'WI') {
-                        if ($cmt['cmt_type'] === 'CT6') {
-                            echo '<option value="' . $cmt['cmt_id'] . '">' . $cmt['cmt_name'] . '</option>';
+                if ($selectedProcess !== 'QF') {
+                    echo "  <label>Select location: </label>
+                            <select class=\"w3-select w3-border\" required id=\"cmt\" name=\"cmt\">
+                                <option disabled hidden selected>Please select</option>
+                            ";
+
+                    while ($cmt = $cmts->fetch_assoc()) {
+                        if ($selectedProcess === 'WI') {
+                            if ($cmt['cmt_type'] === 'CT6') {
+                                echo '<option value="' . $cmt['cmt_id'] . '">' . $cmt['cmt_name'] . '</option>';
+                            }
+                        } else if ($selectedProcess === 'FI') {
+                            if ($cmt['cmt_type'] === 'CT3') {
+                                echo '<option value="' . $cmt['cmt_id'] . '">' . $cmt['cmt_name'] . '</option>';
+                            }
                         }
-                    } else if ($selectedProcess === 'FI') {
-                        if ($cmt['cmt_type'] === 'CT3') {
-                            echo '<option value="' . $cmt['cmt_id'] . '">' . $cmt['cmt_name'] . '</option>';
-                        }
+
                     }
 
+                    echo "</select>";
                 }
-
-                echo "</select>";
                 echo "<button class=\"w3-button w3-blue-grey w3-block\" style=\"margin-top: 20px\" type=\"submit\">Submit</button>";
                 echo "</form>";
             }

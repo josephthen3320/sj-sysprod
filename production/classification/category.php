@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/w3.css">
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css" type="text/css">
+    <script src="/assets/js/utils.js"></script>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
 
     <!-- Buttons Container -->
     <div class="w3-bar" style="margin-bottom: 12px;">
-        <button class="w3-bar-item w3-button w3-green" onclick="openPopup('action/add-category.php', 'class-add')">
+        <button class="w3-bar-item w3-button w3-green" onclick="openPopupURL2('action/add-category.php', 'class-add')">
             <i class="fa-solid fa-plus-circle"></i>
             Add Category
         </button>

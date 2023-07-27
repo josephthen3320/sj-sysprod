@@ -15,10 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"); {
     $articleId = $worksheet['article_id'];
 }
 
-if (isset($_POST['i'])) {
-    $processName = $_POST['p'];
-    $processId = $_POST['i'];
-    $qty = $_POST['qtyOut'];
+if (isset($_GET['i'])) {
+    // $processName = $_POST['p'];
+    // $processId = $_POST['i'];
+    // $qty = $_POST['qtyOut'];
+    $qty = getQtyIn('embro', $processId);
 
     setQtyOut($processName, $processId, $qty);
 

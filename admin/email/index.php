@@ -41,7 +41,7 @@ if ($response) {
 }
 */
 
-
+/*
 include $_SERVER['DOCUMENT_ROOT'] . '/php-modules/db.php';
 $conn = getConnTransaction();
 
@@ -66,3 +66,4 @@ if ($result) {
 
 // Close the database conn
 mysqli_close($conn);
+*/

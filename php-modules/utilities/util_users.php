@@ -52,3 +52,17 @@ function getRoleByUserId($uid) {
         return null;
     }
 }
+
+function getRoleByRoleId($rid) {
+    $conn = getConnUser();
+
+    $sql = "SELECT role_name FROM roles WHERE id = '$rid'";
+    $result = $conn->query($sql);
+    $conn->close();
+
+    if ($result && $result->num_rows > 0) {
+        return $result->fetch_assoc()['role_name'];
+    } else {
+        return null;
+    }
+}

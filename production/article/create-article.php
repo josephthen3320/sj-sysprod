@@ -42,8 +42,8 @@ $conn = getConnProduction();
         <!-- Article Name -->
         <div class="w3-container w3-margin-bottom">
             <div class="w3-padding">
-                <label for="model_name">Article Name:</label>
-                <input class="w3-input" type="text" name="model_name" id="model_name" placeholder="Nama Model Artikel" required>
+                <label for="model_name">Nama Artikel:</label>
+                <input class="w3-input" type="text" name="model_name" id="model_name" placeholder="Baju Kemeja Oversize" required>
             </div>
         </div>
 
@@ -104,8 +104,8 @@ $conn = getConnProduction();
         <div class="w3-container">
             <!-- Article ID -->
             <div class="w3-half w3-padding">
-                <label for="article_id">Article ID:</label>
-                <input class="w3-input" type="text" name="article_id" id="article_id" placeholder="Kode Artikel" required>
+                <label for="article_id">No. Artikel:</label>
+                <input class="w3-input" type="text" name="article_id" id="article_id" placeholder="01-234-R-XX" required>
             </div>
 
 

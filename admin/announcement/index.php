@@ -43,6 +43,9 @@ $top_title = "Site Announcements";
             line-height: 0.01637em;
             vertical-align: -0.27679em;
         }
+        select {
+            font-family: FontAwesome, Roboto;
+        }
     </style>
 </head>
 <body>
@@ -96,12 +99,13 @@ $top_title = "Site Announcements";
 
                                 <div class="w3-col l6 m6 s12 w3-margin-top">
                                     <select class="w3-select w3-border" name="type" required>
-                                        <option value="0" selected>Normal</option>
-                                        <option value="1">Critical</option>
-                                        <option value="2">Service Down</option>
-                                        <option value="5">Service Up</option>
-                                        <option value="3">Bug</option>
-                                        <option value="4">Resolved</option>
+                                        <option value="0">&#xf05a; &nbsp; Normal</option>
+                                        <option value="1">&#xf071; &nbsp; Critical</option>
+                                        <option value="2">&#xf354; &nbsp; Service Down</option>
+                                        <option value="5">&#xf357; &nbsp; Service Up</option>
+                                        <option value="3">&#xf188; &nbsp; Bug</option>
+                                        <option value="4">&#xf00c; &nbsp; Resolved</option>
+                                        <option value="6">&#xf675; &nbsp; Notice</option>
                                     </select>
                                 </div>
 

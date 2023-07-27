@@ -17,22 +17,34 @@ $role = $_SESSION['user_role'];
 <script src="/assets/js/utils.js"></script>
 <body>
 <div class="w3-container classification-content" id="worksheet-modal" style="">
-    <table class="w3-table w3-table-all w3-hide-small">
+    <table class="w3-table w3-table-all w3-hide-small w3-small">
         <thead>
         <tr>
-            <th>No</th>
-            <th>Worksheet No.</th>
-            <th>Article ID.</th>
-            <th>Worksheet Date.</th>
-            <th>PO Date</th>
-            <th>Actions</th>
-            <th>Send to</th>
-            <th>Current Position</th>
+            <th class="w3-center" style="vertical-align: middle;">No</th>
+            <th class="w3-center" style="vertical-align: middle;">Worksheet No.</th>
+            <th class="w3-center" style="vertical-align: middle;">Article ID</th>
+            <th class="w3-center" style="vertical-align: middle;">Model</th>
+            <th class="w3-center" style="vertical-align: middle;">Subcategory</th>
+
+            <th class="w3-center" style="vertical-align: middle;">Worksheet Date.</th>
+            <th class="w3-center" style="vertical-align: middle;">PO Date</th>
+
+            <th class="w3-center" style="vertical-align: middle;">Lebar Kain</th>
+
+            <th class="w3-center" style="vertical-align: middle;">Embro</th>
+            <th class="w3-center" style="vertical-align: middle;">Print/<br>Sablon</th>
+            <th class="w3-center" style="vertical-align: middle;">Washing</th>
+
+
+            <th class="w3-center" style="vertical-align: middle;">Actions</th>
+            <th class="w3-center" style="vertical-align: middle;">Send to</th>
+            <th class="w3-center" style="vertical-align: middle;">Posisi</th>
         </tr>
         </thead>
         <tbody>
         <?php
         include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_worksheet.php';
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_articles.php';
         include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_worksheet_position.php';
 
         $worksheets = fetchWorksheets();
@@ -46,22 +58,52 @@ $role = $_SESSION['user_role'];
         foreach ($worksheets as $index => $worksheet) {
             $worksheetId = $worksheet['worksheet_id'];
             $details = fetchWorksheetDetails($worksheetId);
+            $articleId = $details['article_id'];
+            $article = getArticleById($articleId);
+
+            $subcategory = getSubcategoryNameById($article['subcategory_id']);
 
             echo "<tr>";
-            echo "  <td>" . ($index + 1) . "</td>";
-            echo "  <td>{$worksheet['worksheet_id']}</td>";
+            echo "  <td style='vertical-align: middle;'>" . ($index + 1) . "</td>";
+            echo "  <td style='vertical-align: middle;'>{$worksheet['worksheet_id']}</td>";
 
-            echo "  <td>{$details['article_id']}</td>";
-            echo "  <td>{$worksheet['worksheet_date']}</td>";
-            echo "  <td>{$worksheet['po_date']}</td>";
+            echo "  <td style='vertical-align: middle;'>{$details['article_id']}</td>";
+            echo "  <td style='vertical-align: middle;'>{$article['model_name']}</td>";
+            echo "  <td style='vertical-align: middle;'>{$subcategory}</td>";
+
+            echo "  <td style='vertical-align: middle;'>{$worksheet['worksheet_date']}</td>";
+            echo "  <td style='vertical-align: middle;'>{$worksheet['po_date']}</td>";
+
+            echo "  <td class='w3-center' style='vertical-align: middle;'>{$details['cloth_width']}</td>";
+
+            // CMTs
+            $article = getArticleById($articleId);
+            $cmtEmbro = getCMTNameById($article['embro_cmt_id']);
+            $cmtPrint = getCMTNameById($article['print_cmt_id']);
+            $washes = implode("<br>", fetchWashNamesByArticleId($articleId));
+
+            echo "  <td class='w3-center' style='vertical-align: middle;'>{$cmtEmbro}</td>";
+            echo "  <td class='w3-center' style='vertical-align: middle;'>{$cmtPrint}</td>";
+            echo "  <td class='w3-center' style='vertical-align: middle;'>{$washes}</td>";
 
             $id = $details['id'];
-            echo "  <td>";
+            echo "  <td style='vertical-align: middle;'>";
 
             // feature disabled temporarily
             if ($role <= -1) {
-                echo "<button class='w3-button w3-blue-gray' onclick='openPopupURL35(\"detail?id=" . $id . "\", \"wsdetail\")'><i class='fa-solid fa-magnifying-glass'></i></button>";
+                echo "<button class='w3-button w3-blue-gray' onclick='openPopupURL35(\"detail?id=" . $id . "\", \"wsdetail\")'><i class='fa-solid fa-fw fa-magnifying-glass'></i></button>";
             }
+
+            // Export button
+            if (in_array($role, [0,1,2,5,6])) {
+                echo "<button class='w3-button w3-green' onclick='openPopupURL2(\"export.php?id=" . $id . "\", \"wspopup\")'><i class='fa-solid fa-fw fa-file-export'></i></button>";
+            }
+
+            // Delete button
+            if (in_array($role, [0,1,2,5])) {
+                echo "<button class='w3-button w3-pale-red w3-text-red' onclick = 'openPopupURL2(\"delete?id=" . $id . "\", \"wspopup\")' ><i class='fa-solid fa-fw fa-trash' ></i ></button >";
+            }
+            echo "<br>";
 
             // Upload Button
 			if (in_array($role, [0,1,2,5,6])) {
@@ -70,34 +112,24 @@ $role = $_SESSION['user_role'];
 					$btnColour = "indigo";
 				}
 
-				echo "<button class='w3-button w3-{$btnColour}' onclick='openPopupURL2(\"import.php?id=" . $id . "\", \"wspopup\")'><i class='fa-solid fa-upload'></i></button>";
+				echo "<button class='w3-button w3-{$btnColour}' onclick='openPopupURL2(\"import.php?id=" . $id . "\", \"wspopup\")'><i class='fa-solid fa-fw fa-upload'></i></button>";
 			}
 
             // Download Button
             if ($role >= -1) {
 				if (isFileExists($worksheet['worksheet_id'].".xlsx")) { 
 					$filePath = "files/" . $worksheet['worksheet_id'] . ".xlsx";
-					echo "<a class='w3-button w3-red' href='{$filePath}' id='wsDownloadLink'><i class='fa-solid fa-download'></i></a>";
+					echo "<a class='w3-button w3-red' href='{$filePath}' id='wsDownloadLink'><i class='fa-solid fa-fw fa-download'></i></a>";
 				}
             }
-
-            // Export button
-            if (in_array($role, [0,1,2,5,6])) {
-                echo "<button class='w3-button w3-green w3-margin-left' onclick='openPopupURL2(\"export.php?id=" . $id . "\", \"wspopup\")'><i class='fa-solid fa-file-export'></i></button>";
-            }
-
-            // Delete button
-            if (in_array($role, [0,1,2,5])) {
-                echo "<button class='w3-button w3-red' onclick = 'openPopupURL2(\"delete?id=" . $id . "\", \"wspopup\")' ><i class='fa-solid fa-trash' ></i ></button >";
-                }
             echo "</td>";
 
 
-            echo "<td>";
+            echo "<td style='vertical-align: middle;'>";
             if (getWorksheetPosition($worksheetId) <= 0) {
                 echo "<button class='w3-button w3-red' onclick='openURL(\"send-to-polamarker.php?w=" . $worksheetId . "\")'>Pola Marker&nbsp;&nbsp;<i class=\"fa-solid fa-arrow-right-from-arc\"></i></button>";
             } else {
-                echo "<button class='w3-button w3-hover-red w3-red w3-disabled'>Pola Marker&nbsp;&nbsp;<i class=\"fa-solid fa-arrow-right-from-arc\"></i></button>";
+                echo "<button class='w3-button w3-hover-red w3-red w3-disabled'><i class=\"fa-solid fa-check\"></i></button>";
             }
             echo "</td>";
 
@@ -105,7 +137,7 @@ $role = $_SESSION['user_role'];
             $url = "/transaction/" . strtolower(str_replace(" ", "-", $pos));
             $url = str_replace("unknown", "", $url);    // remove link if unknown
             // Link to process view
-            echo "<td><a href='$url' target='_blank'>{$pos}</a></td>";
+            echo "<td style='vertical-align: middle;'><a href='$url' target='_blank'>{$pos}</a></td>";
             echo "</tr>";
         }
         ?>

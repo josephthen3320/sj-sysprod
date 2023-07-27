@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         <h1>Send to QC Embro</h1>
         <span style="display: inline-block; width: 120px; font-weight: bold">Worksheet ID: </span><?= $w ?>
         <br>
-        <span style="display: inline-block; width: 120px; font-weight: bold">Cutting ID: </span><?= $pi ?>
+        <span style="display: inline-block; width: 120px; font-weight: bold">Embro ID: </span><?= $pi ?>
         <br>
         <span style="display: inline-block; width: 120px; font-weight: bold">Article ID: </span><?= $a ?>
         <br><br>

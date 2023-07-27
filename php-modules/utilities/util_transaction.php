@@ -44,7 +44,7 @@ function pushToProcess($p, $pid, $w) {
     $uid = $_SESSION['user_id'];
 
 
-    if (func_get_args()[3]) {
+    if (isset(func_get_args()[3])) {
         $qty_in = func_get_args()[3];
 
         $sql = "INSERT INTO ".$p." (".$p."_id, worksheet_id, created_by, qty_in)
@@ -53,6 +53,18 @@ function pushToProcess($p, $pid, $w) {
         $sql = "INSERT INTO ".$p." (".$p."_id, worksheet_id, created_by)
             VALUES ('$pid', '$w', '$uid')";
     }
+
+    $conn->query($sql);
+    $conn->close();
+}
+
+function pushToProcessWithQty($p, $pid, $w, $qty_in) {
+    $conn = getConnTransaction();
+    $uid = $_SESSION['user_id'];
+
+
+    $sql = "INSERT INTO ".$p." (".$p."_id, worksheet_id, created_by, qty_in)
+        VALUES ('$pid', '$w', '$uid', '$qty_in')";
 
     $conn->query($sql);
     $conn->close();
@@ -103,6 +115,22 @@ function setQtyOut($p, $pid, $qtyOut) {
     $conn->close();
 }
 
+function setQtyOthers($p, $pid, $qtyMissing, $qtyFail, $qtyDefect) {
+    $conn = getConnTransaction();
+
+    $sql = "UPDATE $p SET qty_missing = '$qtyMissing', qty_fail = '$qtyFail', qty_defect = '$qtyDefect' WHERE {$p}_id = '$pid'";
+    $conn->query($sql);
+    $conn->close();
+}
+
+function setQtyMissing($p, $pid, $qtyMissing) {
+    $conn = getConnTransaction();
+
+    $sql = "UPDATE $p SET qty_missing = $qtyMissing WHERE {$p}_id = '$pid'";
+    $conn->query($sql);
+    $conn->close();
+}
+
 
 function fetchAllTransactionByProcess($tname) {
     $conn = getConnTransaction();
@@ -140,12 +168,77 @@ function toggleProcessCompleted($tn, $wid) {
 }
 
 /** Sewing Helper Updates */
+function fetchSewingOutRecords($sewingId) {
+    $conn = getConnTransaction();
+    $sql = "SELECT * FROM sewing_out WHERE sewing_id = '$sewingId'";
+    $result = $conn->query($sql);
+
+    return $result;
+}
+
 function setQtyOther($p, $pid, $qtyDefect, $qtyFail, $qtyMissing) {
     $conn = getConnTransaction();
 
     $sql = "UPDATE $p SET qty_defect = $qtyDefect, qty_fail = $qtyFail, qty_missing = $qtyMissing WHERE {$p}_id = '$pid'";
     $conn->query($sql);
     $conn->close();
+}
+
+function getQtyOutTotal($sewingId) {
+    $conn = getConnTransaction();
+
+    $sql = "SELECT SUM(qty_out + qty_missing) AS qty_total_out FROM sewing_out WHERE sewing_id = '$sewingId'";
+    $result = $conn->query($sql);
+    $conn->close();
+
+    return $result;
+}
+
+function insertSewingOutRecord($sewingId, $qtyOut, $qtyMissing, $description, $uid) {
+    $conn = getConnTransaction();
+
+    $sql = "INSERT INTO sewing_out (sewing_id, qty_out, qty_missing, description, user_id) VALUES ('$sewingId', '$qtyOut', '$qtyMissing', '$description', '$uid')";
+    $conn->query($sql);
+    $conn->close();
+}
+
+function updateSewingMasterRecord($sewingId) {
+    $conn = getConnTransaction();
+
+    // Get sum of qtyOut and qtyMissing
+    $sql = "SELECT SUM(qty_out) AS total_qty_out, SUM(qty_missing) AS total_qty_missing FROM sewing_out WHERE sewing_id = '$sewingId'";
+    $result = $conn->query($sql);
+
+    if ($result) {
+        $row = $result->fetch_assoc();
+
+        $totalQtyOut = $row['total_qty_out'];
+        $totalQtyMissing = $row['total_qty_missing'];
+
+        // Update sewing table with the calculated sums
+        $sql = "UPDATE sewing SET qty_out = '$totalQtyOut', qty_missing = '$totalQtyMissing' WHERE sewing_id = '$sewingId'";
+        $updateResult = $conn->query($sql);
+
+        if ($updateResult) {
+            echo "Sewing master record updated successfully.";
+        } else {
+            echo "Error updating sewing master record: " . $conn->error;
+        }
+    } else {
+        echo "Error retrieving sums from sewing_out: " . $conn->error;
+    }
+
+    $conn->close();
+}
+
+/** Warehouse Functions */
+function fetchWarehouseData() {
+    $conn = getConnTransaction();
+
+    $sql = "SELECT * FROM warehouse ORDER BY date_in DESC";
+    $result = $conn->query($sql);
+
+    return $result;
 }
 
 
@@ -201,8 +294,39 @@ function pushToFinishing($wid, $cmt, $qtyIn) {
 
 function pushToQCFinal($wid, $qtyIn) {
     $recordId = generateQCFinalId();
-    pushToProcess('qc_final', $recordId, $wid, $qtyIn);
+    pushToProcessWithQty('qc_final', $recordId, $wid, $qtyIn);
     logGeneric(-1, 581, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
+}
+
+
+
+function getTotalQtyMissing($wid) {
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/db.php';
+    $conn = getConnTransaction();
+
+    $sql = "SELECT SUM(qty_missing) AS total_qty_missing
+            FROM (
+                SELECT qty_missing
+                FROM sewing
+                WHERE worksheet_id = '$wid'
+            
+                UNION ALL
+            
+                SELECT qty_missing
+                FROM washing
+                WHERE worksheet_id = '$wid'
+            
+                UNION ALL
+            
+                SELECT qty_missing
+                FROM finishing
+                WHERE worksheet_id = '$wid'
+            ) AS combined_data ";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc()['total_qty_missing'];
+
+    return $row;
+
 }
 
 function pushToPerbaikan($wid, $qtyIn) {
@@ -293,4 +417,13 @@ function parseProcessNameFromProcessId($processId) {
         default:
             return null;
     }
+}
+
+function getQtyIn($processName, $processId) {
+    $conn = getConnTransaction();
+    $sql = "SELECT qty_in FROM {$processName} WHERE {$processName}_id = '$processId'";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc()['qty_in'];
+    $conn->close();
+    return $row;
 }

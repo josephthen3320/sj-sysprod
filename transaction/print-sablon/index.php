@@ -89,7 +89,7 @@ $top_title .= "Dashboard";
         <?php include $_SERVER['DOCUMENT_ROOT'] . "/transaction/nav-transaction.php" ?>
 
 
-        <div class="w3-cell-row w3-padding-16">
+        <div class="w3-cell-row w3-padding">
             <div id="loading">Loading...</div>
             <iframe id="pmFrame" src="table-print-sablon.php" width="100%" frameborder="0" style="min-height: 75vh;"></iframe>
         </div>

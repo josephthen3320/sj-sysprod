@@ -16,6 +16,8 @@
             <button class='w3-bar-item w3-button' onclick='openURL(\"/transaction/finishing\")' >Finishing</button>
             <button class='w3-bar-item w3-button' onclick='openURL(\"/transaction/qc-final\")' >QC Final</button>
             <button class='w3-bar-item w3-button' onclick='openURL(\"/transaction/perbaikan\")' >Perbaikan</button>
+            
+            <button class='w3-bar-item w3-button' onclick='openURL(\"/warehouse\")' >Gudang</button>
             ";
 
         echo ($_SESSION['user_role'] != 4) ? $btnOthers : '';
