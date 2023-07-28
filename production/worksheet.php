@@ -3,9 +3,6 @@ session_start();
 
 $page_title = "Production Centre | Worksheet";
 
-// TODO: Change this to actual user role
-$user_role = "Kucing Admin";
-
 // Check if the user is not logged in, redirect to login page
 include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/verify-session.php";
 
@@ -28,10 +25,7 @@ if ($result->num_rows > 0) {
 }
 
 $top_title = "";
-if ($username == "nara") {
-    $top_title .= "Admin ";
-}
-$top_title .= "Dashboard";
+$top_title .= "Worksheet";
 
 ?>
 
@@ -87,7 +81,9 @@ $top_title .= "Dashboard";
         </div>
 
         <div id="" class="w3-bar w3-black w3-border-bottom">
+            <?php if(in_array($_SESSION['user_role'], [0,1,2,5,6])): ?>
             <button class="w3-bar-item w3-button" onclick="changeIframeSrc('worksheet/create')"><span class="w3-hide-small">Create  &nbsp; </span><i class="fa-solid fa-plus fa-sm"></i> </button>
+            <?php endif; ?>
             <button class="w3-bar-item w3-button" onclick="changeIframeSrc('worksheet/worksheet-table.php')"><span class="w3-hide-small">View All &nbsp; </span><i class="fa-solid fa-magnifying-glass fa-sm"></i> </button>
             <?php
             if ($_SESSION['user_role'] == 0) {

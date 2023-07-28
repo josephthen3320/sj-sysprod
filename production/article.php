@@ -1,10 +1,7 @@
 <?php
 session_start();
 
-$page_title = "Production Centre | Worksheet";
-
-// TODO: Change this to actual user role
-$user_role = "Kucing Admin";
+$page_title = "Production Centre | Article";
 
 // Check if the user is not logged in, redirect to login page
 include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/verify-session.php";
@@ -27,10 +24,7 @@ if ($result->num_rows > 0) {
 }
 
 $top_title = "";
-if ($username == "nara") {
-    $top_title .= "Admin ";
-}
-$top_title .= "Dashboard";
+$top_title .= "Article";
 
 ?>
 
@@ -93,13 +87,16 @@ $top_title .= "Dashboard";
             <span class="w3-bar-item w3-large" style="color: #0B293C;"><b>Article</b></span>
         </div>
         <div class="w3-bar w3-black">
+            <?php if(in_array($_SESSION['user_role'], [0,1,2,5,6])): ?>
             <button class="w3-bar-item w3-button" onclick="openPopupURL2('article/create-article.php')">New Article &nbsp; <i class="fa-solid fa-plus fa-sm"></i> </button>
+            <?php endif; ?>
+            <div class="w3-bar-item">&nbsp;</div>
         </div>
 
         <div class="w3-cell-row w3-padding-16">
             <div id="loading">Loading...</div>
             <div class="w3-container w3-twothird w3-padding">
-                <iframe id="worksheetFrame" src="article/article-table.php" frameborder="0" width="100%" style="min-height: 75vh;"></iframe>
+                <iframe id="articleFrame" src="article/article-table.php" frameborder="0" width="100%" style="min-height: 75vh;"></iframe>
             </div>
             <div class="w3-container w3-third w3-padding">
                 <iframe class="w3-border w3-border-light-grey" id="articleDetailFrame" src="" width="100%"  frameborder="0" style="min-height: 75vh;"></iframe>
@@ -120,7 +117,7 @@ $top_title .= "Dashboard";
         </script>
 
         <script>
-            var iframe = document.getElementById('worksheetFrame');
+            var iframe = document.getElementById('articleFrame');
             var loading = document.getElementById('loading');
 
             function changeIframeSrc(src) {
