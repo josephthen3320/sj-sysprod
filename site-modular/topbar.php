@@ -10,6 +10,8 @@
 ?>
 
 <script src="/assets/js/utils.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <script>
     function sidenavOpen() {
@@ -112,8 +114,56 @@
             <i class="fa-solid fa-chevron-down"></i>
         </div>
     </div>
-    <div id="userdropmodal" class="w3-dropdown-content w3-bar-block w3-border-2 w3-card" style="position: fixed; width:250px; right: 0; margin-top:135px;">
-        <a href="#" class="w3-bar-item w3-button">My Profile</a>
+    <div id="userdropmodal" class="w3-dropdown-content w3-bar-block w3-border-2 w3-card" style="position: fixed; width:250px; right: 0; transform: translateY(100%);">
+        <?php
+        if ($_SESSION['username'] == 'nara'):
+            ?>
+            <select class="w3-bar-item w3-button" id="userRoleSelect">
+                <option disabled selected>Change Role View</option>
+                <option value="0">Superuser</option>
+                <option value="2">Manager Produksi</option>
+                <option value="3">Admin Produksi</option>
+                <option value="4">Admin Cipadung</option>
+                <option value="5">MD</option>
+            </select>
+
+            <script>
+                // Function to handle the select change and update the user_role
+                function updateUserRole() {
+                    var selectedRole = document.getElementById("userRoleSelect").value;
+
+                    // Send the data using Ajax
+                    $.ajax({
+                        type: 'POST',
+                        url: '/site-modular/change-role-view.php', // Replace this with the actual PHP file to handle the update
+                        data: {
+                            newRole: selectedRole
+                        },
+                        success: function(response) {
+                            // Handle the successful response here (if needed)
+                            console.log(response); // Log the response for debugging
+
+                            // Reload the page after 0.5 seconds (500 milliseconds)
+                            setTimeout(function() {
+                                location.reload();
+                            }, 500);
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle errors here (if any)
+                            console.log(xhr.responseText); // Log the error response for debugging
+                        }
+                    });
+                }
+
+                // Listen for changes in the <select> element and trigger the Ajax request
+                document.getElementById("userRoleSelect").addEventListener("change", updateUserRole);
+            </script>
+        <?php
+        endif; // endif
+        ?>
+
+
+
         <a href="/php-modules/logout.php" class="w3-bar-item w3-button">Logout &nbsp;&nbsp; <i class="fa-solid fa-right-from-bracket"></i></a>
     </div>
 

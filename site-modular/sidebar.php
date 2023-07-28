@@ -55,6 +55,7 @@
         <a class="w3-medium w3-button w3-bar-item action-button" href="/support/"><i class="fas fa-fw fa-headset w3-text-red"></i> &nbsp;&nbsp; Support</a>
     </div>
 
+    <!-- Admin Zone -->
     <?php
     if(in_array($_SESSION['user_role'], [0,1])) {
         echo "<div class='w3-container w3-padding w3-border-bottom w3-border-top w3-border-orange' style='padding-left: 32px;'>";
@@ -67,35 +68,46 @@
     $userManagementButton = '<a class="w3-medium w3-button w3-bar-item action-button" href="/admin/user-management"><i class="fas fa-fw fa-user w3-text-red"></i> &nbsp;&nbsp; User Management</a>';
     $activityLogButton = '<a class="w3-medium w3-button w3-bar-item action-button" href="/admin/activities"><i class="fas fa-fw fa-list-timeline w3-text-red"></i> &nbsp;&nbsp; Activity Log</a>';
     $announcementButton   = '<a class="w3-medium w3-button w3-bar-item action-button" href="/admin/announcement"><i class="fas fa-fw fa-megaphone w3-text-red"></i> &nbsp;&nbsp; Announcement</a>';
+    $systemsButton   = '<a class="w3-medium w3-button w3-bar-item action-button" href="/admin/systems/manage.php"><i class="fas fa-fw fa-computer w3-text-red"></i> &nbsp;&nbsp; Systems</a>';
 
     echo ($_SESSION['user_role'] <= 1) ? $userManagementButton : "";
     echo ($_SESSION['user_role'] <= 1) ? $activityLogButton : "";
     echo ($_SESSION['user_role'] <= 1) ? $announcementButton : "";
+    echo ($_SESSION['user_role'] <= 1) ? $systemsButton : "";
 
     ?>
     </div>
 
     <!-- Production section -->
     <?php
+    if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 10])) {
+        if ($_SESSION['user_role'] != 4) {
+            echo "
+        <div class=\"w3-container w3-padding w3-border-bottom w3-border-top w3-border-orange\" style=\"padding-left: 32px;\">
+            <span class=\"w3-large\" style=\"font-weight: 400;\">Pre-Production</span>
+        </div>
+    
+        <div class=\"w3-padding w3-bar-block\" style=\"\">
+        ";
+            // echo "<a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/\"><i class=\"fas fa-fw fa-gauge-high w3-text-orange\"></i> &nbsp;&nbsp; Production Dashboard</a>";
 
-        if(in_array($_SESSION['user_role'], [0,1,2,3,4,5,6,7,10])) {
-            if ($_SESSION['user_role'] != 4) {
-                echo "
-            <div class=\"w3-container w3-padding w3-border-bottom w3-border-top w3-border-orange\" style=\"padding-left: 32px;\">
-                <span class=\"w3-large\" style=\"font-weight: 400;\">Pre-Production</span>
-            </div>
-        
-            <div class=\"w3-padding w3-bar-block\" style=\"\">
-                <a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/\"><i class=\"fas fa-fw fa-gauge-high w3-text-orange\"></i> &nbsp;&nbsp; Production Dashboard</a>
-        
-                <a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/classification.php\"><i class=\"fas fa-fw fa-database w3-text-blue\"></i> &nbsp;&nbsp; Classification</a>
-                <a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/article.php\"><i class=\"fas fa-fw fa-clothes-hanger w3-text-green\"></i> &nbsp;&nbsp; Article</a>
-                <a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/worksheet.php\"><i class=\"fas fa-fw fa-file-lines w3-text-yellow\"></i> &nbsp;&nbsp; Worksheet</a>
-            </div>
-            ";
+            if (in_array($_SESSION['user_role'], [0, 1, 2, 5, 6, 10])) {
+                echo "<a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/classification.php\"><i class=\"fas fa-fw fa-database w3-text-blue\"></i> &nbsp;&nbsp; Classification</a>";
             }
-        }
 
+            if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 10])) {
+                echo "<a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/article.php\"><i class=\"fas fa-fw fa-clothes-hanger w3-text-green\"></i> &nbsp;&nbsp; Article</a>";
+            }
+
+            if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 10])) {
+                echo "<a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/worksheet.php\"><i class=\"fas fa-fw fa-file-lines w3-text-yellow\"></i> &nbsp;&nbsp; Worksheet</a>";
+            }
+
+            echo "
+        </div>
+        ";
+        }
+    }
     ?>
 
 
