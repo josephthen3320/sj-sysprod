@@ -48,6 +48,16 @@ $brand = getBrandNameById($articleData['brand_id']);
 
 $customer = ($sjData['destination'] != -1) ? getCMTNameById(getCMTId($wid, $targetProcess)) : "Kantor";
 
+switch ($sjData['destination']) {
+    case -1:
+        $customer = "Kantor";
+        break;
+    case 11:
+        $customer = "Gudang Jadi";
+        $destination = "Gudang";
+        break;
+}
+
 $receiver_name = $customer;
 
 
@@ -72,9 +82,22 @@ function getCMTId($worksheet_id, $processName) {
     }
 
     $sql = ($processName != "kantor") ? "SELECT cmt_id FROM $processName WHERE worksheet_id = '$worksheet_id'" : "SELECT cmt_id FROM cutting WHERE worksheet_id = '$worksheet_id'";
+
+    switch ($processName) {
+        case "kantor":
+            $sql = "SELECT cmt_id FROM cutting WHERE worksheet_id = '$worksheet_id'";
+            break;
+        case "warehouse":
+            return "Gudang";
+            break;
+        default:
+            $sql = "SELECT cmt_id FROM $processName WHERE worksheet_id = '$worksheet_id'";
+            break;
+    }
+
     $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
+    if ($result->num_rows > 0 && $processName != 'warehouse') {
         $row = $result->fetch_assoc()['cmt_id'];
     } else {
         $row = null;
@@ -149,7 +172,53 @@ function getCMTId($worksheet_id, $processName) {
             </div>
             <div class="w3-col l3 m3 s3">
                 <span class="w3-small">Tanggal <?= $sjData['type'] == '1' ? 'kirim' : 'terima' ?></span><br>
-                <span class="" style="font-weight: bold"><?= $sjData['send_date'] ?></span>
+                <span class="print-show" style="font-weight: bold"><?= $sjData['send_date'] ?></span>
+                <input type="date" class="date-input print-hide" style="border:none; font-weight: bold" value="<?= $sjData['send_date'] ?>">
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var dateInput = document.querySelector('.date-input');
+
+                        dateInput.addEventListener('click', function() {
+                            this.readOnly = false;
+                            this.classList.add('editable'); // Add a class to style the editable state
+                        });
+
+                        dateInput.addEventListener('blur', function() {
+                            this.readOnly = true;
+                            this.classList.remove('editable'); // Remove the editable class
+
+                            // Get the new date value from the input
+                            var newDate = this.value;
+                            var sjid = '<?= $sjid ?>';
+                            var oldDate = '<?= $sjData['send_date'] ?>';
+
+                            // Send the data using Ajax
+                            $.ajax({
+                                type: 'POST',
+                                url: 'update_date.php', // Replace this with the actual PHP file to handle the update
+                                data: {
+                                    sjid: sjid,
+                                    newDate: newDate,
+                                    oldDate: oldDate
+                                },
+                                success: function(response) {
+                                    // Handle the successful response here (if needed)
+                                    console.log(response); // Log the response for debugging
+
+                                    // Reload the page after 0.2 seconds (200 milliseconds)
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 200);
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle errors here (if any)
+                                    console.log(xhr.responseText); // Log the error response for debugging
+                                }
+                            });
+                        });
+                    });
+                </script>
             </div>
         </div>
 
