@@ -20,7 +20,10 @@ if (isset($_POST['i'])) {
     $processId = $_POST['i'];
     $qty = $_POST['qtyOut'];
 
+    $date = date('Y-m-d');
+
     setQtyOut($processName, $processId, $qty);
+    setDateCutting($processId);
 
     $stid = createSuratJalan("CTO", $processId, 2, -1, $articleId, $qty, $uid);
     addSuratTerimaRecord($stid, "cutting", $processId);
@@ -28,6 +31,16 @@ if (isset($_POST['i'])) {
     echo $closeWindowScript = "<script type='text/javascript'>window.close();</script>";
 
 }
+
+function setDateCutting($processId) {
+    $conn = getConnTransaction();
+    $date = date('Y-m-d');
+
+    $sql = "UPDATE cutting SET date_cut = '$date' WHERE cutting_id = '$processId'";
+    $conn->query($sql);
+    $conn->close();
+}
+
 ?>
 
 <html>

@@ -18,7 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $worksheet = fetchWorksheetData($wid);
     $aid = $worksheet['article_id'];
 
-    $sql = "UPDATE cutting SET qty_out='$qty' WHERE id='$id'";
+    $date = date('Y-m-d');
+
+    $sql = "UPDATE cutting SET qty_out='$qty', date_cut='$date' WHERE id='$id'";
     $conn->query($sql);
     $conn->close();
 

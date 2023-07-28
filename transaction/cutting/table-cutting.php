@@ -1,6 +1,7 @@
 <?php
 session_start();
 $role = $_SESSION['user_role'];
+
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +29,7 @@ $role = $_SESSION['user_role'];
         <th>Start Date</th>
         <th>End Date</th>
         <th class="w3-center">Qty Cutting</th>
+        <th class="w3-center">Tgl Cutting</th>
         <th>Surat Jalan</th>
         <th>Actions</th>
     </tr>
@@ -57,7 +59,6 @@ $role = $_SESSION['user_role'];
 
 
             while ($ct = $ct_data->fetch_assoc()) {
-                $qty_add_btn = "<button class='w3-button w3-blue-grey w3-round-large' onclick='openPopupURL2(\"add-qty-out.php?i={$ct['id']}&w={$ct['worksheet_id']}&c={$ct['cutting_id']}\", \"cutout\", 500, 300)'> <i class='fas fa-plus fa-sm'></i></button>";
                 ++$i;
 
                 $worksheet = fetchWorksheet($ct['worksheet_id'])->fetch_assoc();
@@ -86,6 +87,8 @@ $role = $_SESSION['user_role'];
                     echo $ct['qty_out'];
                 }
                 echo "</td>";
+
+                echo "<td>{$ct['date_cut']}</td>";
 
 
                 echo "<td>";
