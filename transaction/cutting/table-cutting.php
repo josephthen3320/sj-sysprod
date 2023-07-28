@@ -46,7 +46,19 @@ $role = $_SESSION['user_role'];
             if ($_SESSION['user_role'] == 4) {
                 $ct_data = fetchCuttingCipadungTransaction();
             } else {
-                $ct_data = fetchAllTransactionByProcess('cutting');
+                $conn = getConnTransaction();
+
+                $sql = "SELECT t.*, p.position_id, p.cutting 
+                        FROM cutting AS t 
+                        INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id 
+                        ORDER BY 
+                            CASE WHEN t.date_cut IS NULL THEN 0 ELSE 1 END, 
+                            t.date_cut DESC,
+                            p.cutting ASC";
+
+                $ct_data = $conn->query($sql);
+                $conn->close();
+                //$ct_data = fetchAllTransactionByProcess('cutting');
             }
 
             $i = 0;

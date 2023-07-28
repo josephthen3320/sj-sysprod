@@ -145,7 +145,14 @@ function fetchAllTransactionByProcess($tname) {
 function fetchCuttingCipadungTransaction() {
     $conn = getConnTransaction();
 
-    $sql = "SELECT * FROM cutting WHERE cmt_id = 'KB01' ORDER BY date_in DESC";
+    $sql = "SELECT t.*, p.position_id, p.cutting 
+                        FROM cutting AS t 
+                        INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id 
+                        WHERE cmt_id = 'KB01'
+                        ORDER BY 
+                            CASE WHEN t.date_cut IS NULL THEN 0 ELSE 1 END, 
+                            t.date_cut DESC,
+                            p.cutting ASC";
     $result = $conn->query($sql);
     $conn->close();
     return $result;
