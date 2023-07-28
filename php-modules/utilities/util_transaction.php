@@ -231,6 +231,16 @@ function updateSewingMasterRecord($sewingId) {
     $conn->close();
 }
 
+/** QC Final helper */
+function getCuttingQtyByWorksheetId($wid) {
+    $conn = getConnTransaction();
+
+    $sql = "SELECT qty_out FROM cutting WHERE worksheet_id = '$wid'";
+    $result = $conn->query($sql);
+
+    return $result->fetch_assoc()['qty_out'];
+}
+
 /** Warehouse Functions */
 function fetchWarehouseData() {
     $conn = getConnTransaction();
@@ -298,6 +308,20 @@ function pushToQCFinal($wid, $qtyIn) {
     logGeneric(-1, 581, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
 }
 
+/* Push to Warehouse */
+function pushToWarehouse($wid, $qty) {
+    $recordId = generateWarehouseId();
+    $uid = $_SESSION['user_id'];
+
+    $conn = getConnTransaction();
+
+    $sql = "INSERT INTO warehouse (warehouse_id, worksheet_id, qty, created_by) VALUES ('$recordId', '$wid', '$qty', '$uid')";
+    $conn->query($sql);
+    $conn->close();
+
+    logGeneric(-1, 601, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
+
+}
 
 
 function getTotalQtyMissing($wid) {
