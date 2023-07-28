@@ -318,6 +318,13 @@ function parseActionIcon($status) {
 
             break;
 
+        case 5:                         // Identified
+            $iconClass = "code-simple";
+            $iconColour = "indigo";
+            $actionName = "Under Development";
+
+            break;
+
         case 0:     // no actions ongoing
         default:
             return null;
