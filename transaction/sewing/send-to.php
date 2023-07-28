@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             updateWorksheetPosition($wid, 7);   // Set to washing
 
             // Surat Jalan
-            $sjid = createSuratJalan('WI', $transaction_id, 6, 7, $aid, $qty, $uid);
+            $sjid = createSuratJalan('SI', $transaction_id, 6, 7, $aid, $qty, $uid);
             addSuratJalanRecord($sjid, 'sewing', $transaction_id);
 
             echo "Pushing complete";
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             updateWorksheetPosition($wid, 9); // Set to qc final
 
             // Surat Jalan
-            $sjid = createSuratJalan('QF', $transaction_id, 6, 9, $aid, $qty, $uid);
+            $sjid = createSuratJalan('SI', $transaction_id, 6, 9, $aid, $qty, $uid);
             addSuratJalanRecord($sjid, 'sewing', $transaction_id);
 
             echo "Pushing complete";
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             updateWorksheetPosition($wid, 8); // Set to finishing
 
             // Surat Jalan
-            $sjid = createSuratJalan('FI', $transaction_id, 6, 8, $aid, $qty, $uid);
+            $sjid = createSuratJalan('SI', $transaction_id, 6, 8, $aid, $qty, $uid);
             addSuratJalanRecord($sjid, 'sewing', $transaction_id);
 
             echo "Pushing complete";

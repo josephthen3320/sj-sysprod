@@ -23,6 +23,9 @@ $role = $_SESSION['user_role'];
         <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">Worksheet No.</th>
         <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">Article ID</th>
         <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">Model</th>
+
+        <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">Qty Cutting</th>
+
         <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">Qty in</th>
         <th class="w3-center w3-cell-middle" style="vertical-align: middle;" rowspan="2">Qty out</th>
         <th class="w3-center w3-cell-middle" style="vertical-align: middle;" colspan="3">Qty Lain-Lain</th>
@@ -59,6 +62,8 @@ $role = $_SESSION['user_role'];
                 $article_id = $worksheet['article_id'];
                 $article = getArticleById($article_id);
 
+                $qtyCutting = getCuttingQtyByWorksheetId($ct['worksheet_id']);
+
                 ++$i;
                 echo "<tr>";
                 echo "<td class='w3-center'>{$i}</td>";
@@ -68,6 +73,7 @@ $role = $_SESSION['user_role'];
                 echo "<td class='w3-center w3-left-align'>{$article_id}</td>";
                 echo "<td class='w3-center w3-left-align'>{$article['model_name']}</td>";
 
+                echo "<td class='w3-center'>{$qtyCutting}</td>";
 
                 echo "<td class='w3-center'>{$ct['qty_in']}</td>";
                 echo "<td class='w3-center'>";

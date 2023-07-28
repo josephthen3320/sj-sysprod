@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $w  = $_POST['w'];
     $i  = $_POST['i'];
     $pi = $_POST['pi'];
-   echo $qty = $_POST['qty'];
+    $qty = $_POST['qty'];
 
     if ($_POST['process'] === "WI") {
         $processName = 'Washing';

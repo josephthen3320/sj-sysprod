@@ -39,7 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 <body>
 
     <div class="w3-container">
-        <h1>Send to QC Final</h1>
+        <h1>Send to</h1>
+        <span class="w3-text-red" style="font-weight: bold">Saat ini hanya bisa kirim ke Gudang!</span>
+        <br><br>
         <span style="display: inline-block; width: 120px; font-weight: bold">Worksheet ID: </span><?= $w ?>
         <br>
         <span style="display: inline-block; width: 120px; font-weight: bold">QC Final ID: </span><?= $pi ?>

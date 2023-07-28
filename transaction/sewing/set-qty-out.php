@@ -101,7 +101,7 @@ $qtyLeft = $qtyIn - $qtyTotalOut;
         <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" <?= ($qtyLeft == 0) ? 'disabled' : ''; ?> type="number" min="0" name="qtyOut" id="qtyOut" autofocus required>
 
         <label for="description">Keterangan: </label>
-        <input  class="w3-input w3-border w3-margin-bottom" <?= ($qtyLeft == 0) ? 'disabled' : ''; ?> type="text" name="description" id="description" required>
+        <input class="w3-input w3-border w3-margin-bottom" <?= ($qtyLeft == 0) ? 'disabled' : ''; ?> type="text" name="description" id="description">
 
         <label for="qtyMissing">Qty Hilang: </label>
         <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" <?= ($qtyLeft == 0) ? 'disabled' : ''; ?> type="number" min="0" name="qtyMissing" id="qtyMissing">

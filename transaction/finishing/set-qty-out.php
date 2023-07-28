@@ -19,7 +19,10 @@ if (isset($_POST['i'])) {
     $processName = $_POST['p'];
     $processId = $_POST['i'];
     $qty = $_POST['qtyOut'];
-    $qtyMissing = isset($_POST['qtyMissing']) ? $_POST['qtyMissing'] : 0 ;
+
+    $qtyMissing = ($_POST['qtyMissing'] <= 0) ? 0 : $_POST['qtyMissing'];
+
+    //echo $qtyMissing = isset($_POST['qtyMissing']) ? $_POST['qtyMissing'] : 0 ;
 /*
     if (($qtyFail + $qtyDefect + $qtyMissing + $qty) != ) {
 
@@ -72,10 +75,10 @@ if (isset($_POST['i'])) {
 
         <h6>Hasil Finishing: </h6>
         <label for="qtyOut">Qty: </label>
-        <input class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyOut" id="qtyOut" autofocus>
+        <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyOut" id="qtyOut" autofocus>
 
         <label for="qtyMissing">Qty Hilang: </label>
-        <input class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyMissing" id="qtyMissing" >
+        <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyMissing" id="qtyMissing" >
 
         <button class="w3-button w3-block w3-blue-grey" type="submit">Submit</button>
     </form>

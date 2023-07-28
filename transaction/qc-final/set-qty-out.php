@@ -20,19 +20,19 @@ if (isset($_POST['i'])) {
     $processId = $_POST['i'];
     $qty = $_POST['qtyOut'];
 
-    $qtyMissing = getTotalQtyMissing($worksheetId);
-    $qtyDefect = $_POST['qtyDefect'];
-    $qtyFail = $_POST['qtyFail'];
+    echo $qtyMissing = getTotalQtyMissing($worksheetId);
+    echo $qtyDefect = $_POST['qtyDefect'] <= 0 ? 0 : $_POST['qtyDefect'];
+    echo $qtyFail = $_POST['qtyFail'] <= 0 ? 0 : $_POST['qtyFail'];
 
     setQtyOut($processName, $processId, $qty);
-    echo setQtyOther($processName, $processId, $qtyMissing, $qtyDefect, $qtyFail);
+    setQtyOther($processName, $processId, $qtyDefect, $qtyFail, $qtyMissing);
 
     /*
     $stid = createSuratTerima("EBO", $processId, 3, -1, $articleId, $qty, $uid);
     addSuratTerimaRecord($stid, "embro", $processId);
     */
 
-    echo $closeWindowScript = "<script type='text/javascript'>window.close();</script>";
+    $closeWindowScript = "<script type='text/javascript'>window.close();</script>";
 
 }
 ?>
@@ -71,13 +71,13 @@ if (isset($_POST['i'])) {
 
 
         <label for="qtyOut">Qty: </label>
-        <input class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyOut" id="qtyOut" autofocus>
+        <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyOut" id="qtyOut" autofocus>
 
         <label for="qtyDefect">Qty Cacat: </label>
-        <input class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyDefect" id="qtyDefect">
+        <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyDefect" id="qtyDefect">
 
         <label for="qtyFail">Qty Gagal: </label>
-        <input class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyFail" id="qtyFail">
+        <input onwheel="event.preventDefault()" class="w3-input w3-border w3-margin-bottom" type="number" min="0" name="qtyFail" id="qtyFail">
 
         <button class="w3-button w3-block w3-blue-grey" type="submit">Submit</button>
     </form>
