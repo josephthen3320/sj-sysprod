@@ -75,61 +75,6 @@ if ($result->num_rows > 0) {
         }
     </style>
 </head>
-<body>
-
-<!-- Left bar -->
-<?php include $_SERVER['DOCUMENT_ROOT'] . "/site-modular/sidebar.php" ; ?>
-
-<div class="w3-threequarter w3-white sj-content" style="min-height: 100vh; margin-left: 25%;">
-    <?php include $_SERVER['DOCUMENT_ROOT'] . "/site-modular/topbar.php" ; ?>
-
-    <div style="margin-top: 16px; min-height: 100vh; background-color: #fbfbfb;">
-        <!-- Dashboard menu -->
-        <div id="" class="w3-bar w3-white w3-border-bottom " style="display: flex; background-color: #0B293C; height: 72px; align-items: center;">
-            <span class="w3-bar-item w3-large" style="color: #0B293C;"><b>Reporting</b></span>
-        </div>
-
-        <!-- todo: Remove this later! -->
-        <div class="w3-cell-row w3-container w3-padding-16 w3-center w3-hide">
-            <h1 class="w3-xxxlarge"><i class="far fa-fw fa-bounce fa-face-awesome"></i></h1>
-            <h4>Page Under Construction</h4>
-            <h6>Halaman sedang dibangun</h6>
-        </div>
-
-
-        <div class="w3-cell-row w3-container w3-padding-16">
-            <h3>Laporan Cutting</h3>
-            <div class="w3-quarter w3-padding">
-                <h6>Cutting Report</h6>
-                <iframe src="cutting/global.php" width="100%" height="500px" frameborder="none"></iframe>
-            </div>
-
-            <div class="w3-threequarter w3-padding">
-                <h6>Rekap Hasil Cutting</h6>
-                <iframe src="cutting/report-detail.php" width="100%" height="500px" frameborder="none"></iframe>
-           </div>
-        </div>
-
-        <div class="w3-cell-row w3-container w3-padding-16">
-            <h3>Laporan Sewing</h3>
-            <div class="w3-third w3-padding">
-                <h6>Sewing Report</h6>
-                <iframe src="sewing/global.php" width="100%" height="500px" frameborder="none"></iframe>
-            </div>
-
-            <div class="w3-twothird w3-padding">
-                <h6>Rekap Kirim ke CMT Jahit</h6>
-                <iframe src="sewing/report-detail.php" width="100%" height="500px" frameborder="none"></iframe>
-           </div>
-        </div>
-
-    </div>
-</div>
-
-<?php include $_SERVER['DOCUMENT_ROOT'] . "/site-modular/bottombar.php" ?>
-
-</body>
-</html>
 
 
 <script>
@@ -142,3 +87,112 @@ if ($result->num_rows > 0) {
         }
     }
 </script>
+
+<body>
+
+<!-- Left bar -->
+<?php include $_SERVER['DOCUMENT_ROOT'] . "/site-modular/sidebar.php" ; ?>
+
+<div class="w3-threequarter w3-white sj-content" style="min-height: 80vh; margin-left: 25%;">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/site-modular/topbar.php" ; ?>
+
+    <div style="margin-top: 16px; min-height: 95vh; background-color: #fbfbfb;">
+        <!-- Dashboard menu -->
+        <div id="" class="w3-bar w3-white w3-border-bottom " style="display: flex; background-color: #0B293C; height: 72px; align-items: center;">
+            <span class="w3-bar-item w3-large" style="color: #0B293C;"><b>Reporting</b></span>
+        </div>
+
+
+
+        <div class="w3-container w3-padding-top-24">
+
+            <div style="margin-bottom: 48px;">
+                <h3>Laporan Cutting</h3>
+
+                <div class="w3-cell-row">
+                    <div class="w3-col l3 m3 s6 w3-padding">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openURL('cutting/hasil-cutting.php')">
+                            <i class="fas fa-fw fa-file-lines fa-2xl"></i><br><br>
+                            <span>Hasil Cutting</span>
+                        </div>
+                    </div>
+
+                    <div class="w3-col l3 m3 s6 w3-padding">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
+                            <i class="fas fa-fw fa-file-lines fa-2xl"></i><br><br>
+                            <span>Pengiriman Hasil Cutting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="margin-bottom: 48px;">
+                <h3>Laporan Sewing (CMT)</h3>
+
+                <div class="w3-cell-row">
+                    <div class="w3-col l3 m3 s6 w3-padding">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
+                            <i class="fas fa-fw fa-file-lines fa-2xl"></i><br><br>
+                            <span>Hasil Sewing</span>
+                        </div>
+                    </div>
+
+                    <div class="w3-col l3 m3 s6 w3-padding">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
+                            <span class="fa-stack" style="vertical-align: top;">
+                                <i class="fas fa-fw fa-reel fa-stack-2x"></i>
+                                <i class="fas fa-fw fa-right-to-line fa-stack-1x" style="left:-55%"></i>
+                            </span><br><br>
+                            <span>Penerimaan Hasil Sewing</span>
+                        </div>
+                    </div>
+
+                    <div class="w3-col l3 m3 s6 w3-padding">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
+                            <span class="fa-stack" style="vertical-align: top;">
+                                <i class="fas fa-fw fa-warehouse fa-stack-2x"></i>
+                                <i class="fas fa-fw fa-exclamation fa-stack-1x w3-text-red" style="left:75%; top: -25%;"></i>
+                            </span><br><br>
+                            <span>Sisa Barang di CMT</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="margin-bottom: 48px;">
+                <h3>Laporan QC Final & Gudang</h3>
+
+                <div class="w3-cell-row">
+                    <div class="w3-col l3 m3 s6 w3-padding">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
+                            <span class="fa-stack" style="vertical-align: top;">
+                                <i class="fas fa-fw fa-file-lines fa-stack-2x"></i>
+                                <i class="fas fa-fw fa-right-to-line fa-stack-1x" style="left:-55%"></i>
+                            </span><br><br>
+                            <span>Penerimaan QC Final</span>
+                        </div>
+                    </div>
+
+                    <div class="w3-col l3 m3 s6 w3-padding">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
+                            <span class="fa-stack" style="vertical-align: top;">
+                                <i class="fas fa-fw fa-warehouse-full fa-stack-2x"></i>
+                                <i class="fas fa-fw fa-right-to-line fa-stack-1x" style="left:-75%"></i>
+                            </span><br><br>
+                            <span>Masuk Gudang</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . "/site-modular/bottombar.php" ?>
+
+</body>
+</html>
+

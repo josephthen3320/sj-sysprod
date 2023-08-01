@@ -7,8 +7,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_worksheet.
 $conn = getConnTransaction();
 
 // Step 2: Retrieve data from the "cutting" table
-$sql = "SELECT cmt_id, SUM(qty_out) AS total_qty_out, worksheet_id, qty_out
+$sql = "SELECT cmt_id, SUM(qty_out) AS total_qty_out, worksheet_id, qty_out, date_cut
                     FROM cutting
+                    WHERE date_cut IS NOT null 
                     GROUP BY cmt_id, worksheet_id
                     ORDER BY cmt_id, worksheet_id";
 
@@ -57,8 +58,9 @@ $result = $conn->query($sql);
     $conn = getConnTransaction();
 
     // Step 2: Retrieve data from the "cutting" table
-    $sql = "SELECT cmt_id, SUM(qty_out) AS total_qty_out, worksheet_id, qty_out
+    $sql = "SELECT cmt_id, SUM(qty_out) AS total_qty_out, worksheet_id, qty_out, date_cut
                     FROM cutting
+                    WHERE date_cut IS NOT null 
                     GROUP BY cmt_id, worksheet_id
                     ORDER BY cmt_id, worksheet_id";
 
