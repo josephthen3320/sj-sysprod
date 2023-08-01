@@ -19,7 +19,7 @@ $result = $connLog->query($sql);
 if ($result->num_rows <= 0) {
     echo "<div class='w3-bar-item w3-leftbar w3-border-green w3-hover-light-grey' style='padding: 16px 40px 16px 20px;'>";
     echo "<div class='w3-container w3-cell w3-cell-middle'>";
-    echo "<i class='fa-solid fa-smile-beam fa-2xl w3-text-green'></i>";
+    echo "<i class='fas fa-fw fa-smile-beam fa-2xl w3-text-green'></i>";
     echo "</div>";
     echo "<div class='w3-container w3-cell w3-cell-middle w3-display-container' style='width:100%;'>";
     echo "<span class='w3-center' style='font-weight: bold;'>No announcement yet!</span><br>";
@@ -66,7 +66,7 @@ while ($a = $result->fetch_assoc()) {
     echo "<div class='w3-border-top w3-border-bottom w3-border-light-grey'>";
     echo "<div class='w3-bar-item w3-leftbar w3-border-{$colour} w3-hover-light-grey' style='padding: 16px 40px 16px 20px;'>";
     echo "<div class='w3-container w3-cell w3-cell-middle'>";
-    echo "<i class='fa-solid {$icon} fa-2xl w3-text-{$colour}'></i>";
+    echo "<i class='fas fa-fw {$icon} fa-2xl w3-text-{$colour}'></i>";
     echo "</div>";
     echo "<div class='w3-container w3-cell w3-cell-middle w3-display-container' style='width:100%;'>";
     echo "<span class='w3-small w3-hide-medium w3-hide-large'><b>{$a['timestamp']}<br></b></span>";

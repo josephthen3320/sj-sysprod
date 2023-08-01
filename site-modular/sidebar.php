@@ -42,7 +42,7 @@
 <div class="w3-sidebar w3-bar-block w3-quarter w3-text-white w3-hide-small w3-hide-medium nav-scrollbar" style="min-height: 100vh; padding-bottom: 20vh; position: fixed; background-color: #0B293C">
     <!-- Header -->
     <div class="w3-container w3-padding" style="display:flex; justify-content: center; align-items: center; width: 100%; height: 100px;">
-            <img src="/assets/logo/sysprod_logo_w.png" height="80%">
+            <img onclick="openURL('/dashboard/')" style="cursor: pointer;" src="/assets/logo/sysprod_logo_w.png" height="80%">
     </div>
 
     <!-- General section -->
@@ -80,7 +80,7 @@
 
     <!-- Production section -->
     <?php
-    if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 10])) {
+    if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 9, 10])) {
         if ($_SESSION['user_role'] != 4) {
             echo "
         <div class=\"w3-container w3-padding w3-border-bottom w3-border-top w3-border-orange\" style=\"padding-left: 32px;\">
@@ -91,15 +91,15 @@
         ";
             // echo "<a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/\"><i class=\"fas fa-fw fa-gauge-high w3-text-orange\"></i> &nbsp;&nbsp; Production Dashboard</a>";
 
-            if (in_array($_SESSION['user_role'], [0, 1, 2, 5, 6, 10])) {
+            if (in_array($_SESSION['user_role'], [0, 1, 2, 5, 6, 9, 10])) {
                 echo "<a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/classification.php\"><i class=\"fas fa-fw fa-database w3-text-blue\"></i> &nbsp;&nbsp; Classification</a>";
             }
 
-            if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 10])) {
+            if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 9, 10])) {
                 echo "<a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/article.php\"><i class=\"fas fa-fw fa-clothes-hanger w3-text-green\"></i> &nbsp;&nbsp; Article</a>";
             }
 
-            if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 10])) {
+            if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 9, 10])) {
                 echo "<a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/worksheet.php\"><i class=\"fas fa-fw fa-file-lines w3-text-yellow\"></i> &nbsp;&nbsp; Worksheet</a>";
             }
 
@@ -115,7 +115,7 @@
     
     <!-- Transaction section -->
     <?php
-    if(in_array($_SESSION['user_role'], [0,1,2,3,4,5,6,7,10])) {
+    if(in_array($_SESSION['user_role'], [0,1,2,3,4,5,6,7,9,10])) {
         echo "<div class='w3-container w3-padding w3-border-bottom w3-border-top w3-border-orange' style='padding-left: 32px;'>";
         echo "    <span class='w3-large' style='font-weight: 400;'>Transaction</span>";
         echo "</div>";
@@ -129,7 +129,7 @@
 
     <!-- Reporting section -->
     <?php
-    if(in_array($_SESSION['user_role'], [0,1,2,3,4,5,6,7,10])) {
+    if(in_array($_SESSION['user_role'], [0,1,2,3,4,5,6,7,9,10])) {
         echo "<div class='w3-container w3-padding w3-border-bottom w3-border-top w3-border-orange' style='padding-left: 32px;'>";
         echo "    <span class='w3-large' style='font-weight: 400;'>Reporting</span>";
         echo "</div>";

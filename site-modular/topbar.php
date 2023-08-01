@@ -108,23 +108,43 @@
             </div>
         </div>
         <div class="w3-half">
-            <?php echo "<b>{$name}</b>"; ?>
+            <?php
+                echo "<b>{$name}</b>";
+
+                if($_SESSION['username'] == 'nara') {
+                    include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/db.php';
+                    $connUser = getConnUser();
+                    $sql = "SELECT role_name as role FROM roles WHERE id = '{$_SESSION['user_role']}'";
+                    $userrole = $connUser->query($sql)->fetch_assoc()['role'];
+
+                    echo "<br><b class='w3-tiny'>{$userrole}</b>";
+                    $connUser->close();
+                }
+            ?>
         </div>
         <div class="w3-quarter">
             <i class="fa-solid fa-chevron-down"></i>
         </div>
     </div>
     <div id="userdropmodal" class="w3-dropdown-content w3-bar-block w3-border-2 w3-card" style="position: fixed; width:250px; right: 0; transform: translateY(100%);">
-        <?php
-        if ($_SESSION['username'] == 'nara'):
+            <?php
+                if ($_SESSION['username'] == 'nara'):
             ?>
             <select class="w3-bar-item w3-button" id="userRoleSelect">
                 <option disabled selected>Change Role View</option>
-                <option value="0">Superuser</option>
-                <option value="2">Manager Produksi</option>
-                <option value="3">Admin Produksi</option>
-                <option value="4">Admin Cipadung</option>
-                <option value="5">MD</option>
+
+                <?php
+                    include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/db.php';
+                    $connUser = getConnUser();
+                    $sql = "SELECT * FROM roles WHERE id >= 0";
+                    $result = $connUser->query($sql);
+
+                    while ($row = $result->fetch_assoc()):
+                ?>
+                    <option value="<?= $row['id'] ?>"><?= $row['role_name'] ?></option>
+                <?php
+                    endwhile;
+                ?>
             </select>
 
             <script>
