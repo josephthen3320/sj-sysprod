@@ -2,6 +2,34 @@
 session_start();
 $role = $_SESSION['user_role'];
 
+include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_worksheet_position.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_transaction.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_articles.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_worksheet.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_surat_jalan.php";
+
+if ($_SESSION['user_role'] == 4) {
+    $ct_data = fetchCuttingCipadungTransaction();
+} else {
+    $conn = getConnTransaction();
+
+    $sql = "SELECT t.*, p.position_id, p.cutting 
+                        FROM cutting AS t 
+                        INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id 
+                        ORDER BY 
+                            CASE WHEN t.date_cut IS NULL THEN 0 ELSE 1 END, 
+                            t.date_cut DESC,
+                            p.cutting ASC";
+
+    $ct_data = $conn->query($sql);
+    $conn->close();
+    //$ct_data = fetchAllTransactionByProcess('cutting');
+}
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +45,7 @@ $role = $_SESSION['user_role'];
 <script src="/assets/js/utils.js"></script>
 <body>
 
-<table class="w3-table w3-table-all w3-hide-small w3-small">
+<table class="w3-table w3-table-all w3-hide-small w3-small w3-margin-top">
     <thead>
     <tr>
         <th>No</th>
@@ -36,31 +64,6 @@ $role = $_SESSION['user_role'];
     </thead>
     <tbody>
         <?php
-            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_worksheet_position.php";
-            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_transaction.php";
-            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_articles.php";
-            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_worksheet.php";
-            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_surat_jalan.php";
-
-
-            if ($_SESSION['user_role'] == 4) {
-                $ct_data = fetchCuttingCipadungTransaction();
-            } else {
-                $conn = getConnTransaction();
-
-                $sql = "SELECT t.*, p.position_id, p.cutting 
-                        FROM cutting AS t 
-                        INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id 
-                        ORDER BY 
-                            CASE WHEN t.date_cut IS NULL THEN 0 ELSE 1 END, 
-                            t.date_cut DESC,
-                            p.cutting ASC";
-
-                $ct_data = $conn->query($sql);
-                $conn->close();
-                //$ct_data = fetchAllTransactionByProcess('cutting');
-            }
-
             $i = 0;
 
             if ($ct_data->num_rows == 0) {
