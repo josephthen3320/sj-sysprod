@@ -62,8 +62,14 @@
 
                 echo "<td>";
                 if (checkSuratJalanExistsByTransactionId($ct['pola_marker_id'])) {
+                    $isPrint = "";
+
+                    if (checkSuratJalanPrinted($ct['pola_marker_id'])) {
+                        $isPrint = "&nbsp;<i class='fas w3-tiny fa-fw fa-check'></i>";
+                    }
+
                     $urlSuratJalan = "/transaction/surat-jalan/?i={$ct['sj_id']}&t={$ct['pola_marker_id']}&w={$ct['worksheet_id']}";
-                    echo "<button class='w3-button w3-green' onclick='openPopupURL2(\"$urlSuratJalan\")'><i class='fas fa-print'></i></button>";
+                    echo "<button class='w3-button w3-green' onclick='openPopupURL2(\"$urlSuratJalan\")'><i class='fas fa-print'></i>{$isPrint}</button>";
                 }
 
                 echo "</td>";

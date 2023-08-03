@@ -18,8 +18,10 @@ if ($_SESSION['user_role'] == 4) {
                         INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id 
                         ORDER BY 
                             CASE WHEN t.date_cut IS NULL THEN 0 ELSE 1 END, 
+                            
+                            p.cutting ASC, 
                             t.date_cut DESC,
-                            p.cutting ASC";
+                            t.date_out DESC";
 
     $ct_data = $conn->query($sql);
     $conn->close();
@@ -114,12 +116,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 if (checkSuratKantorExistsByTransactionId($ct['cutting_id'])) {
                     $dropdownId = $ct['cutting_id'] . "_sj";
+
+                    $sjPrint = $skPrint = null;
+
+                    if (checkSuratJalanCOPrinted($ct['cutting_id'])) {
+                    $skPrint = "&nbsp; <i class='fas fa-fw w3-tiny fa-check'></i>";
+                    }
+
+                    if (checkSuratJalanPrinted($ct['cutting_id'])) {
+                    $sjPrint = "&nbsp; <i class='fas fa-fw w3-tiny fa-check'></i>";
+                    }
+
                     echo "<button onclick=\"dropdownButton('$dropdownId')\" class='w3-button w3-green'><i class='fas fa-print'></i></button>";
                     echo "<div id='$dropdownId' class='w3-dropdown-content w3-bar-block w3-border'>";
-                        echo "<button class='w3-bar-item w3-button' onclick='openPopupURL2(\"$urlSuratJalanKantor\", \"suratJalan\", 800, 500)'>Kantor</button>";
+                        echo "<button class='w3-bar-item w3-button' onclick='openPopupURL2(\"$urlSuratJalanKantor\", \"suratJalan\", 800, 500)'>Kantor {$skPrint}</button>";
 
                         if (checkSuratJalanExistsByTransactionId($ct['cutting_id']) && $_SESSION['user_role'] != 4) {
-                            echo "<button class='w3-bar-item w3-button' onclick='openPopupURL2(\"$urlSuratJalan\", \"suratJalan\", 800, 500)'>External</button>";
+                            echo "<button class='w3-bar-item w3-button' onclick='openPopupURL2(\"$urlSuratJalan\", \"suratJalan\", 800, 500)'>External {$sjPrint}</button>";
                         }
 
                         echo "</div>";
