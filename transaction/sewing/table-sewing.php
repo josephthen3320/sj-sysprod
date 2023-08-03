@@ -123,8 +123,13 @@ $i = 0;
             $urlSuratTerima = "/transaction/surat-jalan/?i={$ct['sj_id']}&t={$ct['sewing_id']}&w={$ct['worksheet_id']}";
 
             if (checkSuratJalanExistsByTransactionId($ct['sewing_id'])) {
+                $isPrint = "";
 
-                echo "<button class='w3-button w3-green' onclick='openPopupURL2(\"$urlSuratTerima\", \"suratJalan\", 800, 500)'><i class='fas fa-print'></i></button>";
+                if (checkSuratJalanPrinted($ct['sewing_id'])) {
+                    $isPrint = "&nbsp;<i class='fas w3-tiny fa-fw fa-check'></i>";
+                }
+
+                echo "<button class='w3-button w3-green' onclick='openPopupURL2(\"$urlSuratTerima\", \"suratJalan\", 800, 500)'><i class='fas fa-print'></i>{$isPrint}</button>";
 
             }
             echo "</div>";
@@ -145,11 +150,19 @@ $i = 0;
 
             echo "<div class='w3-col w3-row l12 m12 s12 w3-pale-blue w3-center {$ct['sewing_id']}' style='display: none; padding-top:8px; padding-bottom: 24px;'>";
             while ($out = $sewingOutData->fetch_assoc()) {
-                echo "<div class='w3-col l5 m5'>&nbsp;</div>";
-                echo "<div class='w3-col l1 m1'>{$out['qty_out']}</div>";
-                echo "<div class='w3-col l1 m1'>{$out['qty_missing']}</div>";
-                echo "<div class='w3-col l1 m1'>&nbsp;</div>";
-                echo "<div class='w3-col l1 m1'>{$out['datestamp']}</div>";
+                echo "<div class='w3-col l6 m6'>&nbsp;</div>";
+
+
+                echo "<div class='w3-col l2 m2 jt-padding-tb-8 w3-row'>";
+                    echo "<div class='w3-col l4 m4 s12'>&nbsp;</div>";
+                    echo "<div class='w3-col l4 m4 s12'>{$out['qty_out']}</div>";
+                    echo "<div class='w3-col l4 m4 s12'>{$out['qty_missing']}</div>";
+                echo "</div>";
+
+                $description = $out['description'] == "" ? "&nbsp;" : $out['description'];
+
+                echo "<div class='w3-col l1 m1 jt-padding-tb-8'>{$description}</div>";
+                echo "<div class='w3-col l1 m1 jt-padding-tb-8'>{$out['datestamp']}</div>";
                 echo "<div class='w3-col l2 m2'>&nbsp;</div>";
             }
             echo "</div>";
