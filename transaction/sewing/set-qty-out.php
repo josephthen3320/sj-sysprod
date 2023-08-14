@@ -35,7 +35,9 @@ if (isset($_POST['i'])) {
         exit();
     }
 
-    insertSewingOutRecord($processId, $qtyOut, $qtyMissing, $description, $uid);
+    $qtyLeft = $qtyIn - ($qtyTotalOut + $qtyOut + $qtyMissing);
+
+    insertSewingOutRecord($processId, $qtyOut, $qtyMissing, $qtyLeft, $description, $uid);
     updateSewingMasterRecord($processId);
 
     /*
