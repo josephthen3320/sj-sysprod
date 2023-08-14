@@ -106,21 +106,51 @@ if ($result->num_rows > 0) {
 
         <div class="w3-container w3-padding-top-24">
 
+            <!-- todo: remove once everything is up -->
+            <span class=""><i class="fas fa-fw w3-text-indigo fa-square"></i> &nbsp; Menu tersedia </span><br>
+            <span class=""><i class="fas fa-fw w3-text-black fa-square"></i> &nbsp; Menu belum tersedia </span>
+
             <div style="margin-bottom: 48px;">
                 <h3>Laporan Cutting</h3>
 
                 <div class="w3-cell-row">
                     <div class="w3-col l3 m3 s6 w3-padding">
                         <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openURL('cutting/hasil-cutting.php')">
-                            <i class="fas fa-fw fa-file-lines fa-2xl"></i><br><br>
+                            <span class="fa-stack" style="vertical-align: top;">
+                                <i class="w3-text-indigo fas fa-fw fa-scissors fa-stack-2x"></i>
+                                <i class="w3-text-red fas fa-fw fa-right fa-stack-1x" style="left:65%"></i>
+                            </span><br><br>
                             <span>Hasil Cutting</span>
                         </div>
                     </div>
 
                     <div class="w3-col l3 m3 s6 w3-padding">
-                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
-                            <i class="fas fa-fw fa-file-lines fa-2xl"></i><br><br>
-                            <span>Pengiriman Hasil Cutting</span>
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openURL('cutting/pengiriman-cutting-sewing.php')">
+                            <span class="fa-stack" style="vertical-align: top;">
+                                <i class="w3-text-indigo fas fa-fw fa-truck fa-stack-2x"></i>
+                                <i class="w3-text-red fas fa-fw fa-reel fa-stack-1x" style="left:65%; top:-50%;"></i>
+                            </span><br><br>
+                            <span>Pengiriman Hasil Cutting ke Sewing</span>
+                        </div>
+                    </div>
+
+                    <div class="w3-col l3 m3 s6 w3-padding">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openURL('cutting/pengiriman-cutting-embro.php')">
+                            <span class="fa-stack" style="vertical-align: top;">
+                                <i class="w3-text-indigo fas fa-fw fa-truck fa-stack-2x"></i>
+                                <i class="w3-text-red fas fa-fw fa-scarf fa-stack-1x" style="left:65%; top:-50%;"></i>
+                            </span><br><br>
+                            <span>Pengiriman Hasil Cutting ke Embro</span>
+                        </div>
+                    </div>
+
+                    <div class="w3-col l3 m3 s6 w3-padding">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openURL('cutting/pengiriman-cutting-sablon.php')">
+                            <span class="fa-stack" style="vertical-align: top;">
+                                <i class="w3-text-indigo fas fa-fw fa-truck fa-stack-2x"></i>
+                                <i class="w3-text-red fas fa-fw fa-pen-paintbrush fa-stack-1x" style="left:65%; top:-50%;"></i>
+                            </span><br><br>
+                            <span>Pengiriman Hasil Cutting ke Print/Sablon</span>
                         </div>
                     </div>
                 </div>
@@ -131,28 +161,22 @@ if ($result->num_rows > 0) {
                 <h3>Laporan Sewing (CMT)</h3>
 
                 <div class="w3-cell-row">
-                    <div class="w3-col l3 m3 s6 w3-padding">
-                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
-                            <i class="fas fa-fw fa-file-lines fa-2xl"></i><br><br>
-                            <span>Hasil Sewing</span>
-                        </div>
-                    </div>
 
                     <div class="w3-col l3 m3 s6 w3-padding">
-                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openURL('sewing/penerimaan-sewing.php')">
                             <span class="fa-stack" style="vertical-align: top;">
-                                <i class="fas fa-fw fa-reel fa-stack-2x"></i>
-                                <i class="fas fa-fw fa-right-to-line fa-stack-1x" style="left:-55%"></i>
+                                <i class="w3-text-indigo fas fa-fw fa-hand-holding fa-stack-2x" style="top:5%"></i>
+                                <i class="w3-text-pink fas fa-fw fa-reel fa-stack-1x" style="top: -20%;"></i>
                             </span><br><br>
                             <span>Penerimaan Hasil Sewing</span>
                         </div>
                     </div>
 
                     <div class="w3-col l3 m3 s6 w3-padding">
-                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openURL('sewing/cmt-detail.php')">
                             <span class="fa-stack" style="vertical-align: top;">
-                                <i class="fas fa-fw fa-warehouse fa-stack-2x"></i>
-                                <i class="fas fa-fw fa-exclamation fa-stack-1x w3-text-red" style="left:75%; top: -25%;"></i>
+                                <i class="w3-text-indigo fas fa-fw fa-warehouse fa-stack-2x"></i>
+                                <i class="fas fa-fw fa-exclamation-circle fa-stack-1x w3-text-pink" style="left:75%; top: -25%;"></i>
                             </span><br><br>
                             <span>Sisa Barang di CMT</span>
                         </div>
@@ -162,7 +186,36 @@ if ($result->num_rows > 0) {
 
 
             <div style="margin-bottom: 48px;">
-                <h3>Laporan QC Final & Gudang</h3>
+                <h3>Laporan Finishing & QC Final</h3>
+
+                <div class="w3-cell-row">
+
+                    <div class="w3-col l3 m3 s6 w3-padding">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openURL('sewing/penerimaan-sewing.php')">
+                            <span class="fa-stack" style="vertical-align: top;">
+                                <i class="w3-text-meong fas fa-fw fa-hand-holding fa-stack-2x" style="top:5%"></i>
+                                <i class="w3-text-pink fas fa-fw fa-reel fa-stack-1x" style="top: -20%;"></i>
+                            </span><br><br>
+                            <span>Status Finishing</span>
+                        </div>
+                    </div>
+
+
+                    <div class="w3-col l3 m3 s6 w3-padding">
+                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
+                            <span class="fa-stack" style="vertical-align: top;">
+                                <i class="w3-text-meong fas fa-fw fa-file-lines fa-stack-2x"></i>
+                                <i class="w3-text-pink fas fa-fw fa-right-to-line fa-stack-1x" style="left:-55%"></i>
+                            </span><br><br>
+                            <span>Penerimaan QC Final</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="margin-bottom: 48px;">
+                <h3>Laporan Gudang</h3>
 
                 <div class="w3-cell-row">
                     <div class="w3-col l3 m3 s6 w3-padding">

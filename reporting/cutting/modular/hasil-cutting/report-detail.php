@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/db.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_worksheet.php';
@@ -8,6 +9,15 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_classifica
 $conn = getConnTransaction();
 
 $sql = "SELECT * FROM cutting WHERE date_cut IS NOT null ORDER BY date_cut DESC";
+
+/*  Query for default weekly report if needed...
+$sql = "SELECT *
+        FROM cutting
+        WHERE date_cut IS NOT NULL
+            AND date_cut BETWEEN DATE_SUB(CURDATE(), INTERVAL (DAYOFWEEK(CURDATE()) - 2) DAY) AND CURDATE()
+        ORDER BY date_cut DESC
+        ";
+*/
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $fLocation = $_POST['fLocation'] == "" ? null : $_POST['fLocation'];
@@ -28,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Append the condition for date_cut if both $fStartDate and $fEndDate are not null
         $sql .= " AND date_cut BETWEEN '$fStartDate' AND '$fEndDate'";
     }
-    $sql .= "ORDER BY date_cut DESC";
+    $sql .= " ORDER BY date_cut DESC";
 
 }
 $result = $conn->query($sql);
@@ -63,9 +73,6 @@ $result = $conn->query($sql);
 </style>
 <body class="nav-scrollbar">
 
-<!-- todo: update -->
-<button class="w3-button w3-border w3-padding" onclick="openURL('export-detail.php')"><i class="fas fa-file-lines fa-fw"></i>&nbsp;Export XLSX</button>
-
 <form action method="post">
     <select class="w3-select w3-quarter w3-margin" name="fLocation">
         <option selected value="">Select Location</option>
@@ -78,9 +85,16 @@ $result = $conn->query($sql);
         ?>
     </select>
     <input class="w3-input w3-quarter w3-margin" name="fStartDate" type="date">
-    <input class="w3-input w3-quarter w3-margin" name="fEndDate" type="date">
+    <input class="w3-input w3-quarter w3-margin" name="fEndDate" type="date" value="<?= date('Y-m-d'); ?>">
 
     <button class="w3-button w3-blue w3-margin" type="submit">Filter</button>
+</form>
+<form action="export-detail.php" method="post">
+    <input hidden value="<?= $sql ?>" name="sql">
+    <input hidden value="<?= $_POST['fStartDate'] ?? "" ?>" name="fStartDate">
+    <input hidden value="<?= $_POST['fEndDate'] ?? "" ?>" name="fEndDate">
+    <input hidden value="<?= $_POST['fLocation'] ?? "" ?>" name="fLocation">
+    <button type="submit" class="w3-button w3-border w3-padding"><i class="fas fa-file-lines fa-fw"></i>&nbsp;Export XLSX</button>
 </form>
 
 <table class="w3-table-all w3-small">
@@ -90,6 +104,9 @@ $result = $conn->query($sql);
         <th>QTY</th>
         <th>LOCATION</th>
         <th>ARTICLE ID</th>
+        <?php if ($_SESSION['user_role'] == 0): ?>
+        <th>CATEGORY</th>
+        <?php endif; ?>
         <th>MODEL</th>
     </tr>
 
@@ -101,6 +118,8 @@ $result = $conn->query($sql);
 
         $cmtName = getCMTNameById($row['cmt_id']);
 
+        $categoryName = getCategoryNameById($article['category_id']);
+
         echo "<tr>";
 
         echo "<td>" . $row['date_cut'] . "</td>";
@@ -108,6 +127,11 @@ $result = $conn->query($sql);
         echo "<td>" . $row['qty_out'] . "</td>";
         echo "<td>" . $cmtName . "</td>";
         echo "<td>" . $article['article_id'] . "</td>";
+
+        if ($_SESSION['user_role'] == 0):
+        echo "<td>" . $categoryName . "</td>";
+        endif;
+
         echo "<td>" . $article['model_name'] . "</td>";
 
         echo "</tr>";
@@ -120,11 +144,10 @@ $result = $conn->query($sql);
     <tr>
         <td colspan="2" class="w3-right-align" style="font-weight: bold">Total: </td>
         <td><?= $totalQty ?></td>
-        <td colspan="3">&nbsp;</td>
+        <td colspan="5">&nbsp;</td>
     </tr>
 
 </table>
-
 
 </body>
 </html>

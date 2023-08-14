@@ -6,9 +6,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_worksheet.
 
 $conn = getConnTransaction();
 
-// Step 2: Retrieve data from the "sewing" table
+// Step 2: Retrieve data from the "embro" table
 $sql = "SELECT cmt_id, SUM(qty_in) AS total_qty_in, worksheet_id, qty_in
-                    FROM sewing
+                    FROM embro
                     GROUP BY cmt_id, worksheet_id
                     ORDER BY cmt_id, worksheet_id";
 
@@ -20,7 +20,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global sewing Report</title>
+    <title>Global embro Report</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/w3.css">
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css" type="text/css">
@@ -44,11 +44,12 @@ $result = $conn->query($sql);
 
 <table class="w3-table-all w3-small">
     <tr>
-        <th>Row Labels</th>
-        <th>MENS WEAR</th>
-        <th>LADIES WEAR</th>
-        <th>KAOS DAN JAKET</th>
-        <th>Grand Total</th>
+        <th></th>
+        <th style="text-align: center">MENS WEAR</th>
+        <th style="text-align: center">LADIES WEAR</th>
+        <th style="text-align: center">KAOS DAN JAKET</th>
+        <th style="text-align: center">LAIN-LAIN</th>
+        <th style="text-align: center; font-weight: bold;">Grand Total</th>
     </tr>
 
     <?php
@@ -56,20 +57,20 @@ $result = $conn->query($sql);
     $connProduction = getConnProduction();
 
     // Initialize cmtArray with keys A, B, and C for each cmt_id
-    $sewingCMTSQL = "SELECT cmt_id FROM cmt WHERE cmt_type = 'CT5'";
-    $sewingResult = $connProduction->query($sewingCMTSQL);
+    $embroCMTSQL = "SELECT cmt_id FROM cmt WHERE cmt_type = 'CT2'";
+    $embroResult = $connProduction->query($embroCMTSQL);
     $cmtArray = array();
 
-    while ($sew = $sewingResult->fetch_assoc()) {
+    while ($sew = $embroResult->fetch_assoc()) {
         $cmt_id = $sew['cmt_id'];
-        $cmtArray[$cmt_id] = array('A' => 0, 'B' => 0, 'C' => 0);
+        $cmtArray[$cmt_id] = array('A' => 0, 'B' => 0, 'C' => 0, 'Lain' => 0);
     }
 
     // Reset Result
-    $sql = "SELECT * FROM sewing";
+    $sql = "SELECT * FROM embro";
     $result = $conn->query($sql);
 
-    $totalA = $totalB = $totalC = 0;
+    $totalA = $totalB = $totalC = $totalL = 0;
 
     while ($ct = $result->fetch_assoc()) {
         $article_id = fetchWorksheet($ct['worksheet_id'])->fetch_assoc()['article_id'];
@@ -80,6 +81,8 @@ $result = $conn->query($sql);
         // Add to the $cmtArray only if the category_id is one of 'A', 'B', or 'C'
         if (in_array($categoryId, ['A', 'B', 'C'])) {
             $cmtArray[$cmtId][$categoryId] += $ct['qty_in'];
+        } else {
+            $cmtArray[$cmtId]['Lain'] += $ct['qty_in'];
         }
 
         // Calculate the grand total
@@ -94,21 +97,13 @@ $result = $conn->query($sql);
                 $totalC += $ct['qty_in'];
                 break;
             default:
+                $totalL += $ct['qty_in'];
                 break;
         }
     }
 
     // Calculate the grand total
-    $grandTotal = $totalA + $totalB + $totalC;
-
-    // HTML table structure
-    echo '<tr style="font-weight: bold">';
-    echo '<td>Jahit</td>';
-    echo '<td>' . $totalA . '</td>';
-    echo '<td>' . $totalB . '</td>';
-    echo '<td>' . $totalC . '</td>';
-    echo '<td>' . $grandTotal . '</td>';
-    echo '</tr>';
+    $grandTotal = $totalA + $totalB + $totalC + $totalL;
 
     // Loop through the $cmtArray and print the data in the table
     foreach ($cmtArray as $cmtId => $categories) {
@@ -122,19 +117,21 @@ $result = $conn->query($sql);
 
         echo '<tr>';
         echo '<td>' . $cmtName . '</td>';
-        echo '<td>' . $categories['A'] . '</td>';
-        echo '<td>' . $categories['B'] . '</td>';
-        echo '<td>' . $categories['C'] . '</td>';
-        echo '<td>' . $cmtTotal . '</td>';
+        echo '<td style="text-align: center;">' . $categories['A'] . '</td>';
+        echo '<td style="text-align: center;">' . $categories['B'] . '</td>';
+        echo '<td style="text-align: center;">' . $categories['C'] . '</td>';
+        echo '<td style="text-align: center;">' . $categories['Lain'] . '</td>';
+        echo '<td style="text-align: center; font-weight: bold;">' . $cmtTotal . '</td>';
         echo '</tr>';
     }
 
-    echo '<tr style="font-weight: bold">';
-    echo '<td>Jahit</td>';
-    echo '<td>' . $totalA . '</td>';
-    echo '<td>' . $totalB . '</td>';
-    echo '<td>' . $totalC . '</td>';
-    echo '<td>' . $grandTotal . '</td>';
+    echo '<tr class="w3-pale-red" style="font-weight: bold">';
+    echo '<td>Embro</td>';
+    echo '<td style="text-align: center;">' . $totalA . '</td>';
+    echo '<td style="text-align: center;">' . $totalB . '</td>';
+    echo '<td style="text-align: center;">' . $totalC . '</td>';
+    echo '<td style="text-align: center;">' . $totalL . '</td>';
+    echo '<td style="text-align: center; font-weight: bold;">' . $grandTotal . '</td>';
     echo '</tr>';
 
     ?>

@@ -7,7 +7,7 @@
 
     $conn = getConnTransaction();
 
-    $sql = "SELECT * FROM sewing WHERE date_out IS NOT null";
+    $sql = "SELECT * FROM print_sablon WHERE date_in IS NOT null ORDER BY date_in DESC";
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $fLocation = $_POST['fLocation'] == "" ? null : $_POST['fLocation'];
@@ -15,7 +15,7 @@
         $fEndDate = $_POST['fEndDate'] == "" ? null : $_POST['fEndDate'];
 
         // Initialize the base SQL query
-        $sql = "SELECT * FROM sewing WHERE 1";
+        $sql = "SELECT * FROM print_sablon WHERE 1";
 
         // Check if $fLocation has a valid value
         if (isset($fLocation)) {
@@ -25,9 +25,10 @@
 
         // Check if $fStartDate and $fEndDate have valid values
         if (isset($fStartDate) && isset($fEndDate)) {
-            // Append the condition for date_out if both $fStartDate and $fEndDate are not null
-            $sql .= " AND date_out BETWEEN '$fStartDate' AND '$fEndDate'";
+            // Append the condition for date_in if both $fStartDate and $fEndDate are not null
+            $sql .= " AND date_in BETWEEN '$fStartDate' AND '$fEndDate'";
         }
+        $sql .= " ORDER BY date_in DESC";
 
     }
     $result = $conn->query($sql);
@@ -39,7 +40,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sewing Report</title>
+    <title>Print/Sablon Report</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/w3.css">
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css" type="text/css">
@@ -64,17 +65,24 @@
     <select class="w3-select w3-quarter w3-margin" name="fLocation">
         <option selected value="">Select Location</option>
         <?php
-            $cmtList = fetchAllCMTByType('CT5');
+        $cmtList = fetchAllCMTByType('CT2');
 
-            while ($row = $cmtList->fetch_assoc()) {
-                echo "<option value='{$row['cmt_id']}'>{$row['cmt_name']}</option>";
-            }
+        while ($row = $cmtList->fetch_assoc()) {
+            echo "<option value='{$row['cmt_id']}'>{$row['cmt_name']}</option>";
+        }
         ?>
     </select>
     <input class="w3-input w3-quarter w3-margin" name="fStartDate" type="date">
-    <input class="w3-input w3-quarter w3-margin" name="fEndDate" type="date">
+    <input class="w3-input w3-quarter w3-margin" name="fEndDate" type="date" value="<?= date('Y-m-d'); ?>">
 
     <button class="w3-button w3-blue w3-margin" type="submit">Filter</button>
+</form>
+<form action="export-detail.php" method="post">
+    <input hidden value="<?= $sql ?>" name="sql">
+    <input hidden value="<?= $_POST['fStartDate'] ?? "" ?>" name="fStartDate">
+    <input hidden value="<?= $_POST['fEndDate'] ?? "" ?>" name="fEndDate">
+    <input hidden value="<?= $_POST['fLocation'] ?? "" ?>" name="fLocation">
+    <button type="submit" class="w3-button w3-border w3-padding"><i class="fas fa-file-lines fa-fw"></i>&nbsp;Export XLSX</button>
 </form>
 
 <table class="w3-table-all w3-small">
@@ -82,6 +90,7 @@
         <th>DATE</th>
         <th>WORKSHEET ID</th>
         <th>QTY</th>
+        <th>PROSES</th>
         <th>CMT</th>
         <th>ARTICLE ID</th>
         <th>MODEL</th>
@@ -98,9 +107,10 @@
 
             echo "<tr>";
 
-            echo "<td>" . $row['date_out'] . "</td>";
+            echo "<td>" . $row['date_in'] . "</td>";
             echo "<td>" . $row['worksheet_id'] . "</td>";
             echo "<td>" . $row['qty_in'] . "</td>";
+            echo "<td>" . "PRINT/SABLON" . "</td>";
             echo "<td>" . $cmtName . "</td>";
             echo "<td>" . $article['article_id'] . "</td>";
             echo "<td>" . $article['model_name'] . "</td>";
@@ -118,7 +128,7 @@
     <tr>
         <td colspan="2" class="w3-right-align" style="font-weight: bold">Total: </td>
         <td><?= $totalQty ?></td>
-        <td colspan="4">&nbsp;</td>
+        <td colspan="6">&nbsp;</td>
     </tr>
 
 </table>

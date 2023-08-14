@@ -6,15 +6,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_worksheet.
 
 $conn = getConnTransaction();
 
-// Step 2: Retrieve data from the "cutting" table
-$sql = "SELECT cmt_id, SUM(qty_out) AS total_qty_out, worksheet_id, qty_out, date_cut
-                    FROM cutting
-                    WHERE date_cut IS NOT null 
-                    GROUP BY cmt_id, worksheet_id
-                    ORDER BY cmt_id, worksheet_id";
-
-$result = $conn->query($sql);
-
 ?>
 
 <html>
@@ -45,7 +36,7 @@ $result = $conn->query($sql);
 
 <table class="w3-table-all w3-small">
     <tr>
-        <th colspan="2">Row Labels</th>
+        <th>Row Labels</th>
         <th>Sum of QTY</th>
     </tr>
 
@@ -56,54 +47,61 @@ $result = $conn->query($sql);
     include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_worksheet.php';
 
     $conn = getConnTransaction();
+    $conn2 = getConnProduction();
 
-    // Step 2: Retrieve data from the "cutting" table
-    $sql = "SELECT cmt_id, SUM(qty_out) AS total_qty_out, worksheet_id, qty_out, date_cut
-                    FROM cutting
-                    WHERE date_cut IS NOT null 
-                    GROUP BY cmt_id, worksheet_id
-                    ORDER BY cmt_id, worksheet_id";
+    //$dbProductioName = "suburjaya_production";     // LOCAL NAME
+    $dbProductioName = "subm6595_sj_production";      // ONLINE NAME
+
+    $sql = "
+    SELECT cmt_id, a.category_id, SUM(cut.qty_out) AS total_qty_out
+    FROM cutting AS cut
+    INNER JOIN {$dbProductioName}.worksheet_detail AS wd ON cut.worksheet_id = wd.worksheet_id
+    INNER JOIN {$dbProductioName}.article AS a ON wd.article_id = a.article_id
+    WHERE cut.date_cut IS NOT NULL
+    GROUP BY cmt_id, a.category_id
+    ORDER BY cmt_id, a.category_id";
 
     $result = $conn->query($sql);
 
-    // Step 3: Generate HTML Table
+    // Initialize an array to store the data
     $data = array();
+
+    // Fetch and store the data in the $data array
     while ($row = $result->fetch_assoc()) {
         $cmt_id = $row["cmt_id"];
-        $worksheet_id = $row["worksheet_id"];
-
-
-        $qty_out = $row["qty_out"];
+        $category_id = $row["category_id"];
+        $qty_out = $row["total_qty_out"];
 
         // Check if the cmt_id is already in the $data array
         if (!isset($data[$cmt_id])) {
             $data[$cmt_id] = array();
         }
 
-        // Add the worksheet_id and qty_out to the respective cmt_id group
-        $data[$cmt_id][] = array("worksheet_id" => $worksheet_id, "qty_out" => $qty_out);
+        // Add the category_id and qty_out to the respective cmt_id group
+        $data[$cmt_id][] = array("category_id" => $category_id, "qty_out" => $qty_out);
     }
 
     // Loop through the $data array to display the table rows
-    foreach ($data as $cmt_id => $worksheets) {
+    foreach ($data as $cmt_id => $categories) {
         $cmtName = getCMTNameById($cmt_id);
         echo "<tr class='w3-pale-red'>";
         echo "<th colspan='2'>" . $cmtName . "</th>";
-        echo "<th>" . array_sum(array_column($worksheets, "qty_out")) . "</th>";
         echo "</tr>";
 
-        foreach ($worksheets as $worksheet) {
-            $article_id = fetchWorksheet($worksheet['worksheet_id'])->fetch_assoc()['article_id'];
-            $article = getArticleById($article_id);
-
-
+        foreach ($categories as $category) {
             echo "<tr>";
-            echo "<td>" . $worksheet['worksheet_id'] . "</td>";
-            echo "<td>" . $article['model_name'] . "</td>";
-            echo "<td>" . $worksheet["qty_out"] . "</td>";
+            echo "<td>" . getCategoryNameById($category['category_id']) . "</td>";
+            echo "<td>" . $category["qty_out"] . "</td>";
             echo "</tr>";
         }
+
+        // Display the total qty_out for the current cmt_id
+        echo "<tr>";
+        echo "<td class='w3-right-align' style='font-weight: bold'>TOTAL: </td>";
+        echo "<td>" . array_sum(array_column($categories, "qty_out")) . "</td>";
+        echo "</tr>";
     }
+
 
     ?>
 

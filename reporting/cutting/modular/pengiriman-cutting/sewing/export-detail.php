@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 }
 
 // SQL query to fetch data from the database
-//$sql = "SELECT * FROM cutting WHERE date_cut IS NOT null ORDER BY date_cut DESC";
+//$sql = "SELECT * FROM cutting WHERE date_in IS NOT null ORDER BY date_in DESC";
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
@@ -54,17 +54,21 @@ if ($result->num_rows > 0) {
         $article = getArticleById($article_id);
         $cmtName = getCMTNameById($row['cmt_id']);
 
+        $categoryName = getCategoryNameById($article['category_id']);
+
         // Add the row data to the Excel data array
         $excelData[] = array(
-            'DATE' => $row['date_cut'],
+            'DATE' => $row['date_in'],
             'No. Worksheet' => $row['worksheet_id'],
-            'QTY' => $row['qty_out'],
-            'Location' => $cmtName,
+            'QTY' => $row['qty_in'],
+            'Proses' => 'JAHIT',
+            'CMT' => $cmtName,
             'No. Artikel' => $article['article_id'],
-            'Model' => $article['model_name']
+            'Model' => $article['model_name'],
+            'Category' => $categoryName
         );
 
-        $totalQty += $row['qty_out'];
+        $totalQty += $row['qty_in'];
     }
 
     // Create a new Spreadsheet object
@@ -81,12 +85,12 @@ if ($result->num_rows > 0) {
     $headerStyle = $sheet->getStyle('B4:' . $sheet->getHighestColumn() . '4');
     $headerStyle->getFont()->setBold(true);
 
-    $sheet->setCellValue('B1', "Laporan Hasil Cutting");
+    $sheet->setCellValue('B1', "Laporan Pengiriman Hasil Cutting ke Sewing CMT");
     $sheet->getStyle('B1')->getFont()->setBold(true)->setSize(18);
-    $sheet->mergeCells('B1:G1'); // Merging cells from column B to G in row 1
+    $sheet->mergeCells('B1:I1'); // Merging cells from column B to G in row 1
 
     // Apply center alignment to the merged cell
-    $style = $sheet->getStyle('B1:G1');
+    $style = $sheet->getStyle('B1:I1');
     $style->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
 
@@ -147,7 +151,7 @@ if ($result->num_rows > 0) {
     $lightOrangeColor = 'FFCC99'; // ARGB format: AARRGGBB
 
     // Set the background color of cells B4 to F4 to light orange
-    $sheet->getStyle('B4:G4')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($lightOrangeColor);
+    $sheet->getStyle('B4:I4')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($lightOrangeColor);
 
     $styleArray = [
         'borders' => [
@@ -158,10 +162,10 @@ if ($result->num_rows > 0) {
         ],
     ];
 
-    $sheet->getStyle('B4:G4')->applyFromArray($styleArray);
+    $sheet->getStyle('B4:I4')->applyFromArray($styleArray);
 
     // Set the column width of B to G to autofit
-    for ($col = 'B'; $col <= 'G'; $col++) {
+    for ($col = 'B'; $col <= 'I'; $col++) {
         $sheet->getColumnDimension($col)->setAutoSize(true);
     }
 
@@ -174,7 +178,7 @@ if ($result->num_rows > 0) {
 
 
 
-    $file_name = 'laporan_hasil_cutting_'. $currentDate . '.xlsx'; // Change the file name as needed
+    $file_name = 'laporan_kirim_hasil_cutting_ke_sewing_'. $currentDate . '.xlsx'; // Change the file name as needed
 
     // Save the file to the server
     $writer->save($file_name);
