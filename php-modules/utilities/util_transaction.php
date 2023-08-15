@@ -158,6 +158,22 @@ function fetchCuttingCipadungTransaction() {
     return $result;
 }
 
+function fetchCuttingKembarTransaction() {
+    $conn = getConnTransaction();
+
+    $sql = "SELECT t.*, p.position_id, p.cutting 
+                        FROM cutting AS t 
+                        INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id 
+                        WHERE cmt_id = 'KB03'
+                        ORDER BY 
+                            CASE WHEN t.date_cut IS NULL THEN 0 ELSE 1 END, 
+                            t.date_cut DESC,
+                            p.cutting ASC";
+    $result = $conn->query($sql);
+    $conn->close();
+    return $result;
+}
+
 function updateEndDate ($tn, $tid) {                // table {transaction_name}
     $conn = getConnTransaction();
 
@@ -172,6 +188,15 @@ function toggleProcessCompleted($tn, $wid) {
     $conn->query($sql);
     $conn->close();
 
+}
+
+/** Cutting Helper */
+function getCuttingQtyByWorksheet($worksheetId) {
+    $conn = getConnTransaction();
+    $sql = "SELECT qty_out FROM cutting WHERE worksheet_id = '$worksheetId'";
+    $result = $conn->query();
+    $qtyCutting = $result->fetch_assoc()['qty_out'];
+    return $qtyCutting;
 }
 
 /** Sewing Helper Updates */
@@ -201,10 +226,10 @@ function getQtyOutTotal($sewingId) {
     return $result;
 }
 
-function insertSewingOutRecord($sewingId, $qtyOut, $qtyMissing, $description, $uid) {
+function insertSewingOutRecord($sewingId, $qtyOut, $qtyMissing, $qtySisa, $description, $uid) {
     $conn = getConnTransaction();
 
-    $sql = "INSERT INTO sewing_out (sewing_id, qty_out, qty_missing, description, user_id) VALUES ('$sewingId', '$qtyOut', '$qtyMissing', '$description', '$uid')";
+    $sql = "INSERT INTO sewing_out (sewing_id, qty_out, qty_missing, qty_sisa, description, user_id) VALUES ('$sewingId', '$qtyOut', '$qtyMissing', '$qtySisa', '$description', '$uid')";
     $conn->query($sql);
     $conn->close();
 }

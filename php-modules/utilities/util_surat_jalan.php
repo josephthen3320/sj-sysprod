@@ -15,6 +15,24 @@ function checkSuratJalanExists($sjid) {
 
 }
 
+function checkSuratJalanPrinted($tid) {
+    $conn = getConnTransaction();
+    $sql = "SELECT is_print FROM surat_jalan WHERE transaction_id = '$tid' AND surat_jalan_id NOT LIKE 'SCTO%'";
+    $row = queryDatabase($conn, $sql)['is_print'];
+    $conn->close();
+
+    return $row;
+}
+
+function checkSuratJalanCOPrinted($tid) {
+    $conn = getConnTransaction();
+    $sql = "SELECT is_print FROM surat_jalan WHERE transaction_id = '$tid' AND surat_jalan_id LIKE 'SCTO%'";
+    $row = queryDatabase($conn, $sql)['is_print'];
+    $conn->close();
+
+    return $row;
+}
+
 function checkSuratJalanExistsByTransactionId($tid) {
     $conn = getConnTransaction();
     $sql = "SELECT * FROM surat_jalan WHERE transaction_id = '$tid' AND surat_jalan_id NOT LIKE 'SCTO%'";

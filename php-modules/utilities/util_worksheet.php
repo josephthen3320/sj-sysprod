@@ -23,11 +23,18 @@ function getAllWorksheet(){
 function fetchWorksheets() {
     $pConn = getConnProduction();
     $tConn = getConnTransaction();
-
+/*
     $sql = "SELECT * FROM worksheet 
-        LEFT JOIN suburjaya_transaction.position AS p ON worksheet.worksheet_id = p.worksheet_id 
-        INNER JOIN worksheet_detail ON worksheet.worksheet_id = worksheet_detail.worksheet_id 
-        ORDER BY p.position_id ASC, worksheet.id ASC";
+            LEFT JOIN suburjaya_transaction.position AS p ON worksheet.worksheet_id = p.worksheet_id
+            INNER JOIN worksheet_detail ON worksheet.worksheet_id = worksheet_detail.worksheet_id
+            ORDER BY p.position_id ASC, worksheet.id ASC";
+*/
+    $sql = "SELECT * FROM worksheet 
+            LEFT JOIN suburjaya_transaction.position AS p ON worksheet.worksheet_id = p.worksheet_id 
+            INNER JOIN worksheet_detail ON worksheet.worksheet_id = worksheet_detail.worksheet_id 
+            ORDER BY 
+                CASE WHEN p.position_id = 0 THEN 0 ELSE 1 END, -- Put rows with position_id = 0 on top
+                worksheet.id DESC; -- Sort by worksheet.id DESC in both cases";
 
     $result = $pConn->query($sql);
 
