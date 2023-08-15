@@ -120,7 +120,7 @@ $top_title .= "Dashboard";
 
             <!-- Sysprod Button -->
             <div class="w3-col l3 m3 s6 w3-padding">
-                <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openURL('http://<?= $_SERVER['HTTP_HOST'] ?>/production')">
+                <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openURL('http://<?= $_SERVER['HTTP_HOST'] ?>/transaction')">
                     <img src="/assets/logo/sysprod_logo_i.png" height="50px" style="margin-bottom: 15px;">
                     <br>
                     <span class="w3-large" style="font-weight: bold;">SysProd</span>
