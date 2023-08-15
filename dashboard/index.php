@@ -40,6 +40,12 @@ $top_title .= "Dashboard";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $page_title ?></title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/w3.css">
     <link rel="stylesheet" href="/assets/css/sj-theme.css">
@@ -95,40 +101,32 @@ $top_title .= "Dashboard";
         <div class="w3-container w3-cell-row w3-padding-16">
 
             <!-- Talenta Button -->
-            <div class="w3-quarter w3-padding">
-                <div class="w3-card-2 w3-white w3-round w3-button w3-cell-row" onclick="openTabURL('https://hr.talenta.co/', 'quicklinks')" style="height: 100px; width: 100%;">
-                    <div class="w3-container w3-cell w3-cell-middle">
-                        <i class="fl-talenta"></i>
-                    </div>
-                    <div class="w3-container w3-cell w3-cell-middle">
-                        <h3><b>Talenta</b></h3>
-                    </div>
+            <div class="w3-col l3 m3 s6 w3-padding">
+                <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openTabURL('https://hr.talenta.co/', 'quicklinks')">
+                    <img src="/assets/logo/logo_talenta.webp" height="50px" style="margin-bottom: 15px;">
+                    <br>
+                    <span class="w3-large" style="font-weight: bold;">Talenta</span>
                 </div>
             </div>
 
-            <!-- Accurate Button -->
-            <div class="w3-quarter w3-padding">
-                <div class="w3-card-2 w3-white w3-round w3-button w3-cell-row" onclick="openTabURL('https://public.accurate.id/', 'quicklinks')" style="height: 100px; width: 100%;">
-                    <div class="w3-container w3-cell w3-cell-middle">
-                        <img src="/assets/logo/logo_accurate.png" height="50px">
-                    </div>
-                    <div class="w3-container w3-cell w3-cell-middle">
-                        <h3><b>Accurate</b></h3>
-                    </div>
+            <!-- Talenta Button -->
+            <div class="w3-col l3 m3 s6 w3-padding">
+                <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openTabURL('https://public.accurate.id/', 'quicklinks')">
+                    <img src="/assets/logo/logo_accurate.png" height="50px" style="margin-bottom: 15px;">
+                    <br>
+                    <span class="w3-large" style="font-weight: bold;">Accurate</span>
                 </div>
             </div>
 
             <!-- Sysprod Button -->
-            <div class="w3-quarter w3-padding">
-                <div class="w3-card-2 w3-white w3-round w3-button w3-cell-row" onclick="openURL('http://<?= $_SERVER['HTTP_HOST'] ?>/production')" style="height: 100px; width: 100%;">
-                    <div class="w3-container w3-cell w3-cell-middle">
-                        <img src="/assets/logo/sysprod_logo_i.png" height="50px">
-                    </div>
-                    <div class="w3-container w3-cell w3-cell-middle">
-                        <h3><b>SysProd</b></h3>
-                    </div>
+            <div class="w3-col l3 m3 s6 w3-padding">
+                <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openURL('http://<?= $_SERVER['HTTP_HOST'] ?>/production')">
+                    <img src="/assets/logo/sysprod_logo_i.png" height="50px" style="margin-bottom: 15px;">
+                    <br>
+                    <span class="w3-large" style="font-weight: bold;">SysProd</span>
                 </div>
             </div>
+
 
         </div>
 

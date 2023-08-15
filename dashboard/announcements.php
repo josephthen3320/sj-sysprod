@@ -13,7 +13,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/db.php";
 $connLog = getConnLog();
 
-$sql = "SELECT * FROM global_announcements ORDER BY timestamp DESC LIMIT 5";
+$sql = "SELECT * FROM global_announcements WHERE is_active = 1 ORDER BY timestamp DESC LIMIT 5";
 $result = $connLog->query($sql);
 
 if ($result->num_rows <= 0) {
