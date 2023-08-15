@@ -11,16 +11,16 @@
 <script src="/assets/js/utils.js"></script>
 <body>
 <div class="w3-container classification-content" id="worksheet-modal" style="">
-    <table class="w3-table w3-table-all">
+    <table class="w3-table w3-table-all w3-small">
         <thead>
         <tr>
-            <th>No</th>
-            <th>Article ID.</th>
-            <th>Sample Image</th>
-            <th>Item</th>
-            <th>Category</th>
-            <th>Subcategory</th>
-            <th>Actions</th>
+            <th class="w3-center" style="width: 5%;">No</th>
+            <th class="w3-center" style="width: 10%;">Article ID</th>
+            <th class="w3-center" style="width: 15%;">Sample Image</th>
+            <th class="w3-left-align" style="width: 20%;">Item</th>
+            <th class="w3-center" style="width: 15%;">Category</th>
+            <th class="w3-center" style="width: 15%;">Subcategory</th>
+            <th class="w3-center" style="width: 20%;">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -36,14 +36,16 @@
                 $category = getCategoryNameById($a['category_id']);
                 $subcategory = getSubcategoryNameById($a['subcategory_id']);
 
+                $modelName = strtoupper($a['model_name']);
+
                 echo "<tr class='w3-hover-blue-grey' onclick='loadArticleDetail(\"{$a['article_id']}\")' style='cursor: pointer;'>";
-                echo "<td>$i</td>";
-                echo "<td>{$a['article_id']}</td>";
-                echo "<td><img src='/img/articles/{$a['sample_img_path']}' width='120px'></td>";
-                echo "<td>{$a['model_name']}</td>";
-                echo "<td>{$category}</td>";
-                echo "<td>{$subcategory}</td>";
-                echo "<td>";
+                echo "<td class='w3-center' style='vertical-align: middle;'>$i</td>";
+                echo "<td class='w3-center' style='vertical-align: middle;'>{$a['article_id']}</td>";
+                echo "<td class='w3-center' style='vertical-align: middle;'><img src='/img/articles/{$a['sample_img_path']}' style='width: 80px; height: 80px; object-fit: cover;' /></td>";
+                echo "<td class='w3-left-align' style='vertical-align: middle;'>{$modelName}</td>";
+                echo "<td class='w3-center' style='vertical-align: middle;'>{$category}</td>";
+                echo "<td class='w3-center' style='vertical-align: middle;'>{$subcategory}</td>";
+                echo "<td class='w3-center' style='vertical-align: middle;'>";
                 //        <button class='w3-button w3-green' onclick='loadArticleDetail(\"{$a['article_id']}\")'><i class='fa-solid fa-info-circle'></i></button>
                 //    ";
 
