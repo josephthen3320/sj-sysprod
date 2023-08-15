@@ -32,6 +32,12 @@ if ($result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $page_title ?></title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/w3.css">
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css" type="text/css">
@@ -217,17 +223,6 @@ if ($result->num_rows > 0) {
             <div style="margin-bottom: 48px;">
                 <h3>Laporan Gudang</h3>
 
-                <div class="w3-cell-row">
-                    <div class="w3-col l3 m3 s6 w3-padding">
-                        <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
-                            <span class="fa-stack" style="vertical-align: top;">
-                                <i class="fas fa-fw fa-file-lines fa-stack-2x"></i>
-                                <i class="fas fa-fw fa-right-to-line fa-stack-1x" style="left:-55%"></i>
-                            </span><br><br>
-                            <span>Penerimaan QC Final</span>
-                        </div>
-                    </div>
-
                     <div class="w3-col l3 m3 s6 w3-padding">
                         <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12">
                             <span class="fa-stack" style="vertical-align: top;">
@@ -237,6 +232,7 @@ if ($result->num_rows > 0) {
                             <span>Masuk Gudang</span>
                         </div>
                     </div>
+
                 </div>
             </div>
 

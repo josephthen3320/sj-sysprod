@@ -12,7 +12,7 @@ $sql = "SELECT so.*, sew.worksheet_id, sew.cmt_id, sew.qty_out AS qty_out_global
         FROM sewing_out AS so 
         INNER JOIN sewing AS sew ON so.sewing_id = sew.sewing_id 
         WHERE so.qty_out > 0
-        ORDER BY so.datestamp DESC;
+        ORDER BY so.datestamp DESC, id DESC;
         ";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $sql .= " AND so.datestamp BETWEEN '$fStartDate' AND '$fEndDate'";
     }
 
-    $sql .= " ORDER BY so.datestamp DESC";
+    $sql .= " ORDER BY so.datestamp DESC, id DESC";
 }
 
 $result = $conn->query($sql);
@@ -73,12 +73,9 @@ $result = $conn->query($sql);
 </style>
 <body class="nav-scrollbar">
 
-<!-- todo: enable -->
-<button class="w3-button w3-disabled w3-border w3-padding" <?php //onclick="openURL('export-detail.php')" ?>><i class="fas fa-file-lines fa-fw"></i>&nbsp;Export XLSX</button>
-
 <form action method="post">
     <select class="w3-select w3-quarter w3-margin" name="fLocation">
-        <option selected value="">Select CMT</option>
+        <option selected value="">Select Location</option>
         <?php
         $cmtList = fetchAllCMTByType('CT5');
 
@@ -88,9 +85,16 @@ $result = $conn->query($sql);
         ?>
     </select>
     <input class="w3-input w3-quarter w3-margin" name="fStartDate" type="date">
-    <input class="w3-input w3-quarter w3-margin" name="fEndDate" type="date">
+    <input class="w3-input w3-quarter w3-margin" name="fEndDate" type="date" value="<?= date('Y-m-d'); ?>">
 
     <button class="w3-button w3-blue w3-margin" type="submit">Filter</button>
+</form>
+<form action="export-detail.php" method="post">
+    <input hidden value="<?= $sql ?>" name="sql">
+    <input hidden value="<?= $_POST['fStartDate'] ?? "" ?>" name="fStartDate">
+    <input hidden value="<?= $_POST['fEndDate'] ?? "" ?>" name="fEndDate">
+    <input hidden value="<?= $_POST['fLocation'] ?? "" ?>" name="fLocation">
+    <button type="submit" class="w3-button w3-border w3-padding"><i class="fas fa-file-lines fa-fw"></i>&nbsp;Export XLSX</button>
 </form>
 
 <div class="w3-container w3-padding">

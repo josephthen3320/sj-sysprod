@@ -5,6 +5,14 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_articles.p
 include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_worksheet.php';
 
 $conn = getConnTransaction();
+
+// Step 2: Retrieve data from the "sewing" table
+$sql = "SELECT *, SUM(qty_out) AS total_qty_out
+                    FROM sewing
+                    WHERE qty_out >= 0 
+                    GROUP BY cmt_id, worksheet_id
+                    ORDER BY date_in DESC, cmt_id, worksheet_id";
+
 ?>
 
 <html>
@@ -33,6 +41,11 @@ $conn = getConnTransaction();
 </style>
 <body class="nav-scrollbar">
 
+<form action="export-detail.php" method="post">
+    <input hidden value="<?= $sql ?>" name="sql">
+    <button type="submit" class="w3-button w3-border w3-padding"><i class="fas fa-file-lines fa-fw"></i>&nbsp;Export XLSX</button>
+</form>
+
 <table class="w3-table-all w3-small">
     <tr>
         <th>CMT</th>
@@ -55,12 +68,7 @@ $conn = getConnTransaction();
 
     $conn = getConnTransaction();
 
-    // Step 2: Retrieve data from the "sewing" table
-    $sql = "SELECT *, SUM(qty_out) AS total_qty_out
-                    FROM sewing
-                    WHERE qty_out >= 0 
-                    GROUP BY cmt_id, worksheet_id
-                    ORDER BY date_in DESC, cmt_id, worksheet_id";
+
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $sql = "SELECT *, SUM(qty_out) AS total_qty_out
