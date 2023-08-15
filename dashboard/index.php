@@ -100,16 +100,16 @@ $top_title .= "Dashboard";
 
         <div class="w3-container w3-cell-row w3-padding-16">
 
-            <!-- Talenta Button -->
+            <!-- Talenta Button>
             <div class="w3-col l3 m3 s6 w3-padding">
                 <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openTabURL('https://hr.talenta.co/', 'quicklinks')">
                     <img src="/assets/logo/logo_talenta.webp" height="50px" style="margin-bottom: 15px;">
                     <br>
                     <span class="w3-large" style="font-weight: bold;">Talenta</span>
                 </div>
-            </div>
+            </div-->
 
-            <!-- Talenta Button -->
+            <!-- Accurate Button -->
             <div class="w3-col l3 m3 s6 w3-padding">
                 <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openTabURL('https://public.accurate.id/', 'quicklinks')">
                     <img src="/assets/logo/logo_accurate.png" height="50px" style="margin-bottom: 15px;">
@@ -124,6 +124,15 @@ $top_title .= "Dashboard";
                     <img src="/assets/logo/sysprod_logo_i.png" height="50px" style="margin-bottom: 15px;">
                     <br>
                     <span class="w3-large" style="font-weight: bold;">SysProd</span>
+                </div>
+            </div>
+
+            <!-- Email Portal Button -->
+            <div class="w3-col l3 m3 s6 w3-padding">
+                <div class="w3-button w3-white w3-card-2 w3-border w3-padding-top-24 w3-col l12 m12 s12" onclick="openTabURL('https://mail.suburjayabdg.com/', 'quicklinks')">
+                    <i class="fad fa-fw fa-envelope w3-text-indigo w3-xxxlarge" style="margin-bottom: 15px; height: 50px;"></i>
+                    <br>
+                    <span class="w3-large" style="font-weight: bold;">E-Mail</span>
                 </div>
             </div>
 
