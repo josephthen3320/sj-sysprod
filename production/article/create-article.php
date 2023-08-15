@@ -122,6 +122,31 @@ $conn = getConnProduction();
             <div class="w3-half w3-padding">
                 <label for="image">Upload Sample Image:</label>
                 <input class="w3-input" type="file" id="art_image" name="art_image" accept="image/*">
+                <br>
+                <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 250px; max-height: 250px; display: none;">
+
+                <script>
+                    const imageInput = document.getElementById('art_image');
+                    const imagePreview = document.getElementById('imagePreview');
+
+                    imageInput.addEventListener('change', function(event) {
+                        const file = event.target.files[0];
+
+                        if (file) {
+                            const reader = new FileReader();
+
+                            reader.onload = function(e) {
+                                imagePreview.src = e.target.result;
+                                imagePreview.style.display = 'block';
+                            };
+
+                            reader.readAsDataURL(file);
+                        } else {
+                            imagePreview.src = '#';
+                            imagePreview.style.display = 'none';
+                        }
+                    });
+                </script>
             </div>
 
             <!-- Sample Code -->

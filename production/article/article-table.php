@@ -25,6 +25,7 @@
         </thead>
         <tbody>
         <?php
+            session_start();
             include $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_articles.php';
 
             $articles = fetchAllArticles();
@@ -45,11 +46,13 @@
                 echo "<td>";
                 //        <button class='w3-button w3-green' onclick='loadArticleDetail(\"{$a['article_id']}\")'><i class='fa-solid fa-info-circle'></i></button>
                 //    ";
-                if (false /*todo: add role check here*/) {
+
+                if (in_array($_SESSION['user_role'], [0,1,2,5,6]) && !checkIfArticleAlreadyUsed($a['article_id'])) { /*todo: add role check here*/
+                    $editURL = "actions/edit_article.php?aid=" . $a['article_id'];
                     echo "
-                    <button class='w3-button w3-blue' ><i class='fa-solid fa-pencil'></i ></button >
-                    <button class='w3-button w3-red' ><i class='fa-solid fa-trash'></i ></button >
+                    <button class='w3-button w3-blue' onclick='openPopupURL2(\"{$editURL}\")'><i class='fa-solid fa-pencil'></i></button >
                     ";
+                    /* <button class='w3-button w3-red' ><i class='fa-solid fa-trash'></i></button > */
                     }
                 echo "</td>";
                 echo "</tr>";
@@ -69,3 +72,21 @@
 
 </body>
 </html>
+
+<?php
+
+function checkIfArticleAlreadyUsed($article_id) {
+    $conn = getConnProduction();
+    $sql = "SELECT * FROM worksheet_detail WHERE article_id = '$article_id'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        return 1;
+    } else {
+        return 0;
+    }
+
+
+}
+
+?>
