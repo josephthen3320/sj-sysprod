@@ -20,6 +20,8 @@ $brand_id = $_POST['brand_id'];
 $is_rib = isset($_POST['is_rib']) ? 1 : 0;
 $sample_code = $_POST['sample_code'];
 
+$description = $_POST['description'];
+
 // Retrieve the uploaded image file
 $file = $_FILES['art_image'];
 $filename = $file['name'];
@@ -124,7 +126,7 @@ if (move_uploaded_file($file_tmp, $target_filepath)) {
     }/**/
 
     // Prepare the insert statement
-    $insertQuery = "INSERT INTO article (model_name, article_id, category_id, subcategory_id, embro_cmt_id, print_cmt_id, brand_id, is_rib, sample_code, sample_img_path) VALUES ('$model_name', '$article_id', '$category_id', '$subcategory_id', '$embro_cmt_id', '$print_cmt_id', '$brand_id', $is_rib, '$sample_code', '$new_filename_webp')";
+    $insertQuery = "INSERT INTO article (model_name, article_id, category_id, subcategory_id, embro_cmt_id, print_cmt_id, brand_id, is_rib, sample_code, sample_img_path, description) VALUES ('$model_name', '$article_id', '$category_id', '$subcategory_id', '$embro_cmt_id', '$print_cmt_id', '$brand_id', $is_rib, '$sample_code', '$new_filename_webp', '$description')";
 
     // Execute the insert statement
     if (mysqli_query($conn, $insertQuery)) {
