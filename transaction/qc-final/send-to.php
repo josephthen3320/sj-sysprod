@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     addSuratJalanRecord($sjid, 'qc_final', $transaction_id);
 
     // todo: Logic for accepted; rejected; other [qty out]
+    echo $closeWindowScript = "<script type='text/javascript'>window.close();</script>";
 
 
 

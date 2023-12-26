@@ -24,17 +24,33 @@ $role = $_SESSION['user_role'];
             <th class="w3-center" style="vertical-align: middle;">Worksheet No.</th>
             <th class="w3-center" style="vertical-align: middle;">Article ID</th>
             <th class="w3-center" style="vertical-align: middle;">Model</th>
+            <?php if(!in_array($role, [2, 5, 6])): ?>
             <th class="w3-center" style="vertical-align: middle;">Subcategory</th>
+            <?php endif; ?>
 
             <th class="w3-center" style="vertical-align: middle;">Worksheet Date.</th>
             <th class="w3-center" style="vertical-align: middle;">PO Date</th>
 
+            <?php if($role != 2): ?>
             <th class="w3-center" style="vertical-align: middle;">Lebar Kain</th>
+            <?php endif; ?>
 
+            <!-- Admin Prod  -->
+            <?php if(!in_array($role, [5,6])): ?>
             <th class="w3-center" style="vertical-align: middle;">Embro</th>
             <th class="w3-center" style="vertical-align: middle;">Print/<br>Sablon</th>
-            <th class="w3-center" style="vertical-align: middle;">Washing</th>
+            <?php endif; ?>
 
+            <!-- MD Prod  -->
+            <?php if(in_array($role, [5, 6, 2])): ?>
+            <th class="w3-center" style="vertical-align: middle;">Qty Est.</th>
+            <?php endif;?>
+
+            <?php if(in_array($role, [5, 6])): ?>
+            <th class="w3-center" style="vertical-align: middle;">Merk</th>
+            <?php endif; ?>
+
+            <th class="w3-center" style="vertical-align: middle;">Washing</th>
 
             <th class="w3-center" style="vertical-align: middle;">Actions</th>
             <th class="w3-center" style="vertical-align: middle;">Send to</th>
@@ -51,7 +67,7 @@ $role = $_SESSION['user_role'];
 
 		function isFileExists($filename) {
 			$filePath = 'files/' . $filename; // Assuming the files are stored in the "files" directory
-			
+
 			return file_exists($filePath);
 		}
 
@@ -69,12 +85,17 @@ $role = $_SESSION['user_role'];
 
             echo "  <td style='vertical-align: middle;'>{$details['article_id']}</td>";
             echo "  <td style='vertical-align: middle;'>{$article['model_name']}</td>";
+
+            if(!in_array($role, [2, 5, 6])):
             echo "  <td style='vertical-align: middle;'>{$subcategory}</td>";
+            endif;
 
             echo "  <td style='vertical-align: middle;'>{$worksheet['worksheet_date']}</td>";
             echo "  <td style='vertical-align: middle;'>{$worksheet['po_date']}</td>";
 
+            if(!in_array($role, [2])):
             echo "  <td class='w3-center' style='vertical-align: middle;'>{$details['cloth_width']}</td>";
+            endif;
 
             // CMTs
             $article = getArticleById($articleId);
@@ -82,8 +103,21 @@ $role = $_SESSION['user_role'];
             $cmtPrint = getCMTNameById($article['print_cmt_id']);
             $washes = implode("<br>", fetchWashNamesByArticleId($articleId));
 
-            echo "  <td class='w3-center' style='vertical-align: middle;'>{$cmtEmbro}</td>";
-            echo "  <td class='w3-center' style='vertical-align: middle;'>{$cmtPrint}</td>";
+            $brand = getBrandNameById($article['brand_id']);
+
+            if(!in_array($role, [5, 6])):
+                echo "  <td class='w3-center' style='vertical-align: middle;'>{$cmtEmbro}</td>";
+                echo "  <td class='w3-center' style='vertical-align: middle;'>{$cmtPrint}</td>";
+            endif;
+
+            if (in_array($role, [5, 6, 2])):
+                echo "  <td class='w3-center' style='vertical-align: middle;'>{$details['qty']}</td>";
+
+                if(!in_array($role,[2])):
+                echo "  <td class='w3-center' style='vertical-align: middle;'>{$brand}</td>";
+                endif;
+            endif;
+
             echo "  <td class='w3-center' style='vertical-align: middle;'>{$washes}</td>";
 
             $id = $details['id'];
@@ -100,7 +134,7 @@ $role = $_SESSION['user_role'];
             }
 
             // Delete button
-            if (in_array($role, [0,1,2,5])) {
+            if (in_array($role, [0,1,2,5]) && getWorksheetPosition($worksheetId) == 0) {
                 echo "<button class='w3-button w3-pale-red w3-text-red' onclick = 'openPopupURL2(\"delete?id=" . $id . "\", \"wspopup\")' ><i class='fa-solid fa-fw fa-trash' ></i ></button >";
             }
             echo "<br>";
@@ -108,7 +142,7 @@ $role = $_SESSION['user_role'];
             // Upload Button
 			if (in_array($role, [0,1,2,5,6])) {
 				$btnColour = "blue";
-				if (isFileExists($worksheet['worksheet_id'].".xlsx")) { 
+				if (isFileExists($worksheet['worksheet_id'].".xlsx")) {
 					$btnColour = "indigo";
 				}
 
@@ -117,19 +151,25 @@ $role = $_SESSION['user_role'];
 
             // Download Button
             if ($role >= -1) {
-				if (isFileExists($worksheet['worksheet_id'].".xlsx")) { 
+				if (isFileExists($worksheet['worksheet_id'].".xlsx")) {
 					$filePath = "files/" . $worksheet['worksheet_id'] . ".xlsx";
 					echo "<a class='w3-button w3-red' href='{$filePath}' id='wsDownloadLink'><i class='fa-solid fa-fw fa-download'></i></a>";
 				}
             }
             echo "</td>";
 
-
+            // Send to Button
             echo "<td style='vertical-align: middle;'>";
-            if (getWorksheetPosition($worksheetId) <= 0) {
-                echo "<button class='w3-button w3-red' onclick='openURL(\"send-to-polamarker.php?w=" . $worksheetId . "\")'>Pola Marker&nbsp;&nbsp;<i class=\"fa-solid fa-arrow-right-from-arc\"></i></button>";
+            if (in_array($role, [0,1,2,5,6])) {
+                if (getWorksheetPosition($worksheetId) <= 0) {
+                    echo "<button class='w3-button w3-red' onclick='openURL(\"send-to-polamarker.php?w=" . $worksheetId . "\")'>Pola Marker&nbsp;&nbsp;<i class=\"fa-solid fa-arrow-right-from-arc\"></i></button>";
+                } else {
+                    echo "<button class='w3-button w3-hover-red w3-red w3-disabled'><i class=\"fa-solid fa-check\"></i></button>";
+                }
             } else {
-                echo "<button class='w3-button w3-hover-red w3-red w3-disabled'><i class=\"fa-solid fa-check\"></i></button>";
+                if (getWorksheetPosition($worksheetId) > 0) {
+                    echo "<button class='w3-button w3-hover-red w3-red w3-disabled'><i class=\"fa-solid fa-check\"></i></button>";
+                }
             }
             echo "</td>";
 

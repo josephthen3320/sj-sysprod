@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../po.suburjayabdg.com/.idea/po.suburjayabdg.com.iml" filepath="$PROJECT_DIR$/../po.suburjayabdg.com/.idea/po.suburjayabdg.com.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/sysprod-live.iml" filepath="$PROJECT_DIR$/.idea/sysprod-live.iml" />
     </modules>
   </component>

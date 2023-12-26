@@ -61,11 +61,24 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             echo "Pushing complete";
             break;
+
+        case 'transit':
+            echo "Pushing to Transit";
+
+            pushToTransit($wid, $qty);
+            updateWorksheetPosition($wid, '-2'); // Set to transit
+
+            // Surat Jalan
+            $sjid = createSuratJalan('TN', $transaction_id, 6, -2, $aid, $qty, $uid);
+            addSuratJalanRecord($sjid, 'transit', $transaction_id);
+
+            echo "Pushing complete";
+            break;
     }
 
     updateEndDate($curProcessName, $tid);
     toggleProcessCompleted($curProcessName, $wid);
 
-    //echo $closeWindowScript = "<script type='text/javascript'>window.close();</script>";
+    echo $closeWindowScript = "<script type='text/javascript'>window.close();</script>";
 
 }

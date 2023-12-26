@@ -68,15 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                         <label>Select process:</label>
                         <select class=\"w3-select w3-border w3-margin-bottom\" required id=\"process\" name=\"process\">
-                            <option selected hidden disabled>Please select</option>
                 ";
 
-
-                if (!checkIsProcessDone($w, 'washing')) {
-                    echo "<option value=\"WI\">Washing</option>";
-                }
-
-                echo "      <option value=\"QF\">QC Final</option>
+                echo "      <option value=\"QF\" selected>QC Final</option>
                         </select>
 
                         <button class=\"w3-button w3-red w3-block\" type=\"submit\">Load CMT List</button>

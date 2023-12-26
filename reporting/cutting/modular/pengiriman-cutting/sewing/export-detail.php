@@ -96,11 +96,11 @@ if ($result->num_rows > 0) {
 
     $sheet->setCellValue('B2', "CMT:");
     $sheet->setCellValue('C2', "{$cmt_id_label}");
-    $sheet->setCellValue('E2', "Periode:");
-    $sheet->setCellValue('F2', "{$period_label}");
+    $sheet->setCellValue('G2', "Periode:");
+    $sheet->setCellValue('H2', "{$period_label}");
 
     $sheet->getStyle('B2')->getFont()->setBold(true);
-    $sheet->getStyle('E2')->getFont()->setBold(true);
+    $sheet->getStyle('G2')->getFont()->setBold(true);
 
 
     // Set the data from the Excel data array
@@ -132,9 +132,9 @@ if ($result->num_rows > 0) {
     $row += 2;
 
     $sheet->setCellValue("B".$row, "Dibuat oleh,");
-    $sheet->setCellValue("G".$row, "Mengetahui,");
+    $sheet->setCellValue("H".$row, "Mengetahui,");
     $sheet->getStyle('B'.$row)->getFont()->setBold(true);
-    $sheet->getStyle('G'.$row)->getFont()->setBold(true);
+    $sheet->getStyle('H'.$row)->getFont()->setBold(true);
 
 
     $row += 4;
@@ -145,7 +145,7 @@ if ($result->num_rows > 0) {
     $userFullName = getUserFullnameByUsername($username);
 
     $sheet->setCellValue("B".$row, $userFullName);
-    $sheet->setCellValue("G".$row, "Manager Produksi");
+    $sheet->setCellValue("H".$row, "Manager Produksi");
 
     // Define the RGB color code for light orange (255, 204, 153)
     $lightOrangeColor = 'FFCC99'; // ARGB format: AARRGGBB

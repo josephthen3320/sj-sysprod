@@ -88,6 +88,27 @@ $top_title .= "Dashboard";
 
         <?php include $_SERVER['DOCUMENT_ROOT'] . "/transaction/nav-transaction.php" ?>
 
+        <div class="w3-padding-24 w3-light-blue w3-border w3-container">
+            <form method="post" action="pola_sj.php" class="w3-row w3-small" target="_blank">
+                <h6 class="w3-col l3">Print Surat Jalan Harian</h6>
+                <input type="date" name="fDate" id="fDate" class="w3-input w3-col l2" value="<?= date('Y-m-d') ?>">
+                <select name="fLocation" class="w3-select w3-col l2">
+                    <option selected value="">Semua Lokasi</option>
+                    <?php
+                    $sql = "SELECT * FROM cmt WHERE cmt_type = 'CT1'";
+                    $pConn = getConnProduction();
+
+                    $result = $pConn->query($sql);
+
+                    while ($fLoc = $result->fetch_assoc()) {
+                        echo "<option value='{$fLoc['cmt_id']}'>{$fLoc['cmt_name']}</option>";
+                    }
+                    ?>
+                </select>
+                <input hidden value="LX" name="printType">
+                <button type="submit" class="w3-button w3-indigo w3-col l2">Print</button>
+            </form>
+        </div>
 
         <div class="w3-cell-row w3-padding">
             <div id="loading">Loading...</div>

@@ -3,9 +3,6 @@ session_start();
 
 $page_title = "Transaction";
 
-// TODO: Change this to actual user role
-$user_role = "Kucing Admin";
-
 // Check if the user is not logged in, redirect to login page
 include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/verify-session.php";
 
@@ -27,12 +24,6 @@ if ($result->num_rows > 0) {
     header("Location: login.php");
 }
 
-$top_title = "";
-if ($username == "nara") {
-    $top_title .= "Admin ";
-}
-$top_title .= "Dashboard";
-
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +38,9 @@ $top_title .= "Dashboard";
     <script src="/assets/js/utils.js"></script>
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             background-color: #F4EDE9;
         }
@@ -133,7 +127,7 @@ $top_title .= "Dashboard";
 
             <!-- Total Worksheet -->
             <div class="w3-third w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round" style="height: 180px; width: 100%;">
+                <div class="w3-container w3-button w3-card-2 w3-display-container w3-white w3-round" style="height: 180px; width: 100%;" onclick="openURL('../production/worksheet.php')">
                     <div class="w3-display-bottommiddle">
                         <i class="fa-solid fa-fw fa-file-lines fa-4xl" style="color: green;"></i><br><br>
                         <b><span class="w3-xlarge"><?= getCountByPosition(0) ?></span><br><span class="w3-text-grey">New Worksheet</span><br><br></b>
@@ -143,7 +137,7 @@ $top_title .= "Dashboard";
 
             <!-- Total Produksi -->
             <div class="w3-third w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round" style="height: 180px; width: 100%;">
+                <div class="w3-container w3-button w3-card-2 w3-display-container w3-white w3-round" style="height: 180px; width: 100%;" onclick="openURL('#in-progress')">
                     <div class="w3-display-bottommiddle">
                         <i class="fa-solid fa-fw fa-right-left fa-4xl" style="color: red;"></i><br><br>
                         <b><span class="w3-xlarge"><?= getCountTransaction() ?></span><br><span class="w3-text-grey">In Progress</span><br><br></b>
@@ -153,7 +147,7 @@ $top_title .= "Dashboard";
 
             <!-- Total Selesai -->
             <div class="w3-third w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round" style="height: 180px; width: 100%;">
+                <div class="w3-container w3-button w3-card-2 w3-display-container w3-white w3-round" style="height: 180px; width: 100%;" onclick="openURL('../warehouse')">
                     <div class="w3-display-bottommiddle">
                         <i class="fa-solid fa-fw fa-warehouse-full fa-4xl" style="color: darkblue;"></i><br><br>
                         <b><span class="w3-xlarge"><?= getCountByPosition(11) ?></span><br><span class="w3-text-grey">Gudang</span><br><br></b>
@@ -164,124 +158,126 @@ $top_title .= "Dashboard";
         </div>
 
 
-        <div id="" class="w3-bar w3-white w3-border-bottom " style="display: flex; background-color: #0B293C; height: 72px; align-items: center;">
-            <span class="w3-bar-item w3-large" style="color: #0B293C;"><b>Process Summary</b></span>
-        </div>
-        <!-- TRANSAKSI -->
-        <div class="w3-container w3-cell-row w3-padding-16">
+        <div class="w3-padding-64" style="min-height: 100vh;">
+            <div id="in-progress" class="w3-bar w3-white w3-border-bottom" style="display: flex; background-color: #0B293C; height: 72px; align-items: center;">
+                <span class="w3-bar-item w3-large" style="color: #0B293C;"><b>Process Summary</b></span>
+            </div>
+            <!-- TRANSAKSI -->
+            <div class="w3-container w3-cell-row w3-padding-16">
 
-            <!-- Pola Marker -->
-            <div class="w3-fifth w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
-                     onclick="openURL('pola-marker')" style="height: 180px; width: 100%;">
-                    <div class="w3-display-bottommiddle">
-                        <i class="fa-solid fa-fw fa-draw-square fa-4xl" style="color: lightseagreen;"></i><br><br>
-                        <b><span class="w3-xlarge"><?= getCountByPosition(1) ?></span><br><span class="w3-text-grey">Pola Marker</span><br><br></b>
+                <!-- Pola Marker -->
+                <div class="w3-fifth w3-center w3-padding">
+                    <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                         onclick="openURL('pola-marker')" style="height: 180px; width: 100%;">
+                        <div class="w3-display-bottommiddle">
+                            <i class="fa-solid fa-fw fa-draw-square fa-4xl" style="color: lightseagreen;"></i><br><br>
+                            <b><span class="w3-xlarge"><?= getCountByPosition(1) ?></span><br><span class="w3-text-grey">Pola Marker</span><br><br></b>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Cutting -->
-            <div class="w3-fifth w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
-                     onclick="openURL('cutting')" style="height: 180px; width: 100%;">
-                    <div class="w3-display-bottommiddle">
-                        <i class="fa-solid fa-fw fa-scissors fa-4xl" style="color: orangered;"></i><br><br>
-                        <b><span class="w3-xlarge"><?= getCountByPosition(2) ?></span><br><span class="w3-text-grey">Cutting</span><br><br></b>
+                <!-- Cutting -->
+                <div class="w3-fifth w3-center w3-padding">
+                    <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                         onclick="openURL('cutting')" style="height: 180px; width: 100%;">
+                        <div class="w3-display-bottommiddle">
+                            <i class="fa-solid fa-fw fa-scissors fa-4xl" style="color: orangered;"></i><br><br>
+                            <b><span class="w3-xlarge"><?= getCountByPosition(2) ?></span><br><span class="w3-text-grey">Cutting</span><br><br></b>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Embro -->
-            <div class="w3-fifth w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
-                     onclick="openURL('embro')" style="height: 180px; width: 100%;">
-                    <div class="w3-display-bottommiddle">
-                        <i class="fa-solid fa-fw fa-scarf fa-4xl" style="color: purple;"></i><br><br>
-                        <b><span class="w3-xlarge"><?= getCountByPosition(3) ?></span><br><span class="w3-text-grey">Embro</span><br><br></b>
+                <!-- Embro -->
+                <div class="w3-fifth w3-center w3-padding">
+                    <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                         onclick="openURL('embro')" style="height: 180px; width: 100%;">
+                        <div class="w3-display-bottommiddle">
+                            <i class="fa-solid fa-fw fa-scarf fa-4xl" style="color: purple;"></i><br><br>
+                            <b><span class="w3-xlarge"><?= getCountByPosition(3) ?></span><br><span class="w3-text-grey">Embro</span><br><br></b>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Print/Sablon -->
-            <div class="w3-fifth w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
-                     onclick="openURL('print-sablon')" style="height: 180px; width: 100%;">
-                    <div class="w3-display-bottommiddle">
-                        <i class="fa-solid fa-fw fa-pen-paintbrush fa-4xl" style="color: dodgerblue;"></i><br><br>
-                        <b><span class="w3-xlarge"><?= getCountByPosition(4) ?></span><br><span class="w3-text-grey">Print/Sablon</span><br><br></b>
+                <!-- Print/Sablon -->
+                <div class="w3-fifth w3-center w3-padding">
+                    <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                         onclick="openURL('print-sablon')" style="height: 180px; width: 100%;">
+                        <div class="w3-display-bottommiddle">
+                            <i class="fa-solid fa-fw fa-pen-paintbrush fa-4xl" style="color: dodgerblue;"></i><br><br>
+                            <b><span class="w3-xlarge"><?= getCountByPosition(4) ?></span><br><span class="w3-text-grey">Print/Sablon</span><br><br></b>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- QC Embro -->
-            <div class="w3-fifth w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
-                     onclick="openURL('qc-embro')" style="height: 180px; width: 100%;">
-                    <div class="w3-display-bottommiddle">
-                        <i class="fa-solid fa-fw fa-clipboard-list-check fa-4xl" style="color: teal;"></i><br><br>
-                        <b><span class="w3-xlarge"><?= getCountByPosition(5) ?></span><br><span class="w3-text-grey">QC Embro</span><br><br></b>
+                <!-- QC Embro -->
+                <div class="w3-fifth w3-center w3-padding">
+                    <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                         onclick="openURL('qc-embro')" style="height: 180px; width: 100%;">
+                        <div class="w3-display-bottommiddle">
+                            <i class="fa-solid fa-fw fa-clipboard-list-check fa-4xl" style="color: teal;"></i><br><br>
+                            <b><span class="w3-xlarge"><?= getCountByPosition(5) ?></span><br><span class="w3-text-grey">QC Embro</span><br><br></b>
+                        </div>
                     </div>
                 </div>
-            </div>
 
 
 
-            <!-- Sewing -->
-            <div class="w3-fifth w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
-                     onclick="openURL('sewing')" style="height: 180px; width: 100%;">
-                    <div class="w3-display-bottommiddle">
-                        <i class="fa-solid fa-fw fa-reel fa-4xl" style="color: deeppink;"></i><br><br>
-                        <b><span class="w3-xlarge"><?= getCountByPosition(6) ?></span><br><span class="w3-text-grey">Sewing</span><br><br></b>
+                <!-- Sewing -->
+                <div class="w3-fifth w3-center w3-padding">
+                    <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                         onclick="openURL('sewing')" style="height: 180px; width: 100%;">
+                        <div class="w3-display-bottommiddle">
+                            <i class="fa-solid fa-fw fa-reel fa-4xl" style="color: deeppink;"></i><br><br>
+                            <b><span class="w3-xlarge"><?= getCountByPosition(6) ?></span><br><span class="w3-text-grey">Sewing</span><br><br></b>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Finishing -->
-            <div class="w3-fifth w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
-                     onclick="openURL('finishing')" style="height: 180px; width: 100%;">
-                    <div class="w3-display-bottommiddle">
-                        <i class="fa-solid fa-fw fa-list fa-4xl" style="color: darkgreen;"></i><br><br>
-                        <b><span class="w3-xlarge"><?= getCountByPosition(8) ?></span><br><span class="w3-text-grey">Finishing</span><br><br></b>
+                <!-- Finishing -->
+                <div class="w3-fifth w3-center w3-padding">
+                    <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                         onclick="openURL('finishing')" style="height: 180px; width: 100%;">
+                        <div class="w3-display-bottommiddle">
+                            <i class="fa-solid fa-fw fa-list fa-4xl" style="color: darkgreen;"></i><br><br>
+                            <b><span class="w3-xlarge"><?= getCountByPosition(8) ?></span><br><span class="w3-text-grey">Finishing</span><br><br></b>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Washing -->
-            <div class="w3-fifth w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
-                     onclick="openURL('washing')" style="height: 180px; width: 100%;">
-                    <div class="w3-display-bottommiddle">
-                        <i class="fa-solid fa-fw fa-washing-machine fa-4xl" style="color: royalblue;"></i><br><br>
-                        <b><span class="w3-xlarge"><?= getCountByPosition(7) ?></span><br><span class="w3-text-grey">Washing</span><br><br></b>
+                <!-- Washing -->
+                <div class="w3-fifth w3-center w3-padding">
+                    <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                         onclick="openURL('washing')" style="height: 180px; width: 100%;">
+                        <div class="w3-display-bottommiddle">
+                            <i class="fa-solid fa-fw fa-washing-machine fa-4xl" style="color: royalblue;"></i><br><br>
+                            <b><span class="w3-xlarge"><?= getCountByPosition(7) ?></span><br><span class="w3-text-grey">Washing</span><br><br></b>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- QC Final -->
-            <div class="w3-fifth w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
-                     onclick="openURL('qc-final')" style="height: 180px; width: 100%;">
-                    <div class="w3-display-bottommiddle">
-                        <i class="fa-solid fa-fw fa-clipboard-check fa-4xl" style="color: lightseagreen;"></i><br><br>
-                        <b><span class="w3-xlarge"><?= getCountByPosition(9) ?></span><br><span class="w3-text-grey">QC Final</span><br><br></b>
+                <!-- QC Final -->
+                <div class="w3-fifth w3-center w3-padding">
+                    <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                         onclick="openURL('qc-final')" style="height: 180px; width: 100%;">
+                        <div class="w3-display-bottommiddle">
+                            <i class="fa-solid fa-fw fa-clipboard-check fa-4xl" style="color: lightseagreen;"></i><br><br>
+                            <b><span class="w3-xlarge"><?= getCountByPosition(9) ?></span><br><span class="w3-text-grey">QC Final</span><br><br></b>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Perbaikan -->
-            <div class="w3-fifth w3-center w3-padding">
-                <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
-                     onclick="openURL('perbaikan')" style="height: 180px; width: 100%;">
-                    <div class="w3-display-bottommiddle">
-                        <i class="fa-solid fa-fw fa-screwdriver-wrench fa-4xl" style="color: sienna;"></i><br><br>
-                        <b><span class="w3-xlarge"><?= getCountByPosition(10) ?></span><br><span class="w3-text-grey">Perbaikan</span><br><br></b>
+                <!-- Perbaikan -->
+                <div class="w3-fifth w3-center w3-padding">
+                    <div class="w3-container w3-card-2 w3-display-container w3-white w3-round w3-button"
+                         onclick="openURL('perbaikan')" style="height: 180px; width: 100%;">
+                        <div class="w3-display-bottommiddle">
+                            <i class="fa-solid fa-fw fa-screwdriver-wrench fa-4xl" style="color: sienna;"></i><br><br>
+                            <b><span class="w3-xlarge"><?= getCountByPosition(10) ?></span><br><span class="w3-text-grey">Perbaikan</span><br><br></b>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 </div>

@@ -38,6 +38,7 @@
             include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_transaction.php";
             include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_classification.php";
             include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_surat_jalan.php";
+            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_articles.php";
 
             $ct_data = fetchAllTransactionByProcess('print_sablon');
             $i = 0;
@@ -66,7 +67,7 @@
 
                 echo "<td>{$ct['qty_in']}</td>";
                 echo "<td>";
-                if ($ct['qty_out'] <= 0) {
+                if ($ct['qty_out'] <= 0 && in_array($role, [0,1,2,3,4,7])) {
                     $urlParam = "p=print_sablon";
                     $urlParam .= "&i=" . $ct['print_sablon_id'];
                     $urlParam .= "&w=" . $ct['worksheet_id'];

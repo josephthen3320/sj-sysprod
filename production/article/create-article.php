@@ -197,6 +197,11 @@ $conn = getConnProduction();
                     ?>
                 </select>
             </div>
+
+            <div class="w3-container w3-rest w3-padding">
+                <label for="description">Keterangan:</label>
+                <textarea class="w3-input" id="description" name="description" rows="3"></textarea>
+            </div>
         </div>
     </div>
 

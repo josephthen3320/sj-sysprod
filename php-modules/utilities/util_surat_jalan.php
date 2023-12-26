@@ -224,6 +224,8 @@ function getProcessName($process_id) {
     $row = queryDatabase($conn, $sql);
     $conn->close();
 
+    $row['process_name'] = $process_id == -2 ? "Transit" : $row['process_name'];
+
     return $row['process_name'];
 }
 

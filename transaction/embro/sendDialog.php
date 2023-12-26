@@ -17,11 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $worksheet = fetchWorksheetData($w);
     $a = $worksheet['article_id'];
 
-
 }
-
-
-
 
 ?>
 
@@ -42,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         <h1>Send to QC Embro</h1>
         <span style="display: inline-block; width: 120px; font-weight: bold">Worksheet ID: </span><?= $w ?>
         <br>
-        <span style="display: inline-block; width: 120px; font-weight: bold">Embro ID: </span><?= $pi ?>
-        <br>
         <span style="display: inline-block; width: 120px; font-weight: bold">Article ID: </span><?= $a ?>
+        <br>
+        <span style="display: inline-block; width: 120px; font-weight: bold">Embro ID: </span><?= $pi ?>
         <br><br>
         <span style="display: inline-block; width: 120px; font-weight: bold">Qty </span><?= $qty ?>
 

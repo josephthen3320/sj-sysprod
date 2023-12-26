@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     require_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_worksheet_position.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_surat_jalan.php';
 
-    $curProcessName = 'sewing';
+    $curProcessName = 'finishing';
 
     $uid = $_POST['uid'];
 

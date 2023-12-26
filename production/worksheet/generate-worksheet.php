@@ -239,6 +239,9 @@ if (isset($_GET['id'])) {
 
             <label>Delivery Date (planned)</label>
             <input class="w3-input w3-border" type="text" readonly value="<?= $delivery_date ?>">
+
+            <label>Brand</label>
+            <input class="w3-input w3-border" type="text" readonly value="<?= $art_brand . "(". $article['brand_id'] .")" ?>">
         </div>
         <div class="w3-half w3-padding">
             <label>Worksheet Date</label>
@@ -365,11 +368,8 @@ function fetchArticle($art_id) {
     include_once $_SERVER['DOCUMENT_ROOT'] . "/php-modules/db.php";
     $conn = getConnProduction();
 
-    $sql = "SELECT * FROM article WHERE article_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $art_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $sql = "SELECT * FROM article WHERE article_id = '$art_id'";
+    $result = $conn->query($sql);
 
     if ($result->num_rows > 0 ){
         $article = $result->fetch_assoc();

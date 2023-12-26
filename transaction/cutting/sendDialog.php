@@ -51,6 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <h1>Send to <?= $processName ?></h1>
         <span style="display: inline-block; width: 120px; font-weight: bold">Worksheet ID: </span><?= $w ?>
         <br>
+        <?php
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_worksheet.php';
+        $worksheetData = fetchWorksheetData($w);
+        ?>
+        <span style="display: inline-block; width: 120px; font-weight: bold">Article ID: </span><?= $worksheetData['article_id'] ?>
+        <br>
         <span style="display: inline-block; width: 120px; font-weight: bold">Cutting ID: </span><?= $pi ?>
 
         <!-- First form: Select target process -->

@@ -202,9 +202,9 @@ if ($result->num_rows > 0) {
     $row += 2;
 
     $sheet->setCellValue("B".$row, "Dibuat oleh,");
-    $sheet->setCellValue("F".$row, "Mengetahui,");
+    $sheet->setCellValue("I".$row, "Mengetahui,");
     $sheet->getStyle('B'.$row)->getFont()->setBold(true);
-    $sheet->getStyle('F'.$row)->getFont()->setBold(true);
+    $sheet->getStyle('I'.$row)->getFont()->setBold(true);
 
 
     $row += 4;
@@ -215,7 +215,7 @@ if ($result->num_rows > 0) {
     $userFullName = getUserFullnameByUsername($username);
 
     $sheet->setCellValue("B".$row, $userFullName);
-    $sheet->setCellValue("F".$row, "Manager Produksi");
+    $sheet->setCellValue("I".$row, "Manager Produksi");
 
     // Define the RGB color code for light orange (255, 204, 153)
     $lightOrangeColor = 'FFCC99'; // ARGB format: AARRGGBB

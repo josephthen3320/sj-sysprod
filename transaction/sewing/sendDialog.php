@@ -26,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $processName = 'Finishing';
     } elseif ($_POST['process'] === "QF") {
         echo $processName = 'QC Final';
+    } elseif ($_POST['process'] === "TN") {
+        echo $processName = 'Transit';
     } else {
         $processName = '<span class="w3-text-red">Unknown</span>';
     }
@@ -69,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <option selected hidden disabled>Please select</option>
                             <option value=\"FI\">Finishing</option>
                             <option value=\"QF\">QC Final</option>
+                            <option value=\"TN\">Transit ke Washing</option>
                         </select>
 
                         <button class=\"w3-button w3-red w3-block\" type=\"submit\">Load CMT List</button>
@@ -109,23 +112,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 echo "<input hidden value='{$aid}' name='aid'>";        // article id
 
 
-                if ($selectedProcess !== 'QF') {
+                if ($selectedProcess === "FI") {
                     echo "  <label>Select location: </label>
                             <select class=\"w3-select w3-border\" required id=\"cmt\" name=\"cmt\">
                                 <option disabled hidden selected>Please select</option>
                             ";
 
                     while ($cmt = $cmts->fetch_assoc()) {
-                        if ($selectedProcess === 'WI') {
-                            if ($cmt['cmt_type'] === 'CT6') {
-                                echo '<option value="' . $cmt['cmt_id'] . '">' . $cmt['cmt_name'] . '</option>';
-                            }
-                        } else if ($selectedProcess === 'FI') {
+                        if ($selectedProcess === 'FI') {
                             if ($cmt['cmt_type'] === 'CT3') {
                                 echo '<option value="' . $cmt['cmt_id'] . '">' . $cmt['cmt_name'] . '</option>';
                             }
                         }
-
                     }
 
                     echo "</select>";

@@ -64,6 +64,17 @@ $role = $_SESSION['user_role'];
 
                 $qtyCutting = getCuttingQtyByWorksheetId($ct['worksheet_id']);
 
+                // QC Final Out Data
+                $qcfinalOutData = fetchQCFinalOutRecords($ct['qc_final_id']);
+                $detailparam = '';
+                $chevron = "";
+
+                if ($qcfinalOutData->num_rows > 0) {
+                    $detailparam = "class='w3-hover-text-red' style='cursor: pointer;' onclick='toggleDetail(\"{$ct['qc_final_id']}\")'";
+                    $chevron = "<i class='fas fa-chevron-down'></i>";
+
+                }
+
                 ++$i;
                 echo "<tr>";
                 echo "<td class='w3-center'>{$i}</td>";
@@ -90,11 +101,11 @@ $role = $_SESSION['user_role'];
                 echo "</td>";
 
                 $qtyMissing = $qtyFail = $qtyDefect = "-";
-                if ($ct['qty_missing'] > 0) {
+                /*if ($ct['qty_missing'] > 0) {*/
                     $qtyMissing = $ct['qty_missing'];
                     $qtyFail = $ct['qty_fail'];
                     $qtyDefect = $ct['qty_defect'];
-                }
+                /*}*/
 
                 echo "<td class='w3-center'>{$qtyMissing}</td>";
                 echo "<td class='w3-center'>{$qtyDefect}</td>";
@@ -107,13 +118,18 @@ $role = $_SESSION['user_role'];
                     // Surat Terima
                     $urlSuratTerima = "/transaction/surat-jalan/?i={$ct['sj_id']}&t={$ct['qc_final_id']}&w={$ct['worksheet_id']}";
                     if (checkSuratJalanExistsByTransactionId($ct['qc_final_id'])) {
-                        echo "<button class='w3-button w3-green' onclick='openPopupURL2(\"$urlSuratTerima\", \"suratJalan\", 800, 500)'><i class='fas fa-print'></i></button>";
+                        $isPrint = "";
+
+                        if (checkSuratJalanPrinted($ct['qc_final_id'])) {
+                            $isPrint = "&nbsp;<i class='fas w3-tiny fa-fw fa-check'></i>";
+                        }
+                        echo "<button class='w3-button w3-green' onclick='openPopupURL2(\"$urlSuratTerima\", \"suratJalan\", 800, 500)'><i class='fas fa-print'></i>{$isPrint}</button>";
                     }
                 echo "</td>";
 
                 echo "<td class='w3-center'>";
                 if (getWorksheetPosition($ct['worksheet_id']) == 9) {
-                    if ($ct['qty_out'] > 0 && in_array($role, [0,1,2,3])) {
+                    if ($ct['qty_out'] > 0 && in_array($role, [0,1,2,3,7])) {
                         echo "<button class='w3-button w3-red' onclick='openPopupURL2(\"sendDialog.php?w={$ct['worksheet_id']}&i={$ct['id']}&pi={$ct['qc_final_id']}&q={$ct['qty_out']}\", \"sendto\", 500, 400)'><i class=\"fa-solid fa-arrow-right-from-arc\"></i></button>";
                     }
 
@@ -146,3 +162,15 @@ $role = $_SESSION['user_role'];
         }
     }
 </script>
+
+<?php
+
+function fetchQCFinalOutRecords($qcFinalId) {
+    $conn = getConnTransaction();
+    $sql = "SELECT * FROM qc_final_out WHERE qc_final_id = '$qcFinalId'";
+    $result = $conn->query($sql);
+
+    return $result;
+}
+
+?>

@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     updateWorksheetPosition($wid, 8);   // Set to finishing
 
     // Surat Jalan
-    $sjid = createSuratTerima('WI', $transaction_id, 7, 8, $aid, $qty, $uid);
-    addSuratTerimaRecord($sjid, 'washing', $transaction_id);
+    $sjid = createSuratJalan('WI', $transaction_id, 7, 8, $aid, $qty, $uid);
+    addSuratJalanRecord($sjid, 'washing', $transaction_id);
 
     updateEndDate($curProcessName, $tid);
     toggleProcessCompleted($curProcessName, $wid);

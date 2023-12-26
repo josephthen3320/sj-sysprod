@@ -11,6 +11,12 @@ $conn = getConnProduction();
 // Retrieve form data
 $model_name = $_POST['model_name'];
 $article_id = $_POST['article_id'];
+
+if (checkDuplicate($article_id)) {
+    echo "Artikel sudah ada. (Error: duplicate article_id)";
+    exit();
+}
+
 $category_id = $_POST['category_id'];
 $subcategory_id = $_POST['subcategory_id'];
 $embro_cmt_id = $_POST['embro_cmt_id'];
@@ -26,6 +32,8 @@ $description = $_POST['description'];
 $file = $_FILES['art_image'];
 $filename = $file['name'];
 $file_tmp = $file['tmp_name'];
+
+
 
 // Generate the target directory and file path
 $target_directory = $_SERVER['DOCUMENT_ROOT'] . "/img/articles/";
@@ -227,4 +235,16 @@ foreach ($wash_ids as $washId) {
 // Close the database connection
 mysqli_close($conn);
 */
+
+function checkDuplicate($article_id) {
+    $conn = getConnProduction();
+    $sql = "SELECT * FROM article WHERE article_id = '$article_id'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows != 0) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
 ?>

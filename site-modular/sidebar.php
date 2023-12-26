@@ -80,8 +80,8 @@
 
     <!-- Production section -->
     <?php
-    if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 9, 10])) {
-        if ($_SESSION['user_role'] != 4) {
+    if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])) {
+        if ($_SESSION['user_role'] != -1) { // Toggle view pre-production
             echo "
         <div class=\"w3-container w3-padding w3-border-bottom w3-border-top w3-border-orange\" style=\"padding-left: 32px;\">
             <span class=\"w3-large\" style=\"font-weight: 400;\">Pre-Production</span>
@@ -95,11 +95,11 @@
                 echo "<a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/classification.php\"><i class=\"fas fa-fw fa-database w3-text-blue\"></i> &nbsp;&nbsp; Classification</a>";
             }
 
-            if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 9, 10])) {
+            if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 5, 6, 7, 8, 9, 10])) {
                 echo "<a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/article.php\"><i class=\"fas fa-fw fa-clothes-hanger w3-text-green\"></i> &nbsp;&nbsp; Article</a>";
             }
 
-            if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 9, 10])) {
+            if (in_array($_SESSION['user_role'], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])) {
                 echo "<a class=\"w3-medium w3-button w3-bar-item action-button\" href=\"/production/worksheet.php\"><i class=\"fas fa-fw fa-file-lines w3-text-yellow\"></i> &nbsp;&nbsp; Worksheet</a>";
             }
 
@@ -115,13 +115,14 @@
     
     <!-- Transaction section -->
     <?php
-    if(in_array($_SESSION['user_role'], [0,1,2,3,4,5,6,7,9,10])) {
+    if(in_array($_SESSION['user_role'], [0,1,2,3,4,5,6,7,8,9,10])) {
         echo "<div class='w3-container w3-padding w3-border-bottom w3-border-top w3-border-orange' style='padding-left: 32px;'>";
         echo "    <span class='w3-large' style='font-weight: 400;'>Transaction</span>";
         echo "</div>";
 
         echo "<div class='w3-padding w3-bar-block' style=''>";
         echo "    <a class='w3-medium w3-button w3-bar-item action-button' href='/transaction/'><i class='fas fa-fw fa-gauge-high w3-text-orange'></i> &nbsp;&nbsp; Transaction Dashboard</a>";
+        echo "    <a class='w3-medium w3-button w3-bar-item action-button' href='/production/wip-list/'><i class='fas fa-fw fa-bars-progress w3-text-green'></i> &nbsp;&nbsp; WIP Status</a>";
         echo "    <a class='w3-medium w3-button w3-bar-item action-button' href='/warehouse'><i class='fas fa-fw fa-warehouse-full w3-text-blue'></i> &nbsp;&nbsp; Warehouse</a>";
         echo "</div>";
     }
@@ -129,7 +130,7 @@
 
     <!-- Reporting section -->
     <?php
-    if(in_array($_SESSION['user_role'], [0,1,2,3,4,5,6,7,9,10])) {
+    if(in_array($_SESSION['user_role'], [0,1,2,3,4,5,6,7,8,9,10])) {
         echo "<div class='w3-container w3-padding w3-border-bottom w3-border-top w3-border-orange' style='padding-left: 32px;'>";
         echo "    <span class='w3-large' style='font-weight: 400;'>Reporting</span>";
         echo "</div>";

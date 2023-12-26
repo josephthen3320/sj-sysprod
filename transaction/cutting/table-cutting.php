@@ -10,6 +10,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_surat_jalan.php
 
 if ($_SESSION['user_role'] == 4) {
     $ct_data = fetchCuttingCipadungTransaction();
+} else if ($_SESSION['user_role'] == 7) {
+    $ct_data = fetchCuttingKembarTransaction();
+
 } else {
     $conn = getConnTransaction();
 
@@ -18,7 +21,6 @@ if ($_SESSION['user_role'] == 4) {
                         INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id 
                         ORDER BY 
                             CASE WHEN t.date_cut IS NULL THEN 0 ELSE 1 END, 
-                            
                             p.cutting ASC, 
                             t.date_cut DESC,
                             t.date_out DESC";
@@ -47,6 +49,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <script src="/assets/js/utils.js"></script>
 <body>
 
+<!--div class="w3-container">
+    <h5>Filter</h5>
+
+    <form action method="post">
+        <input placeholder="No. Article" name="fArticleId">
+        <input type="date" name="fStartDate">
+        <input type="date" name="fEndDate">
+        <button type="submit">Filter</button>
+    </form>
+</div-->
+
 <table class="w3-table w3-table-all w3-hide-small w3-small w3-margin-top">
     <thead>
     <tr>
@@ -60,6 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <th>End Date</th>
         <th class="w3-center">Qty Cutting</th>
         <th class="w3-center">Tgl Cutting</th>
+
+        <!-- Admin Produksi -->
+        <?php if(in_array($role, [0,1,2,3])): ?>
+        <th>Embro?</th>
+        <th>Sablon?</th>
+        <?php endif; ?>
+
+
         <th>Surat Jalan</th>
         <th>Actions</th>
     </tr>
@@ -81,6 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $worksheet = fetchWorksheet($ct['worksheet_id'])->fetch_assoc();
                 $article_id = $worksheet['article_id'];
                 $article = getArticleById($article_id);
+
+                if (!empty($_POST['fArticleId'])  && $_POST['fArticleId'] !== $article_id) {
+                    continue;
+                }
 
                 echo "<tr>";
                 echo "<td>{$i}</td>";
@@ -106,6 +131,31 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 echo "</td>";
 
                 echo "<td>{$ct['date_cut']}</td>";
+
+                if(in_array($role, [0,1,2,3])):
+                    $check = "<span style='font-weight: bold;'><i class='fas fa-fw fa-xl fa-check w3-text-green'></i></span>";
+                    $naught = "<span style='font-weight: bold;'><i class='fas fa-fw fa-x w3-text-red'></i></span>";
+
+                    $embroStatus = $sablonStatus = $naught;
+
+                    // CMTs
+                    $article = getArticleById($article_id);
+
+                    $cmtEmbro = getCMTNameById($article['embro_cmt_id']);
+                    $cmtPrint = getCMTNameById($article['print_cmt_id']);
+
+                    if ($cmtEmbro !== "NO") {
+                        $embroStatus = $check . "<br>" . "<span class='w3-tiny'>" . $cmtEmbro . "</span>";
+                    }
+
+                    if ($cmtPrint !== "NO") {
+                        $sablonStatus = $check . "<br>" . "<span class='w3-tiny'>" . $cmtPrint . "</span>";
+                    }
+
+                    echo "<td class='w3-center' style='vertical-align: middle'>" . $embroStatus . "</td>";
+                    echo "<td class='w3-center' style='vertical-align: middle'>" . $sablonStatus ."</td>";
+
+                endif;
 
 
                 echo "<td>";

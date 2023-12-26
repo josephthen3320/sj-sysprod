@@ -26,6 +26,7 @@ $role = $_SESSION['user_role'];
         <th>Location</th>
         <th>Qty in</th>
         <th>Qty out</th>
+        <th>Qty Hilang</th>
         <th>Start Date</th>
         <th>End Date</th>
         <th colspan="2">Actions</th>
@@ -34,9 +35,10 @@ $role = $_SESSION['user_role'];
     <tbody>
         <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_worksheet_position.php";
+            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_worksheet.php";
             include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_transaction.php";
-        include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_articles.php";
-        include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_surat_jalan.php";
+            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_articles.php";
+            include $_SERVER['DOCUMENT_ROOT'] . "/php-modules/utilities/util_surat_jalan.php";
 
             $ct_data = fetchAllTransactionByProcess('washing');
             $i = 0;
@@ -70,6 +72,7 @@ $role = $_SESSION['user_role'];
                     $urlParam = "p=washing";
                     $urlParam .= "&i=" . $ct['washing_id'];
                     $urlParam .= "&w=" . $ct['worksheet_id'];
+                    $urlParam .= "&q=" . $ct['qty_in'];
                     echo "<button onclick='openPopupURL2(\"set-qty-out.php?{$urlParam}\", \"qtyOut\", 500, 300)' class='w3-button w3-blue-grey'>" . "<i class='fas fa-plus'></i>" . "</button>";
                 } else {
                     echo $ct['qty_out'];
@@ -77,12 +80,14 @@ $role = $_SESSION['user_role'];
 
                 echo "</td>";
 
+                echo "<td>" . $ct['qty_missing'] ?? 0  . "</td>";
+
                 echo "<td>{$ct['date_in']}</td>";
                 echo "<td>{$ct['date_out']}</td>";
 
                 echo "<td>";
                     // Surat Terima
-                    $urlSuratTerima = "/transaction/surat-jalan/?i={$ct['st_id']}&t={$ct['washing_id']}&w={$ct['worksheet_id']}";
+                    $urlSuratTerima = "/transaction/surat-jalan/?i={$ct['sj_id']}&t={$ct['washing_id']}&w={$ct['worksheet_id']}";
                     if (checkSuratJalanExistsByTransactionId($ct['washing_id'])) {
                         echo "<button class='w3-button w3-green' onclick='openPopupURL2(\"$urlSuratTerima\", \"suratJalan\", 800, 500)'><i class='fas fa-print'></i></button>";
                     }

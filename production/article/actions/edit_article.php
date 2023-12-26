@@ -15,6 +15,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_classification.
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn = getConnProduction();
 
+    $internalId = $_POST['internalId'];
+    $originalId = $_POST['originalArticleId'];
     $articleId = $_POST['articleId'];
     $modelName = $_POST['modelName'];
     $sampleCode = $_POST['sampleCode'];
@@ -25,13 +27,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $sql = "UPDATE article 
             SET 
+                article_id = '$articleId',
                 model_name = '$modelName', 
                 sample_code = '$sampleCode', 
                 brand_id = '$brandId', 
                 embro_cmt_id = '$embroCMTId', 
                 print_cmt_id = '$printCMTId', 
                 is_rib = '$isRib' 
-            WHERE article_id = '$articleId'";
+            WHERE id = '$internalId'";
+
+    $conn->query($sql);
+
+    $sql = "UPDATE article_wash
+            SET
+              article_id = '$articleId'
+            WHERE 
+              article_id = '$originalId'";
+
 
     $conn->query($sql);
     $conn->close();
@@ -68,6 +80,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $id = isset($_GET['aid']) ? $_GET['aid'] : '';
         $a = getArticleById($id);
+
+        $conn = getConnProduction();
+        $sql = "SELECT id FROM article WHERE article_id = '$id'";
+
+        $internalId = $conn->query($sql)->fetch_assoc()['id'];
+        $originalId = $id;
     }
     ?>
 
@@ -84,6 +102,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <form action="" method="post">
     <div class="w3-padding-16" style="margin-bottom: 64px;">
+        <input hidden value="<?= $internalId ?>" name="internalId">
+        <input hidden value="<?= $originalId ?>" name="originalArticleId">
+
+
         <span><b>No. Article:</b></span>
         <input class='w3-input w3-border w3-border-grey'value="<?= $id ?>" name="articleId">
         <br>

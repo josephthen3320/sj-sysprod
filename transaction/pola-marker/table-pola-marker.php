@@ -77,7 +77,7 @@
 
                 echo "<td>";
                 if (in_array($role, [0,1,2,3,7]))
-                if (getWorksheetPosition($ct['worksheet_id']) <= 1) {
+                if (getWorksheetPosition($ct['worksheet_id']) == 1) {
                     echo "<button class='w3-button w3-red' onclick='openPopupURL2(\"sendDialog.php?w={$ct['worksheet_id']}&i={$ct['id']}&pi={$ct['pola_marker_id']}&a={$article_id}\", \"sendtocutting\", 500, 400)'><i class=\"fa-solid fa-arrow-right-from-arc\"></i></button>";
 
                 } else {

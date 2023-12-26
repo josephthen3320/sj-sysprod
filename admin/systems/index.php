@@ -235,6 +235,7 @@ while($rowService = $resultService->fetch_assoc()) {
 
         echo "</tr>";
     }
+
     echo "</tbody>";
 
     echo "</table>";
@@ -244,6 +245,66 @@ while($rowService = $resultService->fetch_assoc()) {
 
 
 ?>
+
+</div>
+
+<!-- Uptime Robot -->
+<div class="w3-center w3-bar w3-padding-top-24 content-padding">
+    <h3>Automated Monitoring</h3>
+</div>
+<div class=" content-padding">
+    <h5>Third Party Monitoring</h5>
+    <table class='w3-table-all'>
+        <thead>
+        <tr class='w3-small'>
+            <th >SERVICE NAME</th>
+            <th class='w3-center'>STATUS</th>
+            <th >LAST UPDATED</th>
+        </tr>
+        </thead>
+
+        <?php
+        // Third Party Services -- UptimeRobot Monitoring
+        // Replace 'YOUR_API_KEY' with your UptimeRobot API key
+        $apiKey = 'ur2246977-c99f4551019c1a0039173dd3';
+        $apiUrl = "https://api.uptimerobot.com/v2/getMonitors";
+
+        // Initialize cURL session
+        $ch = curl_init();
+
+        // Set cURL options
+        curl_setopt($ch, CURLOPT_URL, $apiUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('api_key' => $apiKey, 'format' => 'json', 'logs' => '1')));
+
+        // Execute cURL session and store the response
+        $response = curl_exec($ch);
+
+        // Close cURL session
+        curl_close($ch);
+
+        // Decode JSON response
+        $data = json_decode($response, true);
+
+        // Check if the response is valid
+        if ($data && isset($data['monitors'])) {
+            foreach ($data['monitors'] as $monitor) {
+                $status = $monitor['status'];
+                $monitorName = $monitor['friendly_name'];
+
+                echo "<tr>";
+                echo "<td>$monitorName</td>";
+                echo "<td class='w3-center'>".parseRobotStatus($status)."</td>";
+                echo "<td>".date('Y-m-d H:i:s')."</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<p>Error retrieving data from UtR API</p>";
+        }
+        ?>
+
+    </table>
 </div>
 
 
@@ -278,6 +339,33 @@ function parseStatusIcon($status) {
             break;
 
         case 0:
+        default:
+            $iconClass = "circle";
+            $iconColour = "red";
+            break;
+    }
+
+
+    return $statusIcon = "<i class='fas fa-fw fa-{$iconClass} w3-text-{$iconColour}'></i>";
+}
+
+function parseRobotStatus($status) {
+
+    switch ($status) {
+
+        case 2:
+            $iconClass = "circle";
+            $iconColour = "green";
+            break;
+
+        case 1:
+            $iconClass = "circle-half-stroke";
+            $iconColour = "orange";
+            break;
+
+        case 0:
+        case 8:
+        case 9:
         default:
             $iconClass = "circle";
             $iconColour = "red";

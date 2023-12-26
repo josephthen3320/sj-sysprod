@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     require_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_worksheet_position.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/utilities/util_surat_jalan.php';
 
-    $curProcessName = 'qc_embro';
+    $curProcessName = 'print_sablon';
 
     $uid = $_POST['uid'];
 
@@ -23,15 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
 
     switch ($processName) {
-        case 'print/sablon':
-            echo "Pushing to Print/Sablon";
+        case 'qc embro':
+            echo "Pushing to QC EMBRO";
 
             pushToPrintSablon($wid, $cmt, $qty);
-            updateWorksheetPosition($wid, 4); // Set to embro
+            updateWorksheetPosition($wid, 5); // Set to embro
 
             // Surat Jalan
-            $sjid = createSuratJalan('QE', $transaction_id, 5, 4, $aid, $qty, $uid);
-            addSuratJalanRecord($sjid, 'qc_embro', $transaction_id);
+            $sjid = createSuratJalan('EP', $transaction_id, 4, 5, $aid, $qty, $uid);
+            addSuratJalanRecord($sjid, 'print_sablon', $transaction_id);
 
             echo "Pushing complete";
             break;
@@ -43,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             updateWorksheetPosition($wid, 6); // Set to embro
 
             // Surat Jalan
-            $sjid = createSuratJalan('QE', $transaction_id, 5, 6, $aid, $qty, $uid);
-            addSuratJalanRecord($sjid, 'qc_embro', $transaction_id);
+            $sjid = createSuratJalan('EP', $transaction_id, 4, 6, $aid, $qty, $uid);
+            addSuratJalanRecord($sjid, 'print_sablon', $transaction_id);
 
             echo "Pushing complete";
             break;

@@ -69,7 +69,7 @@
                 echo "<td>{$ct['qty_in']}</td>";
                 echo "<td>";
 
-                if ($ct['qty_out'] <= 0) {
+                if ($ct['qty_out'] <= 0 && in_array($role, [0,1,2,3,4,7])) {
                     $urlParam = "p=embro";
                     $urlParam .= "&i=" . $ct['embro_id'];
                     $urlParam .= "&w=" . $ct['worksheet_id'];

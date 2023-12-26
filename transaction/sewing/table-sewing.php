@@ -51,9 +51,12 @@ $i = 0;
 
 <div class="w3-row w3-hide-small w3-small">
     <div class='w3-col w3-row l12 m12 s12 w3-white w3-border w3-border-light-gray w3-center'>
-        <div class="w3-col l1 m1 s12 jt-padding-tb" style="font-weight: bold;">No.</div>
-        <div class="w3-col l1 m1 s12 jt-padding-tb" style="font-weight: bold;">Sewing ID</div>
-        <div class="w3-col l1 m1 s12 jt-padding-tb" style="font-weight: bold;">Worksheet ID</div>
+        <div class="w3-col l3 m3 s12 jt-padding-tb" style="font-weight: bold;">
+            <div class="w3-col l2 m2 s12 jt-padding-tb" style="font-weight: bold;">No.</div>
+            <div class="w3-col l5 m5 s12 jt-padding-tb" style="font-weight: bold;">Sewing ID</div>
+            <div class="w3-col l5 m5 s12 jt-padding-tb" style="font-weight: bold;">Worksheet ID</div>
+        </div>
+
         <div class="w3-col l1 m1 s12 jt-padding-tb" style="font-weight: bold;">Article ID</div>
         <div class="w3-col l1 m1 s12 jt-padding-tb" style="font-weight: bold;">Model</div>
 
@@ -64,10 +67,16 @@ $i = 0;
             <div class="w3-col l4 m4 s12 jt-padding-tb" style="font-weight: bold;">Qty Out</div>
             <div class="w3-col l4 m4 s12 jt-padding-tb" style="font-weight: bold;">Qty Hilang</div>
         </div>
+
         <div class="w3-col l1 m1 s12 jt-padding-tb" style="font-weight: bold;">Start Date</div>
         <div class="w3-col l1 m1 s12 jt-padding-tb" style="font-weight: bold;">End Date</div>
-        <div class="w3-col l1 m1 s12 jt-padding-tb" style="font-weight: bold;">Actions</div>
-        <div class="w3-col l1 m1 s12 jt-padding-tb" style="font-weight: bold;">Lempar</div>
+        <div class="w3-col l1 m1 s12 jt-padding-tb" style="font-weight: bold;">Wash?</div>
+
+
+        <div class="w3-col l1 m1 s12 jt-padding-tb w3-row" style="font-weight: bold;">
+            <div class="w3-col l6 m6 s12 jt-padding-tb" style="font-weight: bold;">Actions</div>
+            <div class="w3-col l6 m6 s12 jt-padding-tb" style="font-weight: bold;">Lempar</div>
+        </div>
     </div>
     <?php
         $index = 0;
@@ -93,9 +102,13 @@ $i = 0;
             }
 
             echo "<div class='w3-col w3-row l12 m12 s12 w3-{$colour} w3-center w3-border w3-border-light-gray'>";
-            echo "<div class='w3-col l1 m1 s12 jt-padding-tb-8'>{$index}<br><span $detailparam>$chevron</span></div>";
-            echo "<div class='w3-col l1 m1 s12 jt-padding-tb-8'>{$ct['sewing_id']}</div>";
-            echo "<div class='w3-col l1 m1 s12 jt-padding-tb-8'>{$ct['worksheet_id']}</div>";
+
+            echo "<div class='w3-col l3 m3 s12 jt-padding-tb-8 w3-row'>";
+                echo "<div class='w3-col l2 m2 s12 jt-padding-tb-8'>{$index}<br><span $detailparam>$chevron</span></div>";
+                echo "<div class='w3-col l5 m5 s12 jt-padding-tb-8'>{$ct['sewing_id']}</div>";
+                echo "<div class='w3-col l5 m5 s12 jt-padding-tb-8'>{$ct['worksheet_id']}</div>";
+            echo "</div>";
+
             echo "<div class='w3-col l1 m1 s12 jt-padding-tb-8'>{$article_id}</div>";
             echo "<div class='w3-col l1 m1 s12 jt-padding-tb-8'>{$article['model_name']}</div>";
 
@@ -110,41 +123,48 @@ $i = 0;
             echo "<div class='w3-col l1 m1 s12 jt-padding-tb-8'>{$ct['date_in']}</div>";
             echo "<div class='w3-col l1 m1 s12 jt-padding-tb-8'>{$ct['date_out']}&nbsp;</div>";
 
-            echo "<div class='w3-col l1 m1 s12 jt-padding-tb-8'>";
-            $qtyCurrentTotal = $ct['qty_out'] + $ct['qty_missing'];
+            $isWash = checkIsWash($article_id) == 1 ? "<i class='fas fa-fw fa-check w3-text-green fa-xl'></i>" : "<i class='fas fa-fw fa-x w3-text-red fa-lg'></i>";
 
-            if ($qtyCurrentTotal != $ct['qty_in'] && in_array($role, [0,1,2,3,7])) {
-                $urlParam = "p=sewing";
-                $urlParam .= "&i=" . $ct['sewing_id'];
-                $urlParam .= "&w=" . $ct['worksheet_id'];
-                $urlParam .= "&q=" . $ct['qty_in'];
-                echo "<button onclick='openPopupURL2(\"set-qty-out.php?{$urlParam}\", \"qtyOut\", 500, 700)' class='w3-button w3-blue-grey'>" . "<i class='fas fa-plus'></i>" . "</button>";
-            }
-            $urlSuratTerima = "/transaction/surat-jalan/?i={$ct['sj_id']}&t={$ct['sewing_id']}&w={$ct['worksheet_id']}";
 
-            if (checkSuratJalanExistsByTransactionId($ct['sewing_id'])) {
-                $isPrint = "";
+            echo "<div class='w3-col l1 m1 s12 jt-padding-tb-8'>$isWash</div>";
 
-                if (checkSuratJalanPrinted($ct['sewing_id'])) {
-                    $isPrint = "&nbsp;<i class='fas w3-tiny fa-fw fa-check'></i>";
+            echo "<div class='w3-col l1 m1 s12 jt-padding-tb-8 w3-row'>";
+                echo "<div class='w3-col l6 m6 s12 jt-padding-tb-8'>";
+                $qtyCurrentTotal = $ct['qty_out'] + $ct['qty_missing'];
+
+                if ($qtyCurrentTotal != $ct['qty_in'] && in_array($role, [0,1,2,3,7])) {
+                    $urlParam = "p=sewing";
+                    $urlParam .= "&i=" . $ct['sewing_id'];
+                    $urlParam .= "&w=" . $ct['worksheet_id'];
+                    $urlParam .= "&q=" . $ct['qty_in'];
+                    echo "<button onclick='openPopupURL2(\"set-qty-out.php?{$urlParam}\", \"qtyOut\", 500, 700)' class='w3-button w3-blue-grey'>" . "<i class='fas fa-plus'></i>" . "</button>";
                 }
+                $urlSuratTerima = "/transaction/surat-jalan/?i={$ct['sj_id']}&t={$ct['sewing_id']}&w={$ct['worksheet_id']}";
 
-                echo "<button class='w3-button w3-green' onclick='openPopupURL2(\"$urlSuratTerima\", \"suratJalan\", 800, 500)'><i class='fas fa-print'></i>{$isPrint}</button>";
+                if (checkSuratJalanExistsByTransactionId($ct['sewing_id'])) {
+                    $isPrint = "";
 
-            }
-            echo "</div>";
-
-            echo "<div class='w3-col l1 m1 s12 jt-padding-tb-8'>";
-            if (getWorksheetPosition($ct['worksheet_id']) == 6) {
-                if (($ct['qty_out'] + $ct['qty_missing']) == $ct['qty_in']) {
-                    if (in_array($role, [0,1,2,3,7])) {
-                        echo "<button class='w3-button w3-red' onclick='openPopupURL2(\"sendDialog.php?w={$ct['worksheet_id']}&i={$ct['id']}&pi={$ct['sewing_id']}&q={$ct['qty_out']}\", \"sendto\", 500, 400)'><i class=\"fa-solid fa-arrow-right-from-arc\"></i></button>";
+                    if (checkSuratJalanPrinted($ct['sewing_id'])) {
+                        $isPrint = "&nbsp;<i class='fas w3-tiny fa-fw fa-check'></i>";
                     }
-                }
 
-            } else {
-                echo "<button class='w3-button w3-hover-red w3-red w3-disabled'><i class='fas fa-check'></i></button>";
-            }
+                    echo "<button class='w3-button w3-green' onclick='openPopupURL2(\"$urlSuratTerima\", \"suratJalan\", 800, 500)'><i class='fas fa-print'></i>{$isPrint}</button>";
+
+                }
+                echo "</div>";
+
+                echo "<div class='w3-col l6 m6 s12 jt-padding-tb-8'>";
+                if (getWorksheetPosition($ct['worksheet_id']) == 6) {
+                    if (($ct['qty_out'] + $ct['qty_missing']) == $ct['qty_in']) {
+                        if (in_array($role, [0,1,2,3,7])) {
+                            echo "<button class='w3-button w3-red' onclick='openPopupURL2(\"sendDialog.php?w={$ct['worksheet_id']}&i={$ct['id']}&pi={$ct['sewing_id']}&q={$ct['qty_out']}\", \"sendto\", 500, 400)'><i class=\"fa-solid fa-arrow-right-from-arc\"></i></button>";
+                        }
+                    }
+
+                } else {
+                    echo "<button class='w3-button w3-hover-red w3-red w3-disabled'><i class='fas fa-check'></i></button>";
+                }
+                echo "</div>";
             echo "</div>";
 
 
@@ -304,3 +324,28 @@ $i = 0;
         }
     }
 </script>
+
+<?php
+
+function checkIsWash($article_id) {
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/php-modules/db.php';
+    $conn = getConnProduction();
+    $sql = "SELECT * FROM article_wash WHERE article_id = '$article_id'";
+    $result = $conn->query($sql);
+
+    $isWash = 1;
+
+    if ($result->num_rows == 1) {
+        while ($row = $result->fetch_assoc()) {
+            if ($row['wash_id'] == "NOX") {
+                return 0;
+
+            }
+        }
+    }
+
+    return $isWash;
+
+}
+
+?>

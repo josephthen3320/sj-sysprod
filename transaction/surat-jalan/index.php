@@ -47,10 +47,15 @@ $brand = getBrandNameById($articleData['brand_id']);
 // todo: fetch customer_name from worksheet_detail as receiver_name
 
 $customer = ($sjData['destination'] != -1) ? getCMTNameById(getCMTId($wid, $targetProcess)) : "Kantor";
+$customer = ($sjData['destination'] != -2) ? getCMTNameById(getCMTId($wid, $targetProcess)) : "Transit";
+$customer = ($sjData['destination'] != -2) ? getCMTNameById(getCMTId($wid, $targetProcess)) : "Transit";
 
 switch ($sjData['destination']) {
     case -1:
         $customer = "Kantor";
+        break;
+    case -2:
+        $customer = "Transit";
         break;
     case 11:
         $customer = "Gudang Jadi";
@@ -121,10 +126,26 @@ function getCMTId($worksheet_id, $processName) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
+<?php
+    $printType = "LX";
+
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        $printType = $_POST['printType'];
+    }
+
+    $printNormalSelected = $printType == "NORMAL" ? "selected" : "";
+    $printLXSelected = $printType == "LX" ? "selected" : "";
+?>
+
 <style>
-    @page {
-        size: 210mm 145mm; /* Adjust the size according to the dot matrix paper size */
-        margin: 0.1in; /* Add margins to accommodate the printer's limitations */
+    @media print {
+        @page {
+            <?php if ($printType == "LX"): ?>
+            size: 210mm 145mm; /* Adjust the size according to the dot matrix paper size */
+            <?php endif; ?>
+
+            margin: 0.1in; /* Add margins to accommodate the printer's limitations */
+        }
     }
 
     .print-show {
@@ -142,17 +163,17 @@ function getCMTId($worksheet_id, $processName) {
     }
 </style>
 
-<body class="w3-monospace">
+<body>
 
-    <div class="w3-container w3-padding-16 w3-display-container" style="padding-left: 64px; padding-right: 64px">
+    <div class="w3-container w3-padding-16 w3-display-container" id="contentToPrint" style="padding-left: 64px; padding-right: 64px">
         <div class="w3-padding w3-right-align print-show">
-            <span class="w3-monospace"><b>CV. SUBUR JAYA</b></span><br>
-            <span class="w3-monospace w3-small">Jl. Moch. Ramdhan 56, Bandung | 0895-4042-55456</span>
+            <span class=""><b>CV. SUBUR JAYA</b></span><br>
+            <span class=" w3-small">Jl. Moch. Ramdhan 56, Bandung | 0895-4042-55456</span>
         </div>
 
         <div class="w3-padding w3-right-align print-hide w3-hide-large">
-            <span class="w3-monospace"><b>CV. SUBUR JAYA</b></span><br>
-            <span class="w3-monospace w3-small">Jl. Moch. Ramdhan 56, Bandung | 0895-4042-55456</span>
+            <span class=""><b>CV. SUBUR JAYA</b></span><br>
+            <span class=" w3-small">Jl. Moch. Ramdhan 56, Bandung | 0895-4042-55456</span>
         </div>
 
         <!-- HEADER -->
@@ -331,8 +352,17 @@ function getCMTId($worksheet_id, $processName) {
         </div>
 
         <div class="w3-container print-hide w3-right" style="margin-top: 64px;">
-            <button class="w3-button w3-blue-grey w3-padding w3-bar" onclick="window.print()">
-                Print &nbsp;
+            <form action method="post">
+                <select name="printType">
+                    <option value="LX" <?= $printLXSelected ?>>LX Printer</option>
+                    <option value="NORMAL"<?= $printNormalSelected ?>>Normal Printer</option>
+                </select>
+                <button type="submit">Pilih Format</button>
+            </form>
+
+
+            <button class="w3-button w3-blue-grey w3-padding w3-bar" onclick="printPage('normal')">
+                Print <?= $printType ?> &nbsp;
                 <i class="fas fa-print"></i>
             </button>
         </div>
@@ -340,6 +370,28 @@ function getCMTId($worksheet_id, $processName) {
     </div>
 
 </body>
+
+<script>
+    function printPage() {
+        // Get the value of the 'sjid' input field (or any other method you use to get the value)
+        var sjid = '<?= $sjid ?>';
+
+        // Execute the PHP function after the print is completed
+        // This will trigger a request to the print_success.php file, passing the 'sjid' variable as a POST parameter.
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'print_success.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                // Handle the response here (if needed)
+                console.log(xhr.responseText);
+            }
+        };
+        xhr.send('sjid=' + encodeURIComponent(sjid));
+
+        window.print()
+    }
+</script>
 
 
 

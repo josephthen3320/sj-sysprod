@@ -135,7 +135,10 @@ function setQtyMissing($p, $pid, $qtyMissing) {
 function fetchAllTransactionByProcess($tname) {
     $conn = getConnTransaction();
 
-    $sql = "SELECT t.*, p.position_id, p.{$tname} FROM {$tname} AS t INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id ORDER BY p.{$tname} ASC, t.{$tname}_id DESC";
+    $sql = "SELECT t.*, p.position_id, p.{$tname}
+        FROM {$tname} AS t
+        INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id
+        ORDER BY p.{$tname} ASC, t.{$tname}_id DESC, t.date_out DESC";
     //$sql = "SELECT * FROM {$tname} AS t INNER JOIN position AS p ON t.worksheet_id = p.worksheet_id ORDER BY p.{$tname} ASC, t.{$tname}_id DESC";
     $result = $conn->query($sql);
     $conn->close();
@@ -334,6 +337,13 @@ function pushToFinishing($wid, $cmt, $qtyIn) {
     logGeneric(-1, 571, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
 }
 
+function pushToTransit($wid, $qtyIn) {
+    $recordId = generateTransitId();
+    pushToProcessWithQty('transit', $recordId, $wid, $qtyIn);
+    logGeneric(-1, 591, "RECORD GENERATED; worksheet_id={$wid}; record_id={$recordId};");
+    // Check activity_id
+}
+
 function pushToQCFinal($wid, $qtyIn) {
     $recordId = generateQCFinalId();
     pushToProcessWithQty('qc_final', $recordId, $wid, $qtyIn);
@@ -423,6 +433,10 @@ function generateWashingId() {
 
 function generateFinishingId() {
     return generateIDString("FI", "finishing");
+}
+
+function generateTransitId() {
+    return generateIDString("TN", "transit");
 }
 
 function generateQCFinalId() {

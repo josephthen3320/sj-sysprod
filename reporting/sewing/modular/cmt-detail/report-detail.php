@@ -68,8 +68,6 @@ $sql = "SELECT *, SUM(qty_out) AS total_qty_out
 
     $conn = getConnTransaction();
 
-
-
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $sql = "SELECT *, SUM(qty_out) AS total_qty_out
                     FROM sewing

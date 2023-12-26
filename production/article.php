@@ -1,5 +1,7 @@
 <?php
 session_start();
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Pragma: no-cache");
 
 $page_title = "Production Centre | Article";
 
@@ -88,7 +90,7 @@ $top_title .= "Article";
         </div>
         <div class="w3-bar w3-black">
             <?php if(in_array($_SESSION['user_role'], [0,1,2,5,6])): ?>
-            <button class="w3-bar-item w3-button" onclick="openPopupURL2('article/create-article.php')">New Article &nbsp; <i class="fa-solid fa-plus fa-sm"></i> </button>
+            <button class="w3-bar-item w3-button" onclick="openPopupURL2('article/create-article.php', 'articleCreate', 840, 500)">New Article &nbsp; <i class="fa-solid fa-plus fa-sm"></i> </button>
             <?php endif; ?>
             <div class="w3-bar-item">&nbsp;</div>
         </div>
